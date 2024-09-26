@@ -1,0 +1,85 @@
+
+.sidebar{
+    background: #39A900; 
+    height: 100vh;
+    width: 20vw;
+}
+.navbar{
+    background: #39A900;
+    width: 80vw;
+    height: 8.4vh;
+}
+.contenidos{
+    background: rgb(255, 255, 255);
+    height: 100vh;
+    width: 80vw;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+}
+.contenidos1{
+    background: rgb(255, 255, 255);
+    height: auto;
+    width: auto;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.titulo{
+    background: rgb(255, 255, 255);
+}
+.linea{
+    height: 2px;
+    width: 75vw;
+    background: black;
+    margin-left: 40px;
+}
+.fichas{
+    background: rgb(255, 255, 255);
+}
+.fichas2{
+    padding-left: 50px;
+}
+.fichas3{
+    padding-left: 300px;
+}
+.combobox{
+    background: rgb(255, 255, 255);
+    width: 280px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: black;
+}
+.combobox:hover{
+    background: #39A900;
+    color: white;
+    width: 280px;
+    height: 40px;
+    border-radius: 5px;
+    border: 10px 10px 10px 10px;
+    border-color: #39A900;
+}
+.tabla{
+    width: 79vw;
+    height: 40vh;
+    background: rgb(255, 255, 255);
+    padding: 50px;
+}
+.jornada{
+    margin-right: 170px;
+}
+.icono{
+    margin-left: -50px;
+}
+.paginador{
+    background: rgb(255, 255, 255);
+    width: 79vw;
+    padding-left: 500px;
+}
+
+.footer{
+    height: 9vh;
+    width: 80vw;
+}
