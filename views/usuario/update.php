@@ -1,75 +1,67 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Roles;
+use app\models\Estados;
 
-/** @var yii\web\View $this */
-/** @var app\models\Usuarios $model */
-/** @var yii\widgets\ActiveForm $form */
+/* @var $this yii\web\View */
+/* @var $model app\models\Usuarios */
+/* @var $form yii\widgets\ActiveForm */
 
 
-$this->title = 'Actualizar Usuarios';
+$this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
+
 ?>
-<div class="usuario">
-    <h1><?= Html::encode($this->title) ?></h1>
-</div>
 
-<div class="divider col-md-10"></div>
+<div class="">
+    <div class="lista">
+        <?= Html::a(
+            Html::img('@web/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
+            ['usuario/index'], 
+            ['class' => 'listausu']
+        ) ?>
+    </div>
+    <hr class="divider">
+    <div class="titulo">
+        <h1>Actualizar Usuario</h1>
+    </div>
 
-<div class="lista">
-    <?= Html::a('<img src="icon-lista.png" class="icon"> Lista de Usuarios', ['index'], ['class' => 'listausu']) ?>
-</div>
+    <div class="UsuariosForm">
 
-<div class="col-11">
-    <div class="containerUsu col-11">
-        <?php $form = ActiveForm::begin([
-            'options' => ['class' => 'user-form'],
-        ]); ?>
-
-        <h2>Actualizar Usuario</h2>
+        <?php $form = ActiveForm::begin(); ?>
 
         <div class="form-grid">
-            <div class="form-group1">
-                <?= $form->field($model, 'identificacion')->textInput(['placeholder' => 'Identificación']) ?>
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'nombre')->textInput(['placeholder' => 'Nombres']) ?>
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'apellido')->textInput(['placeholder' => 'Apellidos']) ?>
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'telefono')->textInput(['placeholder' => 'Teléfono']) ?>
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'correo')->textInput(['type' => 'email', 'placeholder' => 'Correo Electrónico']) ?>
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'username')->textInput(['placeholder' => 'Usuario']) ?>
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Contraseña', 'value' => '']) ?> <!-- Optional clear for password -->
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'rol_id_FK')->dropDownList(
-                    ['1' => 'Administrador', '2' => 'Instructor', '3' => 'Usuario'],
-                    ['prompt' => 'Seleccione un rol']
-                ) ?>
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'est_id_FK')->dropDownList(
-                    ['1' => 'Activo', '2' => 'Inactivo'],
-                    ['prompt' => 'Seleccione un estado']
-                ) ?>
-            </div>
-            <div class="form-group1">
-                <?= $form->field($model, 'fecha_creacion')->input('date') ?>
-            </div>
-        </div>
+            <?= $form->field($model, 'identificacion')->textInput(['maxlength' => true, 'placeholder' => 'Identificación']) ?>
 
-        <div class="boton">
-            <?= Html::submitButton('Actualizar', ['class' => 'btn-registrar']) ?>
-        </div>
+            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true, 'placeholder' => 'Nombres']) ?>
 
-        <?php ActiveForm::end(); ?>
+            <?= $form->field($model, 'apellido')->textInput(['maxlength' => true, 'placeholder' => 'Apellidos']) ?>
+
+            <?= $form->field($model, 'telefono')->textInput(['maxlength' => true, 'placeholder' => 'Teléfono']) ?>
+
+            <?= $form->field($model, 'correo')->input('email', ['placeholder' => 'Correo Electrónico']) ?>
+
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => 'Usuario']) ?>
+
+            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true, 'placeholder' => 'Contraseña']) ?>
+
+            <?= $form->field($model, 'rol_id_FK')->dropDownList(
+                ArrayHelper::map(Roles::find()->all(), 'rol_id', 'nombre'), 
+                ['prompt' => 'Seleccione un Rol']
+            ) ?>
+
+            <?= $form->field($model, 'est_id_FK')->dropDownList(
+                ArrayHelper::map(Estados::find()->all(), 'est_id', 'descripcion'), 
+                ['prompt' => 'Seleccione un Estado']
+            ) ?>
+
+        </div>
     </div>
+    
+    <div class="boton">
+        <?= Html::submitButton('Actualizar', ['class' => 'btn-registrar']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 </div>

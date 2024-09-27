@@ -11,14 +11,24 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Usuarios';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="usuarios-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Crear Usuarios', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="lista">
+    <?= Html::a(
+            Html::img('@web/icon-crear.png', ['class' => 'iconosa']) . ' Crear Usuario', 
+            ['usuario/create'], 
+            ['class' => 'listausu']
+        ) ?>
+        <?= Html::a(
+            Html::img('@web/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
+            ['usuario/index'], 
+            ['class' => 'listaususelected']
+        ) ?>
+    </div>
+    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 

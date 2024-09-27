@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-use yii\web\IdentityInterface;
+
 use Yii;
 
 /**
@@ -23,7 +23,7 @@ use Yii;
  * @property TblRoles $rolIdFK
  * @property TblHorarios[] $tblHorarios
  */
-class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
+class Usuarios extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -33,11 +33,13 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return 'tbl_usuarios';
     }
 
-    
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['identificacion', 'nombre', 'apellido', 'correo', 'username', 'password', 'fecha_creacion', 'rol_id_FK', 'est_id_FK'], 'required'],
+            [['identificacion', 'nombre', 'apellido', 'correo', 'username', 'password', 'rol_id_FK', 'est_id_FK'], 'required'],
             [['fecha_creacion'], 'safe'],
             [['rol_id_FK', 'est_id_FK'], 'integer'],
             [['identificacion', 'telefono'], 'string', 'max' => 10],
@@ -45,8 +47,8 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['apellido', 'correo'], 'string', 'max' => 100],
             [['identificacion'], 'unique'],
             [['username', 'password'], 'unique', 'targetAttribute' => ['username', 'password']],
-            [['rol_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblRoles::class, 'targetAttribute' => ['rol_id_FK' => 'rol_id']],
-            [['est_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblEstados::class, 'targetAttribute' => ['est_id_FK' => 'est_id']],
+            [['rol_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::class, 'targetAttribute' => ['rol_id_FK' => 'rol_id']],
+            [['est_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Estados::class, 'targetAttribute' => ['est_id_FK' => 'est_id']],
         ];
     }
 
@@ -57,15 +59,15 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'usu_id' => 'Usu ID',
-            'identificacion' => 'Identificacion',
-            'nombre' => 'Nombre',
-            'apellido' => 'Apellido',
+            'identificacion' => 'Identificación',
+            'nombre' => 'Nombres',
+            'apellido' => 'Apellidos',
             'telefono' => 'Telefono',
-            'correo' => 'Correo',
-            'username' => 'Username',
-            'password' => 'Password',
+            'correo' => 'Correo electornico',
+            'username' => 'Usuario',
+            'password' => 'Contraseña',
             'fecha_creacion' => 'Fecha Creacion',
-            'rol_id_FK' => 'Roles',
+            'rol_id_FK' => 'Asignar Rol',
             'est_id_FK' => 'Estado',
         ];
     }
@@ -101,31 +103,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     }
     public function validatePassword($password)
     {
+        // Comparación directa de la contraseña (sin hashing).
         return $this->password === $password;
     }
-    public static function findIdentity($id)
-    {
-        return static::findOne($id);
-    }
-
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        return static::findOne(['access_token' => $token]);
-    }
-
-    public function getId()
-    {
-        return $this->usu_id;
-    }
-
-    public function getAuthKey()
-    {
-        return null;
-    }
-
-    public function validateAuthKey($authKey)
-    {
-        return false;
-    }
-
 }

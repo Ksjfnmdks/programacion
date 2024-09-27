@@ -21,35 +21,45 @@ body {
     padding: 10px 20px;
     text-align: center;
 }
-
-.boton {
+.titulo{
     width: 100%;
-    max-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+.boton {
+    width: auto;
     margin: 0 auto;
-    padding: 10px 20px;
-    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .lista {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 10px 20px;
-    text-align: right;
+    padding-top: 25px;
+    width: auto;
+    display: flex;
+    justify-content: space-between;
 }
 
+.listaususelected{
+    text-decoration: none;
+    color: grey;
+    font-size: 20px;
+    display: inline-flex;
+    margin-right: 10px;
+}
 .listausu {
     text-decoration: none;
     color: #000;
     font-size: 20px;
     display: inline-flex;
-    align-items: right;
+    margin-right: 10px;
 }
 
-.icon {
-    margin-right: 5px;
-    width: 16px;
-    height: 16px;
+.icono {
+    margin:5px;
+    width: 32px;
+    height: 32px;
 }
 
 .divider {
@@ -74,8 +84,14 @@ h1 {
     font-size: 20px;
 }
 
-.user-form {
-    text-align: left;
+.UsuariosForm{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -84,9 +100,10 @@ h2 {
 }
 
 .form-grid {
+    width: 600px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 5px;
 }
 
 .form-group1{
@@ -95,7 +112,6 @@ h2 {
 
 .control-label {
     display: block;
-    
     font-size: 20px;
     font-weight: bold;
 }
@@ -109,7 +125,7 @@ input, select {
 }
 
 .btn-registrar {
-    width: 30%;
+    width: 20%;
     background-color: #4CAF50;
     color: white;
     padding: 10px;
@@ -124,7 +140,7 @@ input, select {
     background-color: #45a049;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .form-grid {
         grid-template-columns: 1fr;
     }
