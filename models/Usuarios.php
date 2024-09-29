@@ -79,7 +79,7 @@ class Usuarios extends \yii\db\ActiveRecord
      */
     public function getEstIdFK()
     {
-        return $this->hasOne(TblEstados::class, ['est_id' => 'est_id_FK']);
+        return $this->hasOne(Estados::class, ['est_id' => 'est_id_FK']);
     }
 
     /**
@@ -89,7 +89,7 @@ class Usuarios extends \yii\db\ActiveRecord
      */
     public function getRolIdFK()
     {
-        return $this->hasOne(TblRoles::class, ['rol_id' => 'rol_id_FK']);
+        return $this->hasOne(Roles::class, ['rol_id' => 'rol_id_FK']);
     }
 
     /**

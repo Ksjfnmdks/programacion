@@ -53,6 +53,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <li><a href="<?= \yii\helpers\Url::to(['usuario/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp; Usuarios</a></li>
                     <li><a href="<?= \yii\helpers\Url::to(['ficha/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Fichas</a></li>
                     <li><a href="<?= \yii\helpers\Url::to(['ambiente/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Ambientes</a></li>
+                    <li><a href="<?= \yii\helpers\Url::to(['jornada/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Ambientes</a></li>
                     <li>
                         <div class="dropdown-menu-button"><i class="zmdi zmdi-account-add zmdi-hc-fw"></i>&nbsp;&nbsp; Registro de usuarios <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i></div>
                         <ul class="list-unstyled">

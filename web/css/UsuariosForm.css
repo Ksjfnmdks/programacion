@@ -35,7 +35,7 @@ body {
 }
 
 .lista {
-    padding-top: 25px;
+    padding: 25px;
     width: auto;
     display: flex;
     justify-content: space-between;
