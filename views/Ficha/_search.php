@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="fichas-search">
+<div class="tbl-fichas-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'pro_id_FK') ?>
 
-    <?php // echo $form->field($model, 'instrcutor_lider') ?>
+    <?php // echo $form->field($model, 'instructor_lider') ?>
 
     <?php // echo $form->field($model, 'jor_id_FK') ?>
 

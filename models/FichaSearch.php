@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Fichas;
+use app\models\TblFichas;
 
 /**
- * FichaSearch represents the model behind the search form of `app\models\Fichas`.
+ * FichaSearch represents the model behind the search form of `app\models\TblFichas`.
  */
-class FichaSearch extends Fichas
+class FichaSearch extends TblFichas
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class FichaSearch extends Fichas
     {
         return [
             [['fic_id', 'pro_id_FK', 'jor_id_FK'], 'integer'],
-            [['codigo', 'fecha_incio', 'fecha_final', 'instrcutor_lider', 'fecha_creacion'], 'safe'],
+            [['codigo', 'fecha_incio', 'fecha_final', 'instructor_lider', 'fecha_creacion'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class FichaSearch extends Fichas
      */
     public function search($params)
     {
-        $query = Fichas::find();
+        $query = TblFichas::find();
 
         // add conditions that should always apply here
 
@@ -67,7 +67,7 @@ class FichaSearch extends Fichas
         ]);
 
         $query->andFilterWhere(['like', 'codigo', $this->codigo])
-            ->andFilterWhere(['like', 'instrcutor_lider', $this->instrcutor_lider]);
+            ->andFilterWhere(['like', 'instructor_lider', $this->instructor_lider]);
 
         return $dataProvider;
     }

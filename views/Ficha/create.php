@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var app\models\Fichas $model */
+/** @var app\models\TblFichas $model */
 
-$this->title = 'Create Fichas';
-$this->params['breadcrumbs'][] = ['label' => 'Fichas', 'url' => ['index']];
+$this->title = 'Create Tbl Fichas';
+$this->params['breadcrumbs'][] = ['label' => 'Tbl Fichas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="fichas-create">
+<div class="tbl-fichas-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

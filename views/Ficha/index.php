@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Fichas;
+use app\models\TblFichas;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -10,15 +10,15 @@ use yii\grid\GridView;
 /** @var app\models\FichaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Fichas';
+$this->title = 'Tbl Fichas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="fichas-index">
+<div class="tbl-fichas-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Fichas', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Tbl Fichas', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha_incio',
             'fecha_final',
             'pro_id_FK',
-            //'instrcutor_lider',
+            //'instructor_lider',
             //'jor_id_FK',
             //'fecha_creacion',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Fichas $model, $key, $index, $column) {
+                'urlCreator' => function ($action, TblFichas $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'fic_id' => $model->fic_id]);
                  }
             ],

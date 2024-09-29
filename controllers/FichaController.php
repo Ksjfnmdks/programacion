@@ -2,14 +2,14 @@
 
 namespace app\controllers;
 
-use app\models\Fichas;
+use app\models\TblFichas;
 use app\models\FichaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * FichaController implements the CRUD actions for Fichas model.
+ * FichaController implements the CRUD actions for TblFichas model.
  */
 class FichaController extends Controller
 {
@@ -32,7 +32,7 @@ class FichaController extends Controller
     }
 
     /**
-     * Lists all Fichas models.
+     * Lists all TblFichas models.
      *
      * @return string
      */
@@ -48,7 +48,7 @@ class FichaController extends Controller
     }
 
     /**
-     * Displays a single Fichas model.
+     * Displays a single TblFichas model.
      * @param int $fic_id Fic ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class FichaController extends Controller
     }
 
     /**
-     * Creates a new Fichas model.
+     * Creates a new TblFichas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Fichas();
+        $model = new TblFichas();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class FichaController extends Controller
     }
 
     /**
-     * Updates an existing Fichas model.
+     * Updates an existing TblFichas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $fic_id Fic ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class FichaController extends Controller
     }
 
     /**
-     * Deletes an existing Fichas model.
+     * Deletes an existing TblFichas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $fic_id Fic ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class FichaController extends Controller
     }
 
     /**
-     * Finds the Fichas model based on its primary key value.
+     * Finds the TblFichas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $fic_id Fic ID
-     * @return Fichas the loaded model
+     * @return TblFichas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($fic_id)
     {
-        if (($model = Fichas::findOne(['fic_id' => $fic_id])) !== null) {
+        if (($model = TblFichas::findOne(['fic_id' => $fic_id])) !== null) {
             return $model;
         }
 

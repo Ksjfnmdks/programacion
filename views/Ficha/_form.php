@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\Fichas $model */
+/** @var app\models\TblFichas $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="fichas-form">
+<div class="tbl-fichas-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'pro_id_FK')->textInput() ?>
 
-    <?= $form->field($model, 'instrcutor_lider')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'instructor_lider')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'jor_id_FK')->textInput() ?>
 

@@ -15,7 +15,7 @@ use Yii;
  *
  * @property TblFichas[] $tblFichas
  */
-class Jornadas extends \yii\db\ActiveRecord
+class TblJornadas extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
