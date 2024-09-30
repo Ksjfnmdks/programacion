@@ -84,14 +84,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav pull-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-
-                    ['label' => 'About', 'url' => ['/site/about']],
-
-                    ['label' => 'Redes', 'url' => ['/red/index']],
-
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-                    
                     Yii::$app->user->isGuest
                         ? ['label' => 'Login', 'url' => ['/site/login']]
                         : '<li class="nav-item">'

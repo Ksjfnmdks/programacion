@@ -1,6 +1,6 @@
 * {
-    margin: 0;
     padding: 0;
+    margin: 0; 
     box-sizing: border-box;
 }
 
@@ -9,28 +9,39 @@ body {
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; 
     padding: 20px;
 }
 
+.Contabla {
+    width: 100%; 
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; 
+}
+
 .table-container {
-    width: auto;
-    margin: 0 auto;
-    background-color: #fff;
+    width: 100%; 
+    background-color: #ffffff; 
     padding: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
+    overflow-x: auto; 
 }
 
 h2 {
-    text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
+
 table {
-    width: 100%;
+    width: 100%; 
+    max-width: 100%; 
     border-collapse: collapse;
     margin-bottom: 20px;
 }
@@ -46,6 +57,7 @@ table th, table td {
     border: 1px solid #ddd;
 }
 
+
 table tbody tr:nth-child(even) {
     background-color: #f2f2f2;
 }
@@ -54,7 +66,44 @@ table tbody tr:hover {
     background-color: #e9f5e9;
 }
 
+
 table th {
     background-color: #38A800;
     color: white;
+}
+
+
+@media screen and (max-width: 768px) {
+    .table-container {
+        padding: 10px;
+    }
+
+    table th, table td {
+        padding: 8px;
+        font-size: 14px; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .table-container {
+        padding: 5px;
+    }
+
+    table {
+        display: block; 
+        overflow-x: auto; 
+        white-space: nowrap; 
+    }
+
+    table th, table td {
+        padding: 6px;
+        font-size: 12px; 
+    }
+}
+
+.BuscarUsu{
+    width: auto;
+    display: flex;
+    justify-content: end;
+    align-items: end;
 }

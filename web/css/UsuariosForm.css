@@ -36,7 +36,7 @@ body {
 
 .lista {
     padding: 25px;
-    width: auto;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -63,6 +63,7 @@ body {
 }
 
 .divider {
+    display: flex;
     color: white;
     width: 100%;
     margin: 10px auto;
