@@ -20,7 +20,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\Usuarios',
+            'identityClass' => 'app\models\TblUsuarios',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [

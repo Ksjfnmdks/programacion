@@ -2,14 +2,14 @@
 
 namespace app\controllers;
 
-use app\models\Usuarios;
+use app\models\TblUsuarios;
 use app\models\UsuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsuarioController implements the CRUD actions for Usuarios model.
+ * UsuarioController implements the CRUD actions for TblUsuarios model.
  */
 class UsuarioController extends Controller
 {
@@ -32,7 +32,7 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Lists all Usuarios models.
+     * Lists all TblUsuarios models.
      *
      * @return string
      */
@@ -48,7 +48,7 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Displays a single Usuarios model.
+     * Displays a single TblUsuarios model.
      * @param int $usu_id Usu ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Creates a new Usuarios model.
+     * Creates a new TblUsuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Usuarios();
+        $model = new TblUsuarios();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Updates an existing Usuarios model.
+     * Updates an existing TblUsuarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $usu_id Usu ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Deletes an existing Usuarios model.
+     * Deletes an existing TblUsuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $usu_id Usu ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Finds the Usuarios model based on its primary key value.
+     * Finds the TblUsuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $usu_id Usu ID
-     * @return Usuarios the loaded model
+     * @return TblUsuarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($usu_id)
     {
-        if (($model = Usuarios::findOne(['usu_id' => $usu_id])) !== null) {
+        if (($model = TblUsuarios::findOne(['usu_id' => $usu_id])) !== null) {
             return $model;
         }
 
