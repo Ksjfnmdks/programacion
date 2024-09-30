@@ -32,7 +32,7 @@ class TblJornadas extends \yii\db\ActiveRecord
     {
         return [
             [['descripcion', 'hora_inicio', 'hora_fin'], 'required'],
-            [['fecha_creacion'], 'safe'],
+            [['fecha_hora_oculta'], 'datetime', 'format' => 'php:Y-m-d H:i:s'], // Validar formato de fecha y hora
             [['descripcion'], 'string', 'max' => 100],
             [['hora_inicio', 'hora_fin'], 'string', 'max' => 30],
         ];
@@ -61,4 +61,15 @@ class TblJornadas extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TblFichas::class, ['jor_id_FK' => 'jor_id']);
     }
+
+
+    public $fecha_hora_oculta; // Atributo para el campo oculto
+    
+    // Método para establecer la fecha y hora actuales
+    public function setCurrentDateTime()
+    {
+        $this->fecha_hora_oculta = date('Y-m-d H:i:s');
+    }
+
+    
 }

@@ -101,7 +101,7 @@ class JornadaController extends Controller
             'model' => $model,
         ]);
     }
-
+    
     /**
      * Deletes an existing TblJornadas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -129,6 +129,6 @@ class JornadaController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Esta pagina no existe.');
     }
 }
