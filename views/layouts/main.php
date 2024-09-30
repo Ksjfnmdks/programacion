@@ -23,6 +23,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <!DOCTYPE html>
 <html lang="es" class="h-100">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <head>
     <title><?= Html::encode($this->title) ?></title>
@@ -54,51 +56,39 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <li><a href="<?= \yii\helpers\Url::to(['ficha/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Fichas</a></li>
                     <li><a href="<?= \yii\helpers\Url::to(['ambiente/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Ambientes</a></li>
                     <li><a href="<?= \yii\helpers\Url::to(['jornada/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Ambientes</a></li>
-                    <li>
-                        <div class="dropdown-menu-button"><i class="zmdi zmdi-account-add zmdi-hc-fw"></i>&nbsp;&nbsp; Registro de usuarios <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i></div>
-                        <ul class="list-unstyled">
-                            <li><a href="admin.html"><i class="zmdi zmdi-face zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo administrador</a></li>
-                            <li><a href="teacher.html"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo docente</a></li>
-                            <li><a href="student.html"><i class="zmdi zmdi-accounts zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo estudiante</a></li>
-                            <li><a href="personal.html"><i class="zmdi zmdi-male-female zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo personal administrativo</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <div class="dropdown-menu-button"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>&nbsp;&nbsp; Libros y catálogo <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i></div>
-                        <ul class="list-unstyled">
-                            <li><a href="book.html"><i class="zmdi zmdi-book zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo libro</a></li>
-                            <li><a href="catalog.html"><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp; Catálogo</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div class="col-8 contenidos">
-        <header id="header" class="">
-            <?php
-            NavBar::begin([
-                'options' => ['class' => 'navbar-expand-md navbar-dark navbar rounded-0']
-            ]);
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav pull-right'],
-                'items' => [
-                    Yii::$app->user->isGuest
-                        ? ['label' => 'Login', 'url' => ['/site/login']]
-                        : '<li class="nav-item">'
-                            . Html::beginForm(['/site/logout'])
-                            . Html::submitButton(
-                                'Logout (' . Yii::$app->user->identity->username . ')',
-                                ['class' => 'nav-link btn btn-link logout']
-                            )
-                            . Html::endForm()
-                            . '</li>'
-                ]
-            ]);
-            NavBar::end();
-            ?>
-        </header>
+    <header id="header">
+    <?php
+    NavBar::begin([
+        'options' => [
+            'class' => 'navbar navbar-expand-md navbar-dark navbar rounded-0',
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav pull-right'],
+        'items' => [
+            
+            Yii::$app->user->isGuest
+                ? ['label' => 'Login', 'url' => ['/site/login']]
+                : '<li class="nav-item">'
+                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'nav-link btn btn-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'
+        ],
+    ]);
+    NavBar::end();
+    ?>
+</header>
+
 
         <main id="main" class="contenidos1 col-12 d-flex flex-column" role="main">
             
