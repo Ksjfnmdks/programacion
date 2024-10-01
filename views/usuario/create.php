@@ -16,12 +16,12 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
 <div class="">
     <div class="lista">
         <?= Html::a(
-            Html::img('@web/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Usuario', 
+            Html::img('@web/img/icons/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Usuario', 
             '#',
             ['class' => 'listaususelected']
         ) ?>        
         <?= Html::a(
-            Html::img('@web/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
+            Html::img('@web/img/icons/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
             ['usuario/index'], 
             ['class' => 'listausu']
         ) ?>

@@ -65,11 +65,11 @@ class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'apellido' => 'Apellido',
             'telefono' => 'Telefono',
             'correo' => 'Correo',
-            'username' => 'Username',
-            'password' => 'Password',
+            'username' => 'Usuario',
+            'password' => 'Contraseña',
             'fecha_creacion' => 'Fecha Creacion',
-            'rol_id_FK' => 'Rol Id Fk',
-            'est_id_FK' => 'Est Id Fk',
+            'rol_id_FK' => 'Roles',
+            'est_id_FK' => 'Estados',
         ];
     }
 

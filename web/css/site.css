@@ -7,7 +7,9 @@ main > .container {
     font-size: .9em;
     height: 60px;
 }
-
+.text-green {
+    color: #007832;
+}
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;
@@ -85,5 +87,12 @@ a.desc:after {
 
 .form-group {
     margin-bottom: 1rem;
+}
+
+.centrar{
+    background: #c55;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 

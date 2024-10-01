@@ -38,11 +38,14 @@ class UsuarioSearch extends TblUsuarios
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+        public function search($params, $role = null)
     {
         $query = TblUsuarios::find();
 
-        // add conditions that should always apply here
+        
+        if ($role === 'instructor') {
+            $query->where(['rol_id_FK' => '2']);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -51,12 +54,10 @@ class UsuarioSearch extends TblUsuarios
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
+            return $dataProvider; 
         }
 
-        // grid filtering conditions
+        // Grid filtering conditions
         $query->andFilterWhere([
             'usu_id' => $this->usu_id,
             'fecha_creacion' => $this->fecha_creacion,

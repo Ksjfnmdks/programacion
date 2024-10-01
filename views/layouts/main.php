@@ -52,42 +52,46 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <div class="full-reset nav-lateral-list-menu">
                 <ul class="list-unstyled">
                     <li><a href="home"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp; Inicio</a></li>
-                    <li><a href="<?= \yii\helpers\Url::to(['usuario/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp; Usuarios</a></li>
+                    <li>
+                        <a class="Letras" href="<?= \yii\helpers\Url::to(['usuario/index']) ?>">
+                            <?= Html::img('@web/img/icons/icon-user.png', ['alt' => 'Usuarios', 'class' => 'icon']) ?> <font size="4">Usuario</font>
+                        </a>
+                    </li>
                     <li><a href="<?= \yii\helpers\Url::to(['ficha/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Fichas</a></li>
                     <li><a href="<?= \yii\helpers\Url::to(['ambiente/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Ambientes</a></li>
                     <li><a href="<?= \yii\helpers\Url::to(['jornada/index']) ?>"><i class="zmdi zmdi-home zmdi-hc-fw"></i>&nbsp;&nbsp;Ambientes</a></li>
                 </ul>
             </div>
         </div>
-    </div>
+        </div>
 
-    <div class="col-8 contenidos">
-    <header id="header">
-    <?php
-    NavBar::begin([
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark navbar rounded-0',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav pull-right'],
-        'items' => [
-            
-            Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
-                : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'], 'post')
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
-        ],
-    ]);
-    NavBar::end();
-    ?>
-</header>
+            <div class="col-8 contenidos">
+            <header id="header">
+            <?php
+            NavBar::begin([
+                'options' => [
+                    'class' => 'navbar navbar-expand-md navbar-dark navbar fixed-top',
+                ],
+            ]);
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav pull-right'],
+                'items' => [
+                    
+                    Yii::$app->user->isGuest
+                        ? ['label' => 'Login', 'url' => ['/site/login']]
+                        : '<li class="nav-item">'
+                            . Html::beginForm(['/site/logout'], 'post')
+                            . Html::submitButton(
+                                'Logout (' . Yii::$app->user->identity->username . ')',
+                                ['class' => 'nav-link btn btn-link logout']
+                            )
+                            . Html::endForm()
+                            . '</li>'
+                ],
+            ]);
+            NavBar::end();
+            ?>
+        </header>
 
 
         <main id="main" class="contenidos1 col-12 d-flex flex-column" role="main">
@@ -99,9 +103,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= $content ?>
             
         </main>
-
-        <footer id="footer" class="mt-auto w-100 bg-light text-right">
-            <p>&copy; 2673007-ADSO 2024 Version 1.0</p>
+                
+        <footer id="footer" class="mt-auto w-100 bg-light text-right ">
+        <div style="padding: 20px">
+            <p style="color: #007832; font-weight: bold;">
+                <?= Html::img('@web/img/icons/derechos-de-autor.png', ['alt' => 'Icono', 'class' => 'icon']) ?> 2673007 ADSO 2024 Version 1.0
+            </p>
+        </div>
         </footer>
     </div>
     

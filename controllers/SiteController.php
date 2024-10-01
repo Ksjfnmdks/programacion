@@ -10,13 +10,20 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\UsuarioSearch;
 
 class SiteController extends Controller
 {
 
     public function actionAdmin()
     {
-        return $this->render('admin');
+        $searchModel = new UsuarioSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'instructor');
+
+        return $this->render('admin', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionUser()

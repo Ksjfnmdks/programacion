@@ -17,19 +17,20 @@ $this->registerCssFile('@web/css/tablaUsu.css', ['depends' => [yii\web\YiiAsset:
 <div class="Contabla">
     <div class="lista">
         <?= Html::a(
-                Html::img('@web/icon-crear.png', ['class' => 'iconosa']) . ' Crear Usuario', 
+                Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear Usuario', 
                 ['usuario/create'], 
                 ['class' => 'listausu']
             ) ?>
         <?= Html::a(
-            Html::img('@web/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
+            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
             ['usuario/index'], 
             ['class' => 'listaususelected']
         ) ?>
     </div>
     <hr class="divider">
-    <div class="table-container">
     <h2><?= Html::encode($this->title) ?></h2>
+    <div class="table-container">
+    
 
         <div class="BuscarUsu">
         
