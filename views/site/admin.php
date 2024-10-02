@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 $this->title = 'Lista de Instructores';
 
-$this->registerCssFile('@web/css/tablaUsu.css', ['depends' => [yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
 ?>
 
 <div class="Contabla">

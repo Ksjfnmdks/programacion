@@ -1,3 +1,26 @@
+#sidebar-wrapper {
+    background-color: #38A800; 
+}
+
+.navbar {
+    background-color: #38A800; 
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white; 
+}
+
+.sidebar-heading {
+    color: white;
+}
+
+.list-group-item {
+    color: white; 
+}
+
+.list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Efecto hover en items */
+}
 main > .container {
     padding: 70px 15px 20px;
 }
@@ -7,9 +30,7 @@ main > .container {
     font-size: .9em;
     height: 60px;
 }
-.text-green {
-    color: #007832;
-}
+
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;
@@ -89,10 +110,89 @@ a.desc:after {
     margin-bottom: 1rem;
 }
 
-.centrar{
-    background: #c55;
+/* Asegúrate de que el sidebar esté siempre en la parte superior */
+#wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
 }
 
+#sidebar-wrapper {
+    min-height: 100vh; /* Altura mínima del sidebar */
+    width: 300px; /* Aumentar el ancho del sidebar */
+    transition: all 0.3s ease; /* Transición suave */
+}
+/* Estilo para los enlaces del sidebar */
+#sidebar-wrapper .list-group-item {
+    color: white; /* Cambiar el color del texto a blanco */
+    text-decoration: none; /* Eliminar el subrayado */
+    background-color: transparent; /* Fondo transparente para eliminar el blanco */
+    border: none; /* Quitar el borde */
+}
+
+/* Estilo al pasar el ratón */
+#sidebar-wrapper .list-group-item:hover {
+    color: white; /* Mantener el color blanco al pasar el ratón */
+    background-color: transparent; /* Asegurarse de que el fondo se mantenga transparente */
+    border: none; /* Quitar el borde al pasar el ratón */
+}
+
+/* Estilo para el elemento activo */
+#sidebar-wrapper .list-group-item.active {
+    color: white; /* Color para el elemento activo */
+    background-color: transparent; /* Mantener fondo transparente */
+    border: none; /* Quitar el borde del elemento activo */
+}
+
+
+.toggled #sidebar-wrapper {
+    margin-left: -250px; /* Ajuste al cerrar el sidebar */
+}
+
+
+#page-content-wrapper {
+    width: calc(100% - 300px); /* Asegúrate de que coincida con el ancho del sidebar */
+}
+
+.fixed-top {
+    margin-left: 300px; /* Mueve el navbar hacia la derecha del sidebar */
+}
+
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+}
+.h3{
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.linea{
+    background-color: white;
+    border: 1px solid white;
+    width: 80%; /* Puedes ajustar el ancho si lo deseas */
+    padding-top: 0,3px;
+    margin-top: 19.5px;
+    border-radius:5px;
+}
+
+.linea2{
+    background-color: white;
+    border: 1px solid white;
+    width: 80%; /* Puedes ajustar el ancho si lo deseas */
+    padding-top: 0,3px;
+    
+    border-radius:5px;
+}
+.espaciado{
+    padding-top: 10px;
+}
+.tletra{
+    font-size: 20px;
+}

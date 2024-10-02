@@ -5,13 +5,10 @@ use yii\widgets\ActiveForm;
 use yii\web\View;
 use yii\helpers\Url;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuarioSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Lista de Usuarios';
 
-$this->registerCssFile('@web/css/tablaUsu.css', ['depends' => [yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
 ?>
 
 <div class="Contabla">

@@ -13,7 +13,7 @@ use app\models\TblEstados;
 $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
 ?>
 
-<div class="">
+<div class="containerUsu">
     <div class="lista">
         <?= Html::a(
             Html::img('@web/img/icons/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Usuario', 
