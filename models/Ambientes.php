@@ -3,30 +3,45 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
-/**
- * This is the model class for table "tbl_ambientes".
- *
- * @property int $amb_id
- * @property string $nombre_ambiente
- * @property string $descripcion
- * @property string $fecha_creacion
- *
- * @property TblHorarios[] $tblHorarios
- */
 class Ambientes extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'tbl_ambientes';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['fecha_creacion'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        if ($insert) {
+            $this->fecha_creacion = new Expression('NOW()');
+        } else {
+            // Preserva la fecha de creación en actualizaciones
+            $this->fecha_creacion = $this->getOldAttribute('fecha_creacion');
+        }
+
+        return true;
+    }
+
     public function rules()
     {
         return [
@@ -37,9 +52,6 @@ class Ambientes extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -50,11 +62,6 @@ class Ambientes extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * Gets query for [[TblHorarios]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getTblHorarios()
     {
         return $this->hasMany(TblHorarios::class, ['amb_id_FK' => 'amb_id']);

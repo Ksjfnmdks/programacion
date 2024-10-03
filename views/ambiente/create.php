@@ -1,17 +1,27 @@
 <?php
 use yii\helpers\Html;
 /** @var yii\web\View $this */
-/** @var app\models\Ambiente $model */
-
-$this->title = 'AMBIENTES';
+/** @var app\models\Ambiente $model */ 
 ?>
+<h1>Crear Ambiente</h1>
+<div class="linea"></div>
+
+<br>
+
 <div class="create-ambientes-container">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="container-boton-buscar">
-        <button type="submit" class="boton-buscar" aria-label="Buscar">
-            <p><?= Html::a('Lista de ambientes', ['index'], ['class' => 'btn']) ?></p> 
-        </button>
+    <div class="lista">
+        <?= Html::a(
+            Html::img('@web/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Ambiente', 
+            '#',
+            ['class' => 'listaususelected']
+        ) ?>        
+        <?= Html::a(
+            Html::img('@web/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Ambiente', 
+            ['ambiente/index'], 
+            ['class' => 'listausu']
+        ) ?>
     </div>
 
     <div class="form-wrapper">
@@ -22,13 +32,13 @@ $this->title = 'AMBIENTES';
 <style>
 /* Contenedor principal centrado */
 .create-ambientes-container {
-    width: 80%; /* Ancho máximo para el contenedor */
+    width: 90%; /* Ancho máximo para el contenedor */
     max-width: 800px; /* Limita el tamaño máximo en pantallas grandes */
     margin: 0 auto; /* Centrar el contenedor en la página */
+    height:520px;
+    background-color:red;
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
     text-align: center;
     font-family: Arial, sans-serif;
 }
@@ -44,8 +54,13 @@ $this->title = 'AMBIENTES';
 /* Botón en la parte superior */
 .container-boton-buscar {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between; /* Alinea los botones a los lados opuestos */
+    align-items: center; /* Asegura que los botones estén centrados verticalmente */
 }
 
+
+/* Estilos de los botones */
 .boton-buscar {
     height: 35px;
     width: 150px;
@@ -70,14 +85,12 @@ $this->title = 'AMBIENTES';
     transform: scale(0.98);
 }
 
-/* Contenedor del formulario */
+.linea {
+    background-color: black;
+}
+
 .form-wrapper {
-    width: 100%;
-    max-width: 600px; /* Ancho máximo para el formulario */
-    margin: 0 auto; /* Centrar el formulario */
-    padding: 20px;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Añadir margen superior al formulario */
 }
 </style>
+

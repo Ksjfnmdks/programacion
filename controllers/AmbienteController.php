@@ -7,6 +7,7 @@ use app\models\searchAmbiente;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * AmbienteController implements the CRUD actions for Ambientes model.
@@ -71,7 +72,7 @@ class AmbienteController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'amb_id' => $model->amb_id]);
+                return $this->redirect(['ambiente/index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -89,18 +90,25 @@ class AmbienteController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($amb_id)
+        public function actionUpdate($amb_id)
     {
         $model = $this->findModel($amb_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'amb_id' => $model->amb_id]);
+        if ($this->request->isPost) {
+            // Cargar los datos del formulario
+            if ($model->load($this->request->post())) {
+                // Validar y guardar sin modificar `fecha_creacion`
+                if ($model->save(false)) { // Usa `save(false)` para evitar la validación
+                    return $this->redirect(['ambiente/index']);
+                }
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
     }
+
 
     /**
      * Deletes an existing Ambientes model.
@@ -109,12 +117,19 @@ class AmbienteController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($amb_id)
-    {
-        $this->findModel($amb_id)->delete();
+         public function actionDelete($amb_id)
+        {
+            // Asegúrate de que se encuentra el modelo antes de intentar eliminarlo
+            $model = $this->findModel($amb_id);
+            if ($model !== null) {
+                $model->delete();
+            }
 
-        return $this->redirect(['index']);
-    }
+            // Redirige a la acción de índice después de eliminar
+            return $this->redirect(['index']);
+        }
+
+
 
     /**
      * Finds the Ambientes model based on its primary key value.
