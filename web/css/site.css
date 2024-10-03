@@ -101,7 +101,6 @@ a.desc:after {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.75);
 }
-
 .nav > li > form > button.logout:focus {
     outline: none;
 }
@@ -110,51 +109,48 @@ a.desc:after {
     margin-bottom: 1rem;
 }
 
-/* Asegúrate de que el sidebar esté siempre en la parte superior */
 #wrapper {
     display: flex;
     width: 100%;
 }
-
 #sidebar-wrapper {
-    min-height: 100vh; /* Altura mínima del sidebar */
-    width: 300px; /* Aumentar el ancho del sidebar */
-    transition: all 0.3s ease; /* Transición suave */
+    min-height: 100vh;
+    width: 300px; 
+    transition: all 0.3s ease; 
 }
-/* Estilo para los enlaces del sidebar */
+
 #sidebar-wrapper .list-group-item {
-    color: white; /* Cambiar el color del texto a blanco */
-    text-decoration: none; /* Eliminar el subrayado */
-    background-color: transparent; /* Fondo transparente para eliminar el blanco */
-    border: none; /* Quitar el borde */
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
 }
 
-/* Estilo al pasar el ratón */
 #sidebar-wrapper .list-group-item:hover {
-    color: white; /* Mantener el color blanco al pasar el ratón */
-    background-color: transparent; /* Asegurarse de que el fondo se mantenga transparente */
-    border: none; /* Quitar el borde al pasar el ratón */
+    color: white; 
+    background-color: transparent;
+    border: none; 
 }
 
-/* Estilo para el elemento activo */
+
 #sidebar-wrapper .list-group-item.active {
-    color: white; /* Color para el elemento activo */
-    background-color: transparent; /* Mantener fondo transparente */
-    border: none; /* Quitar el borde del elemento activo */
+    color: white;
+    background-color: transparent;
+    border: none;
 }
 
 
 .toggled #sidebar-wrapper {
-    margin-left: -250px; /* Ajuste al cerrar el sidebar */
+    margin-left: -250px;
 }
 
 
 #page-content-wrapper {
-    width: calc(100% - 300px); /* Asegúrate de que coincida con el ancho del sidebar */
+    width: calc(100% - 300px); 
 }
 
 .fixed-top {
-    margin-left: 300px; /* Mueve el navbar hacia la derecha del sidebar */
+    margin-left: 300px; 
 }
 
 
@@ -176,7 +172,7 @@ a.desc:after {
 .linea{
     background-color: white;
     border: 1px solid white;
-    width: 80%; /* Puedes ajustar el ancho si lo deseas */
+    width: 80%; 
     padding-top: 0,3px;
     margin-top: 19.5px;
     border-radius:5px;
@@ -185,7 +181,7 @@ a.desc:after {
 .linea2{
     background-color: white;
     border: 1px solid white;
-    width: 80%; /* Puedes ajustar el ancho si lo deseas */
+    width: 80%; 
     padding-top: 0,3px;
     
     border-radius:5px;

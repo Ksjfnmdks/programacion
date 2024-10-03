@@ -48,7 +48,6 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
             'tableOptions' => ['class' => 'table'], 
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                'usu_id',
                 'identificacion',
                 'nombre',
                 'apellido',
