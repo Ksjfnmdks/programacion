@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use yii\web\IdentityInterface;
 use Yii;
 
@@ -23,7 +24,7 @@ use Yii;
  * @property TblRoles $rolIdFK
  * @property TblHorarios[] $tblHorarios
  */
-class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
+class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -33,11 +34,13 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return 'tbl_usuarios';
     }
 
-    
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['identificacion', 'nombre', 'apellido', 'correo', 'username', 'password', 'fecha_creacion', 'rol_id_FK', 'est_id_FK'], 'required'],
+            [['identificacion', 'nombre', 'apellido', 'correo', 'username', 'password', 'rol_id_FK', 'est_id_FK'], 'required'],
             [['fecha_creacion'], 'safe'],
             [['rol_id_FK', 'est_id_FK'], 'integer'],
             [['identificacion', 'telefono'], 'string', 'max' => 10],
@@ -62,11 +65,11 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'apellido' => 'Apellido',
             'telefono' => 'Telefono',
             'correo' => 'Correo',
-            'username' => 'Username',
-            'password' => 'Password',
+            'username' => 'Usuario',
+            'password' => 'Contraseña',
             'fecha_creacion' => 'Fecha Creacion',
             'rol_id_FK' => 'Roles',
-            'est_id_FK' => 'Estado',
+            'est_id_FK' => 'Estados',
         ];
     }
 
@@ -77,7 +80,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getEstIdFK()
     {
-        return $this->hasOne(Estados::class, ['est_id' => 'est_id_FK']);
+        return $this->hasOne(TblEstados::class, ['est_id' => 'est_id_FK']);
     }
 
     /**
@@ -87,7 +90,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getRolIdFK()
     {
-        return $this->hasOne(Roles::class, ['rol_id' => 'rol_id_FK']);
+        return $this->hasOne(TblRoles::class, ['rol_id' => 'rol_id_FK']);
     }
 
     /**

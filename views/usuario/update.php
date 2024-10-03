@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\Roles;
-use app\models\Estados;
+use app\models\TblRoles;
+use app\models\TblEstados;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
@@ -17,7 +17,7 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
 <div class="">
     <div class="lista">
         <?= Html::a(
-            Html::img('@web/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
+            Html::img('@web/img/icons/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
             ['usuario/index'], 
             ['class' => 'listausu']
         ) ?>
@@ -27,7 +27,7 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
         <h1>Actualizar Usuario</h1>
     </div>
 
-    <div class="UsuariosForm">
+    <div class="fichaForm">
 
         <?php $form = ActiveForm::begin(); ?>
 
@@ -47,12 +47,12 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
             <?= $form->field($model, 'password')->passwordInput(['maxlength' => true, 'placeholder' => 'Contraseña']) ?>
 
             <?= $form->field($model, 'rol_id_FK')->dropDownList(
-                ArrayHelper::map(Roles::find()->all(), 'rol_id', 'nombre'), 
+                ArrayHelper::map(TblRoles::find()->all(), 'rol_id', 'nombre'), 
                 ['prompt' => 'Seleccione un Rol']
             ) ?>
 
             <?= $form->field($model, 'est_id_FK')->dropDownList(
-                ArrayHelper::map(Estados::find()->all(), 'est_id', 'descripcion'), 
+                ArrayHelper::map(TblEstados::find()->all(), 'est_id', 'descripcion'), 
                 ['prompt' => 'Seleccione un Estado']
             ) ?>
 

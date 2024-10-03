@@ -83,7 +83,7 @@ h1 {
     font-size: 20px;
 }
 
-.UsuariosForm{
+.fichaForm{
     display: flex;  
     justify-content: center;
     padding: 10px;
@@ -150,3 +150,17 @@ input, select {
     font-weight: 700; 
     text-decoration: none; 
 }
+
+.ficha{
+    display: grid; /* Usamos CSS Grid para organizar los elementos */
+    
+   
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+        gap: 30px; /* Espacio entre los elementos */
+        
+        
+       
+    padding: 30px;
+}
+
+

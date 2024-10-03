@@ -4,18 +4,9 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; 
-    padding: 20px;
-}
 
 .Contabla {
     width: 100%; 
-    max-width: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,4 +97,51 @@ table th {
     display: flex;
     justify-content: end;
     align-items: end;
+}
+.Texto-verde{
+    color: #007832;
+}
+
+.listaususelected{
+    text-decoration: none;
+    color: grey;
+    font-size: 20px;
+    display: inline-flex;
+    margin-right: 10px;
+}
+.listausu {
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+    display: inline-flex;
+    margin-right: 10px;
+}
+.lista {
+    padding: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Work Sans';
+    font-size: 40px;
+}
+.icono {
+    margin:5px;
+    width: 32px;
+    height: 32px;
+}
+
+.divider {
+    display: flex;
+    color: white;
+    width: 100%;
+    margin: 10px auto;
+    border: none;
+    border-top: 2px solid #000000;
+}
+
+.listaususelected, .listausu {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700; 
+    text-decoration: none; 
 }

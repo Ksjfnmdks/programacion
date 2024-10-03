@@ -3,6 +3,8 @@
 use app\models\TblFichas;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
@@ -10,41 +12,65 @@ use yii\grid\GridView;
 /** @var app\models\FichaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Tbl Fichas';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Lista de fichas';
+
+$this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
+
 ?>
-<div class="tbl-fichas-index">
+<div class="Contabla">
+    <div class="lista">
+        <?= Html::a(
+                Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear ficha', 
+                ['ficha/create'], 
+                ['class' => 'listausu']
+            ) ?>
+        <?= Html::a(
+            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de fichas', 
+            ['ficha/index'], 
+            ['class' => 'listaususelected']
+        ) ?>
+    </div>
+    <hr class="divider">
+    <h2><?= Html::encode($this->title) ?></h2>
+    <div class="table-container">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Tbl Fichas', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'fic_id',
-            'codigo',
-            'fecha_incio',
-            'fecha_final',
-            'pro_id_FK',
-            //'instructor_lider',
-            //'jor_id_FK',
-            //'fecha_creacion',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, TblFichas $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'fic_id' => $model->fic_id]);
-                 }
+        <div class="BuscarUsu">
+            <?php $form = ActiveForm::begin([
+                'action' => ['index'],
+                'method' => 'get',
+            ]); ?>
+            
+            <?= $form->field($searchModel, 'codigo')->textInput(['placeholder' => 'Buscar por código'])->label(false) ?>
+            <?php ActiveForm::end(); ?>
+        </div>
+    
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'tableOptions' => ['class' => 'table'], 
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                'codigo',
+                'fecha_incio',
+                'fecha_final',
+                [
+                    'attribute' => 'pro_id_FK',
+                    'value' => 'proIdFK.nombre_programa',
+                ],
+                'instructor_lider',
+                [
+                    'attribute' => 'jor_id_FK',
+                    'value' => 'jorIdFK.descripcion',
+                ],
+                'fecha_creacion',
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'header' => 'Acciones',
+                    'urlCreator' => function ($action, $model, $key, $index) {
+                        return Url::to([$action, 'fic_id' => $model->fic_id]);
+                    },
+                ],
             ],
-        ],
-    ]); ?>
-
-
+        
+        ]); ?>
+    </div>
 </div>

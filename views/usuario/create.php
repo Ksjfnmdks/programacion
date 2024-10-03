@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\Roles;
-use app\models\Estados;
+use app\models\TblRoles;
+use app\models\TblEstados;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
@@ -12,24 +12,26 @@ use app\models\Estados;
 
 $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
 ?>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-<div class="">
+<div class="containerUsu">
+<div class="titulo">
+        <h1>Crear Usuario</h1>
+    </div>
+    <hr class="divider">
     <div class="lista">
         <?= Html::a(
-            Html::img('@web/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Usuario', 
+            Html::img('@web/img/icons/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Usuario', 
             '#',
             ['class' => 'listaususelected']
         ) ?>        
         <?= Html::a(
-            Html::img('@web/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
+            Html::img('@web/img/icons/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
             ['usuario/index'], 
             ['class' => 'listausu']
         ) ?>
     </div>
-    <hr class="divider">
-    <div class="titulo">
-        <h1>Crear Usuario</h1>
-    </div>
+    
 
     <div class="UsuariosForm">
 
@@ -51,12 +53,12 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
             <?= $form->field($model, 'password')->passwordInput(['maxlength' => true, 'placeholder' => 'Contraseña']) ?>
 
             <?= $form->field($model, 'rol_id_FK')->dropDownList(
-                ArrayHelper::map(Roles::find()->all(), 'rol_id', 'nombre'), 
+                ArrayHelper::map(TblRoles::find()->all(), 'rol_id', 'nombre'), 
                 ['prompt' => 'Seleccione un Rol']
             ) ?>
 
             <?= $form->field($model, 'est_id_FK')->dropDownList(
-                ArrayHelper::map(Estados::find()->all(), 'est_id', 'descripcion'), 
+                ArrayHelper::map(TblEstados::find()->all(), 'est_id', 'descripcion'), 
                 ['prompt' => 'Seleccione un Estado']
             ) ?>
 

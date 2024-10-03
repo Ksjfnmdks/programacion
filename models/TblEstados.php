@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_roles".
+ * This is the model class for table "tbl_estados".
  *
- * @property int $rol_id
- * @property string $nombre
+ * @property int $est_id
+ * @property string $descripcion
  *
  * @property TblUsuarios[] $tblUsuarios
  */
-class Roles extends \yii\db\ActiveRecord
+class TblEstados extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'tbl_roles';
+        return 'tbl_estados';
     }
 
     /**
@@ -28,8 +28,8 @@ class Roles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre'], 'required'],
-            [['nombre'], 'string', 'max' => 30],
+            [['descripcion'], 'required'],
+            [['descripcion'], 'string', 'max' => 50],
         ];
     }
 
@@ -39,8 +39,8 @@ class Roles extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'rol_id' => 'Rol ID',
-            'nombre' => 'Nombre',
+            'est_id' => 'Est ID',
+            'descripcion' => 'Descripcion',
         ];
     }
 
@@ -51,6 +51,6 @@ class Roles extends \yii\db\ActiveRecord
      */
     public function getTblUsuarios()
     {
-        return $this->hasMany(TblUsuarios::class, ['rol_id_FK' => 'rol_id']);
+        return $this->hasMany(TblUsuarios::class, ['est_id_FK' => 'est_id']);
     }
 }

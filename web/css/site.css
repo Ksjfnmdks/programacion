@@ -1,3 +1,26 @@
+#sidebar-wrapper {
+    background-color: #38A800; 
+}
+
+.navbar {
+    background-color: #38A800; 
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white; 
+}
+
+.sidebar-heading {
+    color: white;
+}
+
+.list-group-item {
+    color: white; 
+}
+
+.list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Efecto hover en items */
+}
 main > .container {
     padding: 70px 15px 20px;
 }
@@ -78,7 +101,6 @@ a.desc:after {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.75);
 }
-
 .nav > li > form > button.logout:focus {
     outline: none;
 }
@@ -87,3 +109,86 @@ a.desc:after {
     margin-bottom: 1rem;
 }
 
+#wrapper {
+    display: flex;
+    width: 100%;
+}
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 300px; 
+    transition: all 0.3s ease; 
+}
+
+#sidebar-wrapper .list-group-item {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    color: white; 
+    background-color: transparent;
+    border: none; 
+}
+
+
+#sidebar-wrapper .list-group-item.active {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+
+.toggled #sidebar-wrapper {
+    margin-left: -250px;
+}
+
+
+#page-content-wrapper {
+    width: calc(100% - 300px); 
+}
+
+.fixed-top {
+    margin-left: 300px; 
+}
+
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+}
+.h3{
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.linea{
+    background-color: white;
+    border: 1px solid white;
+    width: 80%; 
+    padding-top: 0,3px;
+    margin-top: 19.5px;
+    border-radius:5px;
+}
+
+.linea2{
+    background-color: white;
+    border: 1px solid white;
+    width: 80%; 
+    padding-top: 0,3px;
+    
+    border-radius:5px;
+}
+.espaciado{
+    padding-top: 10px;
+}
+.tletra{
+    font-size: 20px;
+}

@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-use app\models\Usuarios;
+use app\models\TblUsuarios;
 
 class LoginForm extends Model
 {
@@ -36,7 +36,7 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = Usuarios::findOne(['username' => $this->username]);
+            $this->_user = TblUsuarios::findOne(['username' => $this->username]);
         }
 
         return $this->_user;

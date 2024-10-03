@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="tbl-fichas-form">
+<div class="UsuariosForm"">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -24,10 +24,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'jor_id_FK')->textInput() ?>
 
-    <?= $form->field($model, 'fecha_creacion')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

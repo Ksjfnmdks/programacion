@@ -5,31 +5,29 @@ use yii\widgets\ActiveForm;
 use yii\web\View;
 use yii\helpers\Url;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuarioSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Lista de Usuarios';
 
-$this->registerCssFile('@web/css/tablaUsu.css', ['depends' => [yii\web\YiiAsset::class]]);
+$this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
 ?>
-
+<link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
 <div class="Contabla">
+    <h2><?= Html::encode($this->title) ?></h2>
+    <hr class="divider">
     <div class="lista">
-        <?= Html::a(
-                Html::img('@web/icon-crear.png', ['class' => 'iconosa']) . ' Crear Usuario', 
+            <?= Html::a(
+                Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear Usuario', 
                 ['usuario/create'], 
                 ['class' => 'listausu']
             ) ?>
         <?= Html::a(
-            Html::img('@web/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
+            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Usuarios', 
             ['usuario/index'], 
             ['class' => 'listaususelected']
         ) ?>
     </div>
-    <hr class="divider">
     <div class="table-container">
-    <h2><?= Html::encode($this->title) ?></h2>
+    
 
         <div class="BuscarUsu">
         
@@ -50,7 +48,6 @@ $this->registerCssFile('@web/css/tablaUsu.css', ['depends' => [yii\web\YiiAsset:
             'tableOptions' => ['class' => 'table'], 
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                'usu_id',
                 'identificacion',
                 'nombre',
                 'apellido',

@@ -13,7 +13,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserAdmin($id)
     {
-       if (Usuarios::findOne(['usu_id' => $id, 'rol_id_FK' => 1])){
+       if (TblUsuarios::findOne(['usu_id' => $id, 'rol_id_FK' => 1])){
         return true;
        } else {
 
@@ -24,7 +24,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserSimple($id)
     {
-       if (Usuarios::findOne(['usu_id' => $id, 'rol_id_FK' => 2])){
+       if (TblUsuarios::findOne(['usu_id' => $id, 'rol_id_FK' => 2])){
        return true;
        } else {
 
@@ -34,7 +34,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserPrivilegio($id)
     {
-       if (Usuarios::findOne(['usu_id' => $id, 'rol_id_FK' => 3])){
+       if (TblUsuarios::findOne(['usu_id' => $id, 'rol_id_FK' => 3])){
        return true;
        } else {
        return false;
