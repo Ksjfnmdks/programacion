@@ -10,10 +10,12 @@ $this->title = 'Lista de Usuarios';
 
 $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
 ?>
-
+<link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
 <div class="Contabla">
+    <h2><?= Html::encode($this->title) ?></h2>
+    <hr class="divider">
     <div class="lista">
-        <?= Html::a(
+            <?= Html::a(
                 Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear Usuario', 
                 ['usuario/create'], 
                 ['class' => 'listausu']
@@ -24,8 +26,6 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
             ['class' => 'listaususelected']
         ) ?>
     </div>
-    <hr class="divider">
-    <h2><?= Html::encode($this->title) ?></h2>
     <div class="table-container">
     
 

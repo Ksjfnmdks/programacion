@@ -144,3 +144,9 @@ input, select {
         grid-template-columns: 1fr;
     }
 }
+.listaususelected, .listausu {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700; 
+    text-decoration: none; 
+}

@@ -12,8 +12,13 @@ use app\models\TblEstados;
 
 $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
 ?>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
 
 <div class="containerUsu">
+<div class="titulo">
+        <h1>Crear Usuario</h1>
+    </div>
+    <hr class="divider">
     <div class="lista">
         <?= Html::a(
             Html::img('@web/img/icons/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Usuario', 
@@ -26,10 +31,7 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
             ['class' => 'listausu']
         ) ?>
     </div>
-    <hr class="divider">
-    <div class="titulo">
-        <h1>Crear Usuario</h1>
-    </div>
+    
 
     <div class="UsuariosForm">
 
