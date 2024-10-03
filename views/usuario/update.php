@@ -27,7 +27,7 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
         <h1>Actualizar Usuario</h1>
     </div>
 
-    <div class="UsuariosForm">
+    <div class="fichaForm">
 
         <?php $form = ActiveForm::begin(); ?>
 

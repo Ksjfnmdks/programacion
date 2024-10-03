@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var app\models\TblFichas $model */
 
 $this->title = $model->fic_id;
-$this->params['breadcrumbs'][] = ['label' => 'Tbl Fichas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'lista de Fichas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'fic_id' => $model->fic_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Estas seguro de eliminar esta ficha?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -33,9 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'codigo',
             'fecha_incio',
             'fecha_final',
-            'pro_id_FK',
+            [
+                'attribute' => 'pro_id_FK',
+                'value' => $model->proIdFK->nombre_programa, // Mostrar nombre del rol
+            ],
             'instructor_lider',
-            'jor_id_FK',
+            [
+                'attribute' => 'jor_id_FK',
+                'value' => $model->jorIdFK->descripcion, // Mostrar descripción del estado
+            ],
             'fecha_creacion',
         ],
     ]) ?>

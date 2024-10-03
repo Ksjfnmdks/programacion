@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+.altura{
+    height: 100vh;
+}
+
+.usuario {
+    width: 100%;
+    max-width: 600px;
+    height: 80px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    text-align: center;
+}
+.titulo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.boton {
+    width: auto;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.lista {
+    padding: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.listaususelected{
+    text-decoration: none;
+    color: grey;
+    font-size: 20px;
+    display: inline-flex;
+    margin-right: 10px;
+}
+.listausu {
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+    display: inline-flex;
+    margin-right: 10px;
+}
+
+.icono {
+    margin:5px;
+    width: 32px;
+    height: 32px;
+}
+
+.divider {
+    display: flex;
+    color: white;
+    width: 100%;
+    margin: 10px auto;
+    border: none;
+    border-top: 2px solid #000000;
+}
+
+.containerUsu {
+    width: 75%;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: white;
+    text-align: center;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+.fichaForm{
+    display: flex;  
+    justify-content: center;
+    padding: 10px;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    font-size: 18px;
+    text-align: center;
+}
+
+.form-grid {
+    width: 600px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.form-group1{
+    margin: 1px;
+}
+
+.control-label {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+}
+
+.btn-registrar {
+    width: 20%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-registrar:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 800px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.listaususelected, .listausu {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700; 
+    text-decoration: none; 
+}
+
+.ficha{
+    display: grid; /* Usamos CSS Grid para organizar los elementos */
+    
+   
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+        gap: 30px; /* Espacio entre los elementos */
+        
+        
+       
+    padding: 30px;
+}
+
+

@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="tbl-fichas-search">
+<div class="usuarios-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

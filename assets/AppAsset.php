@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/tablaUsu.css',
         'css/site.css',
+        'css/ficha.css',
         'css/UsuariosForm.css',
         'css/estilos.css',
         'css/bootstrap.min.css',
