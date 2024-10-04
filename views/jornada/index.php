@@ -12,45 +12,43 @@ use yii\widgets\ActiveForm;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 
+$this->title = 'Lista de Jornadas';
 
+$this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
 ?>
-
-<h1>Lista de jornadas</h1>
-<div class="linea"></div>
-
-<div class="jornadas-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
-    <div class="contenido">
-        <div class="search-container">
-            <div class="container-boton-buscar">
-                <?= Html::a(
-                    Html::img('@web/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Jornada', 
-                    ['jornada/create'], 
-                    ['class' => 'listaususelected']
-                ) ?>  
-            </div>
-
-            <div class="input">
-                <div class="container-busqueda">
-                    <?= $form->field($searchModel, 'descripcion')->textInput([
-                    'placeholder' => 'Buscar jornada', 
-                    'class' => 'busqueda'
-                    ])->label(false) ?>
-                </div>
-            </div>
-        </div>
-
-        
+<link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
+<div class="Contabla">
+    <h2><?= Html::encode($this->title) ?></h2>
+    <hr class="divider">
+    <div class="lista">
+            <?= Html::a(
+                Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear Jornada', 
+                ['jornada/create'], 
+                ['class' => 'listausu']
+            ) ?>
+        <?= Html::a(
+            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Jornadas', 
+            ['jornada/index'], 
+            ['class' => 'listaususelected']
+        ) ?>
     </div>
+    <div class="table-container">
+    
 
-    <div class="div">
-        <?php ActiveForm::end(); ?>
+        <div class="BuscarUsu">
+        
+            <?php $form = ActiveForm::begin([
+                'action' => ['index'],
+                'method' => 'get',
+            ]); ?>
+            
+            <?= $form->field($searchModel, 'descripcion')->textInput(['placeholder' => 'Buscar por nombre'])->label(false) ?>
+
+
+
+            <?php ActiveForm::end(); ?>
+        </div>
+        
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'columns' => [
@@ -74,246 +72,7 @@ use yii\widgets\ActiveForm;
     </div>
 </div>
 
-<!--se pone los estilos aca pq la mlp tabla no toma los estilos desde otra hoja de css-->
-<style>
-    
-    .jornadas-index {
-    width: 75%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-.contenido {
-    width: 100%;
-}
-
-.search-container {
-    height: 40px;
-    display: flex; 
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    width: 100%; 
-}
-
-.input {
-display: flex;
-justify-content: center;
-align-items: center;
-width: 25%;
-height: 100%; /* Ajusta la altura del contenedor del input */
-margin: 0;
-padding: 0;
-}
-
-.busqueda {
-display: block;
-color: #000;
-width: 100%;
-height: 35px; /* Ajusta la altura del input */
-margin: 0 auto;
-}
-
-
-.container-busqueda {
-width: 100%; /* Asegura que el input ocupe el ancho completo del contenedor */
-display: flex;
-justify-content: center;
-align-items: center;
-padding-top: 21px;
-}
-
-
-.container-boton-buscar {
-    height: 100%;
-    /* Ajustar el ancho del contenedor del botón según sea necesario */
-}
-.boton-buscar {
-    height: 35px; /* Ajusta la altura */
-    width: 150px; /* Ajusta el ancho */
-    background-color: #38A800; /* Color de fondo */
-    color: black; /* Color del texto */
-    border: none; /* Eliminar borde */
-    padding: 5px; /* Ajusta el espaciado interno */
-    font-size: 16px; /* Tamaño de fuente */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
-}
-
-.boton-buscar:hover {
-    background-color: #FFFFFF; /* Color de fondo al pasar el cursor */
-    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
-}
-
-.boton-buscar:active {
-    background-color: #265C00; /* Color cuando se presiona */
-    transform: scale(0.98); /* Reducir ligeramente cuando se hace clic */
-}
-
-.boton-buscar:focus {
-    outline: none; /* Elimina el borde de enfoque */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Añadir sombra cuando está enfocado */
-}
-
-/*estilos de la tabla*/
-.my-custom-class {
-    background-color: #FFFFFF; /* Fondo de la tabla */
-    border: 2px solid #000; /* Borde de la tabla */
-}
-
-.my-custom-class th {
-    background-color: #38A800; /* Fondo de los encabezados */
-    color: white; /* Color del texto en los encabezados */
-    padding: 10px;
-    text-align: center;
-}
-
-.my-custom-class td {
-    padding: 8px;
-    text-align: left; /* Alineación del texto en celdas */
-}
-
-.my-custom-class tr:nth-child(even) {
-    background-color: #f2f2f2; /* Alternar colores de filas */
-}
-
-/* Asegúrate de que la tabla sea responsive */
-@media (max-width: 600px) {
-    .my-custom-class {
-        font-size: 12px; /* Tamaño de fuente más pequeño en pantallas pequeñas */
-    }
-
-    .my-custom-class th, .my-custom-class td {
-        padding: 8px; /* Reducir padding en pantallas pequeñas */
-    }
-}
-
-
-
-</style>
-
-<style>
-    
-    .ambientes-index {
-        width: 100%;
-        display: flex;
-        
-    
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Aumenté el max-width para hacer la tabla más ancha */
-    .contenido {
-        width: 1200px; /* Ocupa el 100% del ancho disponible */
-        max-width: 1600px; /* Aumenté el max-width a 1600px para hacerla más amplia */
-       
-        padding: 20px; /* Añadí algo de padding para mejorar el espacio */
-    }
-
-    .search-container {
-        height: 40px;
-        display: flex; 
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        width: 100%; 
-    }
-
-    .input {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 25%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .busqueda {
-        display: block;
-        color: #000;
-        width: 100%;
-        height: 35px;
-        margin: 0 auto;
-    }
-
-    .container-busqueda {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-top: 21px;
-    }
-
-    .container-boton-buscar {
-        height: 100%;
-    }
-
-    .boton-buscar {
-        height: 35px;
-        width: 150px;
-        background-color: #38A800;
-        color: black;
-        border: none;
-        padding: 5px;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .boton-buscar:hover {
-        background-color: #FFFFFF;
-        transform: scale(1.05);
-    }
-
-    .boton-buscar:active {
-        background-color: #265C00;
-        transform: scale(0.98);
-    }
-
-    .boton-buscar:focus {
-        outline: none;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Estilos de la tabla */
-    .my-custom-class {
-        background-color: #FFFFFF;
-        border: 2px solid #000;
-        width: 100%; /* Esto hará que la tabla ocupe todo el espacio disponible */
-    }
-
-    .my-custom-class th {
-        background-color: #38A800;
-        color: white;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .my-custom-class td {
-        padding: 8px;
-        text-align: left;
-    }
-
-    .my-custom-class tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    /* Asegurarte de que la tabla sea responsive */
-    @media (max-width: 600px) {
-        .my-custom-class {
-            font-size: 12px;
-        }
-        .my-custom-class th, .my-custom-class td {
-            padding: 8px;
-        }
-    }
-</style>
 
 
 <?php
