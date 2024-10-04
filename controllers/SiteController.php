@@ -128,46 +128,32 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
+        $this->layout = 'login'; // Usar layout específico para login
+
         if (!\Yii::$app->user->isGuest) {
-   
-   if (User::isUserAdmin(Yii::$app->user->identity->id))
-   {
-    return $this->redirect(["site/admin"]);
-   }
-   
-   if (User::isUserPrivilegio(Yii::$app->user->identity->id))
-   {
-    return $this->redirect(["site/userprivilegio"]);
-   }
-   else
-   {
-    return $this->redirect(["site/user"]);
-   }
+            if (User::isUserAdmin(Yii::$app->user->identity->id)) {
+                return $this->redirect(["site/admin"]);
+            }
+            if (User::isUserPrivilegio(Yii::$app->user->identity->id)) {
+                return $this->redirect(["site/userprivilegio"]);
+            }
+            return $this->redirect(["site/user"]);
         }
- 
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-   
-            if (User::isUserAdmin(Yii::$app->user->identity->id))
-   {
-    return $this->redirect(["site/admin"]);
-   }
-   
-   if (User::isUserPrivilegio(Yii::$app->user->identity->id))
-   {
-    return $this->redirect(["site/userprivilegio"]);
-   }
-   else
-   {
-    return $this->redirect(["site/user"]);
-   }
-   
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+            if (User::isUserAdmin(Yii::$app->user->identity->id)) {
+                return $this->redirect(["site/admin"]);
+            }
+            if (User::isUserPrivilegio(Yii::$app->user->identity->id)) {
+                return $this->redirect(["site/userprivilegio"]);
+            }
+            return $this->redirect(["site/user"]);
         }
+
+        return $this->render('login', ['model' => $model]);
     }
+
 
     public function actionLogout()
     {
