@@ -45,7 +45,14 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
         
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'tableOptions' => ['class' => 'table'], 
+            'tableOptions' => ['class' => 'table'],
+            'options' => ['class' => 'table table-striped'],
+            'summary' => 'Mostrando  {begin}  - {end}  de {totalCount} Usuarios.', //se agrega el paginador        
+            'pager' => [
+                'options' => ['class' => 'pagination justify-content-center'], // centrar el paginador
+                'linkOptions' => ['class' => 'page-link'], // estilo para cada enlace del paginador
+                'pageCssClass' => 'page-item', // clase para el contenedor de cada página
+            ],
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 'identificacion',

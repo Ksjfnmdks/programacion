@@ -17,8 +17,8 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            [['username', 'password'], 'required'],
-            ['rememberMe', 'boolean'],
+            ['username', 'required', 'message' => 'Debe ingresar un usuario.'],
+            ['password', 'required', 'message' => 'Debe ingresar una contraseña.'],
             ['password', 'validatePassword'],
         ];
     }
@@ -28,7 +28,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Usuario o Contraseña incorrectos.');
             }
         }
     }

@@ -7,7 +7,7 @@ $this->title = 'Iniciar Sesión';
 
 <div class="login-container">
     <div class="login-form-wrapper">
-        <h1 class="h1"><?= Html::encode($this->title) ?></h1>
+        <h1 class="h1 mt-3"><?= Html::encode($this->title) ?></h1>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
@@ -32,11 +32,6 @@ $this->title = 'Iniciar Sesión';
                 'placeholder' => 'Contraseña' 
             ])->label(false) 
             ?>
-        </div>
-
-        <!-- Enlace para recuperar contraseña -->
-        <div class="forgot-password">
-            <?= Html::a('Forgot password?', ['site/request-password-reset']) ?>
         </div>
 
         <!-- Botón de Envío -->

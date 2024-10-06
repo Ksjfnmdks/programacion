@@ -1,7 +1,7 @@
 <?php
 
 namespace app\controllers;
-
+use Yii;
 use app\models\TblUsuarios;
 use app\models\UsuarioSearch;
 use yii\web\Controller;
@@ -71,7 +71,11 @@ class UsuarioController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'usu_id' => $model->usu_id]);
+                // Establecer un mensaje flash de éxito
+                Yii::$app->session->setFlash('success', 'Usuario registrado con éxito.');
+
+                // Permanecer en la misma página recargando
+                return $this->refresh();
             }
         } else {
             $model->loadDefaultValues();
@@ -81,6 +85,7 @@ class UsuarioController extends Controller
             'model' => $model,
         ]);
     }
+    
 
     /**
      * Updates an existing TblUsuarios model.

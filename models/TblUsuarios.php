@@ -46,7 +46,18 @@ class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['identificacion', 'telefono'], 'string', 'max' => 10],
             [['nombre', 'username', 'password'], 'string', 'max' => 50],
             [['apellido', 'correo'], 'string', 'max' => 100],
-            [['identificacion'], 'unique'],
+            
+            //Validacion de campos
+            [['identificacion'], 'required','message' => 'El campo identificacion no puede estar vacío.'],// No sirven estas validaciones
+            [['nombre'], 'required','message' => 'El campo nombre no puede estar vacío.'],
+            [['apellido'], 'required','message' => 'El campo apellido no puede estar vacío.'],
+            [['correo'], 'required','message' => 'El campo correo no puede estar vacío.'],
+            [['username'], 'required','message' => 'El campo username no puede estar vacío.'],
+            [['password'], 'required','message' => 'El campo password no puede estar vacío.'],
+            [['identificacion'], 'unique','message' => 'La identificacion ya ha sido registrada.'],//hasta aqui 
+            ['identificacion', 'match', 'pattern' => '/^\d+$/', 'message' => 'La identificación solo puede contener números.'],
+            ['telefono', 'match', 'pattern' => '/^\d+$/', 'message' => 'El teléfono solo puede contener números.'],
+            [['nombre', 'apellido'], 'match', 'pattern' => '/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/', 'message' => '{attribute} solo puede contener letras y espacios.'],
             [['username', 'password'], 'unique', 'targetAttribute' => ['username', 'password']],
             [['rol_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblRoles::class, 'targetAttribute' => ['rol_id_FK' => 'rol_id']],
             [['est_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblEstados::class, 'targetAttribute' => ['est_id_FK' => 'est_id']],
