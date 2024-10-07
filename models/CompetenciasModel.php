@@ -22,7 +22,7 @@ class CompetenciasModel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_competencias';
+        return 'competencias';
     }
 
     /**
@@ -31,12 +31,16 @@ class CompetenciasModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'cant_horas', 'codigo', 'descripcion'], 'required'],
-            [['cant_horas'], 'integer'],
             [['codigo'], 'string', 'max' => 50],
-            [['fecha_creacion'], 'safe'],
             [['nombre'], 'string', 'max' => 100],
             [['descripcion'], 'string', 'max' => 100],
+            [['codigo', 'nombre', 'cant_horas', 'descripcion'], 'required'],
+            [['cant_horas'], 'integer'],
+            [['descripcion'], 'string'],
+            [['fecha_creacion'], 'safe'],
+            ['codigo', 'unique', 'message' => 'El código ya existe.'],
+            ['nombre', 'unique', 'message' => 'Ya una competencia tiene este nombre.'],
+            ['descripcion', 'unique', 'message' => 'Ya una competencia  tiene esta descripcion.'],
         ];
     }
 
