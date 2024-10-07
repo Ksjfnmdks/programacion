@@ -25,23 +25,50 @@ class Resultado extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_resultados';
+        return 'resultados';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
-        return [
-            [['nombre', 'horas', 'id_com_fk'], 'required'],
-            [['horas'], 'integer', 'min' => 1],
-            [['fecha_creacion'], 'safe'],
-            [['id_com_fk'], 'exist', 'skipOnError' => true, 'targetClass' => CompetenciasModel::class, 'targetAttribute' => ['id_com_fk' => 'id_com']],
-            [['horas'], 'validateHoras'],
-        ];
-    }
+public function rules()
+{
+    return [
+        [['nombre', 'horas', 'id_com_fk'], 'required'],
+        [['horas'], 'integer', 'min' => 1],
+        [['fecha_creacion'], 'safe'],
+        [['id_com_fk'], 'exist', 'skipOnError' => true, 'targetClass' => CompetenciasModel::class, 'targetAttribute' => ['id_com_fk' => 'id_com']],
+        ['nombre', 'unique', 'message' => 'Ya un resultado tiene este nombre.'],
+        [['horas'], 'validateHoras'],
+        [['horas'], 'validateHorasCompetencia'],
+    ];
+}
+
     
+
+    public function validateHorasCompetencia($attribute, $params)
+    {
+        $competencia = CompetenciasModel::findOne($this->id_com_fk);
+
+        if ($competencia) {
+
+            $sumaHorasExistentes = Resultado::find()
+                ->where(['id_com_fk' => $this->id_com_fk])
+                ->sum('horas');
+
+            $horasRestantes = $competencia->cant_horas - $sumaHorasExistentes;
+
+            if ($horasRestantes <= 0) {
+                $this->addError($attribute, 'No hay horas disponibles para esta competencia.');
+                return;
+            }
+
+            if ($this->horas > $horasRestantes) {
+                $this->addError($attribute,'Horas libres restantes: ' . $horasRestantes);
+            }
+        }
+    }
+
     public function validateHoras($attribute, $params)
     {
         if (!$this->hasErrors()) {
