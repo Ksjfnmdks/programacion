@@ -21,6 +21,10 @@ $this->title = 'Sistema de Asignación';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="web/css/estilos.php">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -42,15 +46,39 @@ $this->title = 'Sistema de Asignación';
         </div>
         <div class="list-group list-group-flush espaciado">
             <ul class="list-unstyled">
-                <li><a href="home" class="list-group-item">Inicio</a></li>
-                <li>
-                    <a class="list-group-item tletra" href="<?= \yii\helpers\Url::to(['usuario/index']) ?>">
-                        <?= Html::img('@web/img/icons/icon-user.png', ['alt' => 'Usuarios', 'class' => 'icon']) ?> Usuario
-                    </a>
-                </li>
-                <li><a href="<?= \yii\helpers\Url::to(['ficha/index']) ?>" class="list-group-item">Fichas</a></li>
-                <li><a href="<?= \yii\helpers\Url::to(['ambiente/index']) ?>" class="list-group-item">Ambientes</a></li>
-                <li><a href="<?= \yii\helpers\Url::to(['jornada/index']) ?>" class="list-group-item">Jornadas</a></li>
+                
+                <?php
+                    echo Nav::widget([
+                        'options' => ['class' => 'list-group-item', 'style' => ''],
+                        'items' => [
+
+                            ['label' => '<h5 class="bi bi-house list-group-item" 
+                                        style="color: white;">  Home</h5>',
+                                        'url' => ['/site/index'], 'encode' => false],   
+
+                            ['label' => '<h5 class="bi bi-people list-group-item" 
+                                        style="color: white;">  Usuario</h5>',
+                                        'url' => ['/usuario/index'], 'encode' => false],   
+
+                            ['label' => '<h5 class="bi bi-people list-group-item" 
+                                        style="color: white;">  Redes</h5>', 
+                                        'url' => ['/red/index'], 'encode' => false],
+
+                            ['label' => '<h5 class="bi bi-people list-group-item" 
+                                        style="color: white;">  Competencias</h5>', 
+                                        'url' => ['/competencia/index'], 'encode' => false],
+
+                            ['label' => '<h5 class="bi bi-journals list-group-item" 
+                                        style="color: white;">  Programas</h5>', 
+                                        'url' => ['/programa/index'], 'encode' => false],
+
+                            ['label' => '<h5 class="bi bi-people list-group-item" 
+                                        style="color: white;">  Asignación</h5>', 
+                                        'url' => ['/competenciaprograma/index'], 'encode' => false],
+                        ]
+                    ]);
+                ?>
+
             </ul>
         </div>
 
@@ -86,7 +114,7 @@ $this->title = 'Sistema de Asignación';
             </div>
         </nav>
 
-        <main class="container-fluid" style="padding-top: 30px;">
+        <main class="container-fluid" style="padding-top: 70px;">
             <?= $content ?>
         </main>
 
@@ -100,13 +128,18 @@ $this->title = 'Sistema de Asignación';
 </footer>
 
 <?php $this->endBody() ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("toggled");
-    });
-</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("toggled");
+        });
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
 </body>
 </html>
 <?php $this->endPage() ?>
