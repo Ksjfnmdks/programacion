@@ -1,141 +1,97 @@
 <?php
 
-namespace app\controllers;
+namespace app\models;
 
-use app\models\CompetenciasModel;
-use app\models\CompetenciasSearch;
-use app\models\Resultado; // Asegúrate de importar el modelo Resultado
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use Yii;
 
 /**
- * CompetenciasController implements the CRUD actions for CompetenciasModel model.
+ * This is the model class for table "tbl_competencias".
+ *
+ * @property int $id_com
+ * @property string $nombre
+ * @property int $cant_horas
+ * @property string $fecha_creacion
+ *
+ * @property TblCompetenciasProgramas[] $tblCompetenciasProgramas
+ * @property Resultado[] $tblResultados
  */
-class CompetenciasController extends Controller
+class CompetenciasModel extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function behaviors()
+    public static function tableName()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
+        return 'competencias';
     }
 
     /**
-     * Lists all CompetenciasModel models.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function actionIndex()
+    public function rules()
     {
-        $searchModel = new CompetenciasSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return [
+            [['codigo'], 'string', 'max' => 50],
+            [['nombre'], 'string', 'max' => 100],
+            [['descripcion'], 'string', 'max' => 100],
+            [['codigo', 'nombre', 'cant_horas', 'descripcion'], 'required'],
+            [['cant_horas'], 'integer'],
+            [['descripcion'], 'string'],
+            [['fecha_creacion'], 'safe'],
+            ['codigo', 'unique', 'message' => 'El código ya existe.'],
+            ['nombre', 'unique', 'message' => 'Ya una competencia tiene este nombre.'],
+            ['descripcion', 'unique', 'message' => 'Ya una competencia  tiene esta descripcion.'],
+        ];
     }
 
-    /**
-     * 
-     * @param int $id_com Id Com
-     * @return string
-     * @throws NotFoundHttpException 
-     */
-    public function actionView($id_com)
+    public function beforeSave($insert)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id_com),
-        ]);
-    }
-
-    /**
-     * 
-     * 
-     * @return string|\yii\web\Response
-     */
-    public function actionCreate()
-    {
-        $model = new CompetenciasModel();
-    
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_com' => $model->id_com]);
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->fecha_creacion = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             }
+            return true;
         }
-    
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return false;
     }
 
     /**
-     * 
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id_com' => 'ID',
+            'codigo' => 'Codigo',
+            'nombre' => 'Nombre',
+            'cant_horas' => 'Cantidad Horas',
+            'fecha_creacion' => 'Fecha Creacion',
+            'descripcion' => 'Descripcion',
+        ];
+    }
+
+    /**
+     * Gets query for [[TblCompetenciasProgramas]].
      *
-     * @param int $id_com Id Com
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException 
+     * @return \yii\db\ActiveQuery
      */
-    public function actionUpdate($id_com)
+    public function getTblCompetenciasProgramas()
     {
-        $model = $this->findModel($id_com);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_com' => $model->id_com]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->hasMany(TblCompetenciasProgramas::class, ['id_com_fk' => 'id_com']);
     }
 
     /**
-     * 
-     * 
-     * @param int 
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException 
-     */
-    public function actionDelete($id_com)
-    {
-      
-        Resultado::deleteAll(['id_com_fk' => $id_com]);
-    
-       
-        $competencia = $this->findModel($id_com);
-        if ($competencia->delete()) {
-            return $this->redirect(['index']);
-        } else {
-            Yii::$app->session->setFlash('error', 'No se pudo eliminar la competencia.');
-            return $this->redirect(['index']);
-        }
-    }
-
-    /**
-     * 
+     * Gets query for [[TblResultados]].
      *
-     * @param int 
-     * @return CompetenciasModel 
-     * @throws NotFoundHttpException 
+     * @return \yii\db\ActiveQuery
      */
-    protected function findModel($id_com)
+    public function getTblResultados()
     {
-        if (($model = CompetenciasModel::findOne(['id_com' => $id_com])) !== null) {
-            return $model;
-        }
+        return $this->hasMany(Resultado::class, ['id_com_fk' => 'id_com']);
+    }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+    public static function getCompetenciasList()
+    {
+        return self::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
     }
 }
