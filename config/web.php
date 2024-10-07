@@ -7,12 +7,14 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'es',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'hziiKc_rOMnApZbPOPgVXL5LYc15JdAE',
         ],
         'cache' => [
@@ -21,7 +23,6 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\TblUsuarios',
             'enableAutoLogin' => true,
-            'loginUrl' => ['site/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
