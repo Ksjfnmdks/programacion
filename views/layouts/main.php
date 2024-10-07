@@ -66,7 +66,7 @@ $this->title = 'Sistema de Asignación';
 
                             ['label' => '<h5 class="bi bi-people list-group-item" 
                                         style="color: white;">  Competencias</h5>', 
-                                        'url' => ['/competencia/index'], 'encode' => false],
+                                        'url' => ['/competencias/index'], 'encode' => false],
 
                             ['label' => '<h5 class="bi bi-journals list-group-item" 
                                         style="color: white;">  Programas</h5>', 
