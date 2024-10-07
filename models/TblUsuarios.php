@@ -31,7 +31,7 @@ class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return 'tbl_usuarios';
+        return 'usuarios';
     }
 
     /**

@@ -86,7 +86,7 @@ $this->title = 'Sistema de Asignación';
             </div>
         </nav>
 
-        <main class="container-fluid" style="padding-top: 70px;">
+        <main class="container-fluid" style="padding-top: 30px;">
             <?= $content ?>
         </main>
 

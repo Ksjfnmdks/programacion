@@ -12,7 +12,7 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
 ?>
 <link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
 <div class="Contabla">
-    <h2><?= Html::encode($this->title) ?></h2>
+    <h2 class="tituloh2"><?= Html::encode($this->title) ?></h2>
     <hr class="divider">
     <div class="lista">
             <?= Html::a(
