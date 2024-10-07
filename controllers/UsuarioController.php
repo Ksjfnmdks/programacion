@@ -94,19 +94,20 @@ class UsuarioController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($usu_id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($usu_id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'usu_id' => $model->usu_id]);
+        $model = $this->findModel($id);
+    
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Usuario actualizado correctamente.');
+            return $this->redirect(['update', 'id' => $model->usu_id]); // Mantén al usuario en la misma vista
         }
-
+    
         return $this->render('update', [
             'model' => $model,
         ]);
     }
-
+    
     /**
      * Deletes an existing TblUsuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

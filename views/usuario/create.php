@@ -16,13 +16,13 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
 
 <div class="containerUsu">
     
-<?php if (Yii::$app->session->hasFlash('success')): ?>
-    <div class="alert alert-success">
-        <?= Yii::$app->session->getFlash('success') ?>
-    </div>
-<?php endif; ?>
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
 
-<div class="titulo">
+    <div class="titulo">
         <h1>Crear Usuario</h1>
     </div>
     <hr class="divider">

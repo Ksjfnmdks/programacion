@@ -114,13 +114,11 @@ $this->title = 'Sistema de Asignación';
             </div>
         </nav>
 
-        <main class="container-fluid" style="padding-top: 70px;">
+        <main class="container-fluid" style="padding-top: 10px;">
             <?= $content ?>
         </main>
-
     </div>
 </div>
-
 <footer class="footer bg-light text-end">
     <div class="container">
         <span class="text-muted">© <?= date('Y') ?> Sistema de Asignación</span>

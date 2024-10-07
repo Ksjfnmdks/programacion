@@ -13,7 +13,7 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
 
 <style>
     .header1{
-        height: 10vh;
+        height: 6vh;
         text-decoration: none;
         background: #39A900;
         color: white;
@@ -69,11 +69,11 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'options' => ['class' => 'table table-striped'],
-            'summary' => 'Mostrando  {begin}  - {end}  de {totalCount} Usuarios.', //se agrega el paginador        
+            'summary' => 'Mostrando  {begin}  - {end}  de {totalCount} Usuarios.',      
             'pager' => [
-                'options' => ['class' => 'pagination justify-content-center'], // centrar el paginador
-                'linkOptions' => ['class' => 'page-link'], // estilo para cada enlace del paginador
-                'pageCssClass' => 'page-item', // clase para el contenedor de cada página
+                'options' => ['class' => 'pagination justify-content-center'],
+                'linkOptions' => ['class' => 'page-link'],
+                'pageCssClass' => 'page-item',
             ],
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
@@ -111,7 +111,7 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
                     'class' => 'yii\grid\ActionColumn',
                     'header' => 'Acciones',
                     'urlCreator' => function ($action, $model, $key, $index) {
-                        return Url::to([$action, 'usu_id' => $model->usu_id]);
+                        return Url::to([$action, 'id' => $model->usu_id]);
                     },
                 ],
             ],
