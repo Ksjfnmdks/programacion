@@ -10,9 +10,32 @@ $this->title = 'Lista de Usuarios';
 
 $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
 ?>
+
+<style>
+    .header1{
+        height: 10vh;
+        text-decoration: none;
+        background: #39A900;
+        color: white;
+        pointer-events: none;
+        cursor: default;
+    }
+    .paginador{
+        color: white;
+        width: 60vw;
+        display: flex;
+        justify-self: center;
+        justify-content: center;
+    }
+    .paginador1{
+        
+        color: white;
+        width: 50px;
+    }
+</style>
 <link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
 <div class="Contabla">
-    <h2 class="tituloh2"><?= Html::encode($this->title) ?></h2>
+    <h2><?= Html::encode($this->title) ?></h2>
     <hr class="divider">
     <div class="lista">
             <?= Html::a(
@@ -45,7 +68,6 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
         
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'tableOptions' => ['class' => 'table'],
             'options' => ['class' => 'table table-striped'],
             'summary' => 'Mostrando  {begin}  - {end}  de {totalCount} Usuarios.', //se agrega el paginador        
             'pager' => [
@@ -55,18 +77,35 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
             ],
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                'identificacion',
-                'nombre',
-                'apellido',
-                'telefono',
-                'correo',
+                [
+                   'attribute' => 'identificacion',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'nombre',
+                     'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'apellido',
+                     'enableSorting' => false,
+                 ],
+                 [
+                    'attribute' => 'telefono',
+                     'enableSorting' => false,
+                 ],
+                 [
+                    'attribute' => 'correo',
+                     'enableSorting' => false,
+                 ],
                 [
                     'attribute' => 'rol_id_FK',
                     'value' => 'rolIdFK.nombre',
+                    'enableSorting' => false,
                 ],
                 [
                     'attribute' => 'est_id_FK',
                     'value' => 'estIdFK.descripcion',
+                    'enableSorting' => false,
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',
@@ -76,7 +115,9 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
                     },
                 ],
             ],
-        ]); ?>
+            'headerRowOptions' => ['class' => 'header1'], 
+        ]); 
+        ?>
     </div>
 </div>
 
