@@ -3,9 +3,9 @@
 namespace app\controllers;
 
 use yii;
-use app\models\Resultado;
+use app\models\Resultados;
 use app\models\ResultadoSearch;
-use app\models\CompetenciasModel;
+use app\models\Competencias;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -72,10 +72,10 @@ class ResultadoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Resultado();
+        $model = new Resultados();
         $model->fecha_creacion = date('Y-m-d'); // Establece la fecha de hoy
     
-        $competencias = CompetenciasModel::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
+        $competencias = Competencias::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
     
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -102,7 +102,7 @@ class ResultadoController extends Controller
     {
         $model = $this->findModel($id_res); 
         
-        $competencias = CompetenciasModel::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
+        $competencias = Competencias::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
     
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id_res' => $model->id_res]);
@@ -144,7 +144,7 @@ class ResultadoController extends Controller
      */
     protected function findModel($id_res)
     {
-        if (($model = Resultado::findOne(['id_res' => $id_res])) !== null) {
+        if (($model = Resultados::findOne(['id_res' => $id_res])) !== null) {
             return $model;
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\CompetenciasModel;
+use app\models\Competencias;
 use app\models\CompetenciasSearch;
 use app\models\Resultado; 
 use yii\helpers\Html;
@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => ActionColumn::class,
-                'urlCreator' => function ($action, CompetenciasModel $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Competencias $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id_com' => $model->id_com]);
                 }
             ],

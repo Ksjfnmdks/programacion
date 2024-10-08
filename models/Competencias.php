@@ -15,7 +15,7 @@ use Yii;
  * @property TblCompetenciasProgramas[] $tblCompetenciasProgramas
  * @property Resultado[] $tblResultados
  */
-class CompetenciasModel extends \yii\db\ActiveRecord
+class Competencias extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -77,7 +77,7 @@ class CompetenciasModel extends \yii\db\ActiveRecord
      */
     public function getTblCompetenciasProgramas()
     {
-        return $this->hasMany(TblCompetenciasProgramas::class, ['id_com_fk' => 'id_com']);
+        return $this->hasMany(CompetenciasProgramas::class, ['id_com_fk' => 'id_com']);
     }
 
     /**
@@ -87,7 +87,7 @@ class CompetenciasModel extends \yii\db\ActiveRecord
      */
     public function getTblResultados()
     {
-        return $this->hasMany(Resultado::class, ['id_com_fk' => 'id_com']);
+        return $this->hasMany(Resultados::class, ['id_com_fk' => 'id_com']);
     }
 
     public static function getCompetenciasList()

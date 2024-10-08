@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\CompetenciasModel;
+use app\models\Competencias;
 use app\models\CompetenciasSearch;
 use app\models\Resultado; // Asegúrate de importar el modelo Resultado
 use yii\web\Controller;
@@ -68,7 +68,7 @@ class CompetenciasController extends Controller
      */
     public function actionCreate()
     {
-        $model = new CompetenciasModel();
+        $model = new Competencias();
     
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -132,7 +132,7 @@ class CompetenciasController extends Controller
      */
     protected function findModel($id_com)
     {
-        if (($model = CompetenciasModel::findOne(['id_com' => $id_com])) !== null) {
+        if (($model = Competencias::findOne(['id_com' => $id_com])) !== null) {
             return $model;
         }
 

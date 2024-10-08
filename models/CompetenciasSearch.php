@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 /**
  *
  */
-class CompetenciasSearch extends CompetenciasModel
+class CompetenciasSearch extends Competencias
 {
     public $searchTerm;
 
@@ -32,7 +32,7 @@ class CompetenciasSearch extends CompetenciasModel
      */
     public function search($params)
     {
-        $query = CompetenciasModel::find();
+        $query = Competencias::find();
     
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
