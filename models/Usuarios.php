@@ -24,7 +24,7 @@ use Yii;
  * @property TblRoles $rolIdFK
  * @property TblHorarios[] $tblHorarios
  */
-class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
+class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -59,8 +59,8 @@ class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
             ['telefono', 'match', 'pattern' => '/^\d+$/', 'message' => 'El teléfono solo puede contener números.'],
             [['nombre', 'apellido'], 'match', 'pattern' => '/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/', 'message' => '{attribute} solo puede contener letras y espacios.'],
             [['username', 'password'], 'unique', 'targetAttribute' => ['username', 'password']],
-            [['rol_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblRoles::class, 'targetAttribute' => ['rol_id_FK' => 'rol_id']],
-            [['est_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblEstados::class, 'targetAttribute' => ['est_id_FK' => 'est_id']],
+            [['rol_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::class, 'targetAttribute' => ['rol_id_FK' => 'rol_id']],
+            [['est_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Estados::class, 'targetAttribute' => ['est_id_FK' => 'est_id']],
         ];
     }
 
@@ -91,7 +91,7 @@ class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getEstIdFK()
     {
-        return $this->hasOne(TblEstados::class, ['est_id' => 'est_id_FK']);
+        return $this->hasOne(Estados::class, ['est_id' => 'est_id_FK']);
     }
 
     /**
@@ -101,7 +101,7 @@ class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getRolIdFK()
     {
-        return $this->hasOne(TblRoles::class, ['rol_id' => 'rol_id_FK']);
+        return $this->hasOne(Roles::class, ['rol_id' => 'rol_id_FK']);
     }
 
     /**
@@ -111,7 +111,7 @@ class TblUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getTblHorarios()
     {
-        return $this->hasMany(TblHorarios::class, ['usu_id_FK' => 'usu_id']);
+        return $this->hasMany(Horarios::class, ['usu_id_FK' => 'usu_id']);
     }
     public function validatePassword($password)
     {

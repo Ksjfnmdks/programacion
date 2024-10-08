@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TblUsuarios;
+use app\models\Usuarios;
 
 /**
  * UsuarioSearch represents the model behind the search form of `app\models\TblUsuarios`.
  */
-class UsuarioSearch extends TblUsuarios
+class UsuarioSearch extends Usuarios
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class UsuarioSearch extends TblUsuarios
      */
         public function search($params, $role = null)
     {
-        $query = TblUsuarios::find();
+        $query = Usuarios::find();
 
         
         if ($role === 'instructor') {

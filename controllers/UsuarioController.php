@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 use Yii;
-use app\models\TblUsuarios;
+use app\models\Usuarios;
 use app\models\UsuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,7 +67,7 @@ class UsuarioController extends Controller
      */
     public function actionCreate()
     {
-        $model = new TblUsuarios();
+        $model = new Usuarios();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -131,7 +131,7 @@ class UsuarioController extends Controller
      */
     protected function findModel($usu_id)
     {
-        if (($model = TblUsuarios::findOne(['usu_id' => $usu_id])) !== null) {
+        if (($model = Usuarios::findOne(['usu_id' => $usu_id])) !== null) {
             return $model;
         }
 
