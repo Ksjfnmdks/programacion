@@ -1,30 +1,50 @@
 <?php
+
+use app\models\Redes;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
 /** @var app\models\Ambiente $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
+
 <div class="ambientes-form-container">
     <h2 class="form-title" style="letter-spacing: 3px;">Nuevo ambiente</h2>
 
     <div class="linea2"> </div>
     <br>
-
     <?php $form = ActiveForm::begin(); ?>
-    
-    <div class="form-group">
-        <?= $form->field($model, 'nombre_ambiente')->textInput(['placeholder' => 'nombre del ambiente'])->label('Nombre del Ambiente') ?>
-        <?= $form->field($model, 'descripcion')->textInput(['placeholder' => 'descripcion del ambiente'])->label('Descripción') ?>
-        
-    </div>
 
-    <div class="form-group submit-btn">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success boton']) ?>
+    <?= $form->field($model, 'nombre_ambiente')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'capacidad')->textInput() ?>
+
+    <?= $form->field($model, 'estado')->dropDownList(
+        [
+            'Habilitado' => 'habilidato',
+            'inactivo' => 'Desabilitado',
+            'pendiente' => 'mantenimiento'
+        ], 
+    ['prompt' => 'Selecciona un estado']
+    ) ?>
+
+    <?= $form->field($model, 'recursos')->textarea(['rows' => 6]) ?>
+    
+    <?= $form->field($model, 'nombre_red')->dropDownList(
+                ArrayHelper::map(Redes::find()->all(), 'red_id', 'nombre_red'), 
+                ['prompt' => 'Seleccione una red']
+            ) ?>
+
+
+
+    <div class="form-group">
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
 </div>
 <style>
 .boton{
@@ -38,6 +58,7 @@ use yii\widgets\ActiveForm;
     display: inline-block;
     width: 450px; 
     margin: 0 auto; 
+    height:700px;
 }
 
 .linea2 {

@@ -15,14 +15,14 @@ use Yii;
  *
  * @property TblFichas[] $tblFichas
  */
-class TblJornadas extends \yii\db\ActiveRecord
+class Jornadas extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'tbl_jornadas';
+        return 'jornadas';
     }
 
     /**
@@ -59,7 +59,7 @@ class TblJornadas extends \yii\db\ActiveRecord
      */
     public function getTblFichas()
     {
-        return $this->hasMany(TblFichas::class, ['jor_id_FK' => 'jor_id']);
+        return $this->hasMany(Fichas::class, ['jor_id_FK' => 'jor_id']);
     }
 
 

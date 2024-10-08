@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TblJornadas;
+use app\models\Jornadas;
 
 /**
  * JornadaSearch represents the model behind the search form of `app\models\TblJornadas`.
  */
-class JornadaSearch extends TblJornadas
+class JornadaSearch extends Jornadas
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class JornadaSearch extends TblJornadas
      */
     public function search($params)
     {
-        $query = TblJornadas::find();
+        $query = Jornadas::find();
 
         // add conditions that should always apply here
 

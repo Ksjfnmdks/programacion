@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\TblJornadas;
+use app\models\Jornadas;
 use app\models\JornadaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,7 +67,7 @@ class JornadaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new TblJornadas();
+        $model = new Jornadas();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -125,7 +125,7 @@ class JornadaController extends Controller
      */
     protected function findModel($jor_id)
     {
-        if (($model = TblJornadas::findOne(['jor_id' => $jor_id])) !== null) {
+        if (($model = Jornadas::findOne(['jor_id' => $jor_id])) !== null) {
             return $model;
         }
 

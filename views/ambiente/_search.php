@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\searchAmbiente $model */
+/** @var app\models\AmbienteSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="ambientes-search">
+<div class="ambiente-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,9 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre_ambiente') ?>
 
-    <?= $form->field($model, 'descripcion') ?>
+    <?= $form->field($model, 'capacidad') ?>
 
-    <?= $form->field($model, 'fecha_creacion') ?>
+    <?= $form->field($model, 'estado') ?>
+
+    <?= $form->field($model, 'recursos') ?>
+
+    <?php // echo $form->field($model, 'nombre_red') ?>
+
+    <?php // echo $form->field($model, 'fecha_creacion') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -1,42 +1,56 @@
 <?php
+
 use yii\helpers\Html;
+
 /** @var yii\web\View $this */
-/** @var app\models\Ambiente $model */ 
+/** @var app\models\Ambiente $model */
+/** @var array $redes */ 
+
+
+
+$this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
 ?>
-<h1>Crear Ambiente</h1>
-<div class="linea"></div>
 
 <br>
+<div class="div text-center">
+    <h1>Crear Ambiente</h1>
+
+</div>
+<hr class="divider2">
+
 
 <div class="create-ambientes-container">
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="lista">
-        <?= Html::a(
-            Html::img('@web/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Ambiente', 
-            '#',
-            ['class' => 'listaususelected']
-        ) ?>        
-        <?= Html::a(
-            Html::img('@web/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Ambiente', 
-            ['ambiente/index'], 
-            ['class' => 'listausu']
-        ) ?>
+            <?= Html::a(
+                Html::img('@web/img/icons/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear Ambiente', 
+                '#',
+                ['class' => 'listaususelected']
+            ) ?>        
+            <?= Html::a(
+                Html::img('@web/img/icons/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Asuarios', 
+                ['ambiente/index'], 
+                ['class' => 'listausu']
+            ) ?>
     </div>
 
+    <h1><?= Html::encode($this->title) ?></h1>
+
+
     <div class="form-wrapper">
-        <?= $this->render('_form', ['model' => $model]) ?>
+        <?= $this->render('_form', ['model' => $model, 'redesOptions' => $redesOptions]) ?> 
     </div>
+
 </div>
 
 <style>
 /* Contenedor principal centrado */
 .create-ambientes-container {
-    width: 90%; /* Ancho máximo para el contenedor */
-    max-width: 800px; /* Limita el tamaño máximo en pantallas grandes */
+     /* Ancho máximo para el contenedor */
+    max-width: 900px; /* Limita el tamaño máximo en pantallas grandes */
     margin: 0 auto; /* Centrar el contenedor en la página */
-    height:520px;
-    background-color:red;
+    height: 830px;
+    
     padding: 20px;
     
     text-align: center;
@@ -93,4 +107,3 @@ use yii\helpers\Html;
     margin-top: 20px; /* Añadir margen superior al formulario */
 }
 </style>
-

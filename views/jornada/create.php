@@ -5,7 +5,7 @@ use yii\helpers\Html;
 $this->registerCssFile("@web/css/jornadasForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
 ?>
 <div  class="CentrarTit">
-<h1>Crear Ambiente</h1>
+<h1>Crear Jornada</h1>
 </div>
 <hr class="divider">
 <br>

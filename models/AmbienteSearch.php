@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 use app\models\Ambientes;
 
 /**
- * searchAmbiente represents the model behind the search form of `app\models\Ambientes`.
+ * AmbienteSearch represents the model behind the search form of `app\models\Ambiente`.
  */
-class searchAmbiente extends Ambientes
+class AmbienteSearch extends Ambientes
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class searchAmbiente extends Ambientes
     public function rules()
     {
         return [
-            [['amb_id'], 'integer'],
-            [['nombre_ambiente', 'descripcion', 'fecha_creacion'], 'safe'],
+            [['amb_id', 'capacidad', 'nombre_red'], 'integer'],
+            [['nombre_ambiente', 'estado', 'recursos', 'fecha_creacion'], 'safe'],
         ];
     }
 
@@ -46,9 +46,6 @@ class searchAmbiente extends Ambientes
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 5, 
-            ],
         ]);
 
         $this->load($params);
@@ -62,11 +59,14 @@ class searchAmbiente extends Ambientes
         // grid filtering conditions
         $query->andFilterWhere([
             'amb_id' => $this->amb_id,
+            'capacidad' => $this->capacidad,
+            'nombre_red' => $this->nombre_red,
             'fecha_creacion' => $this->fecha_creacion,
         ]);
 
         $query->andFilterWhere(['like', 'nombre_ambiente', $this->nombre_ambiente])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
+            ->andFilterWhere(['like', 'estado', $this->estado])
+            ->andFilterWhere(['like', 'recursos', $this->recursos]);
 
         return $dataProvider;
     }

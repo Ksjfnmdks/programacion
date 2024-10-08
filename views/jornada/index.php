@@ -1,6 +1,6 @@
 <?php
 
-use app\models\TblJornadas;
+use app\models\Jornadas;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -60,7 +60,7 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
                     [
                         'class' => ActionColumn::className(),
                         'header'=>'acciones',
-                        'urlCreator' => function ($action, TblJornadas $model, $key, $index, $column) {
+                        'urlCreator' => function ($action, Jornadas $model, $key, $index, $column) {
                             return Url::toRoute([$action, 'jor_id' => $model->jor_id]);
                         }
                     ],
