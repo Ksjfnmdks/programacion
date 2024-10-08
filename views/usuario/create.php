@@ -15,7 +15,6 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
 
 <div class="containerUsu">
-    
     <?php if (Yii::$app->session->hasFlash('success')): ?>
         <div class="alert alert-success">
             <?= Yii::$app->session->getFlash('success') ?>
@@ -23,7 +22,7 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
     <?php endif; ?>
 
     <div class="titulo">
-        <h1>Crear Usuario</h1>
+        <h1>Usuarios</h1>
     </div>
     <hr class="divider">
     <div class="lista">
@@ -38,13 +37,15 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
             ['class' => 'listausu']
         ) ?>
     </div>
-    
 
     <div class="UsuariosForm">
-
         <?php $form = ActiveForm::begin(); ?>
-
+            <div class="titulo2">
+                <h2>Crear Usuario</h2>
+            </div>
+            <hr class="divider2">
         <div class="form-grid">
+            
             <?= $form->field($model, 'identificacion')->textInput(['maxlength' => true, 'placeholder' => 'Identificación']) ?>
 
             <?= $form->field($model, 'nombre')->textInput(['maxlength' => true, 'placeholder' => 'Nombres']) ?>

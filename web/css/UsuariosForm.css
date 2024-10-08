@@ -28,6 +28,12 @@ body {
     justify-content: center;
     
 }
+.titulo2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
 
 .boton {
     width: 100%;
@@ -74,6 +80,13 @@ body {
     border: none;
     border-top: 2px solid #000000;
 }
+.divider2 {
+    display: flex;
+    width: 75%;
+    margin: 10px auto;
+    border: none;
+    border-top: 2px solid #000000;
+}
 
 .containerUsu {
     width: 75%;
@@ -82,6 +95,10 @@ body {
     background-color: white;
     text-align: center;
     border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
 }
 
 h1 {
@@ -92,7 +109,7 @@ h1 {
     display: flex;
     justify-content: center;
     padding: 10px;
-    width: 100%;
+    width: 60%;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
@@ -102,7 +119,7 @@ h1 {
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 100px; 
+    column-gap: 20px; 
     row-gap: 15px;
 }
 
@@ -131,8 +148,8 @@ input, select {
 }
 
 .btn-registrar {
-    width: 30%;
-    background-color: #4CAF50;
+    width: 20%;
+    background-color: #38A800;
     color: white;
     padding: 10px;
     border: none;

@@ -87,22 +87,22 @@ $this->title = 'Sistema de Asignación';
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg ">
+        <nav class="navbar navbar-expand-lg col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style='height: 8.5%;'>
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <?php
                     NavBar::begin([
-                        'options' => ['class' => 'navbar-nav ms-auto'],
+                        'options' => ['class' => 'navbar-nav ms-auto' ],
                     ]);
                     echo Nav::widget([
                         'items' => [
                             Yii::$app->user->isGuest
-                                ? ['label' => 'Login', 'url' => ['/site/login']]
+                                ? ['label' => 'Iniciar Sesión', 'url' => ['/site/login']]
                                 : '<li class="nav-item">'
                                     . Html::beginForm(['/site/logout'], 'post')
                                     . Html::submitButton(
-                                        'Logout (' . Yii::$app->user->identity->username . ')',
-                                        ['class' => 'nav-link btn btn-link logout']
+                                        ' ' . Yii::$app->user->identity->username . '',
+                                        ['class' => 'bi bi-person-circle nav-link btn btn-link logout','style'=>'font-size: 1.3rem;']
                                     )
                                     . Html::endForm()
                                     . '</li>'

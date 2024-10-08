@@ -20,7 +20,7 @@ if (Yii::$app->session->hasFlash('success')): ?>
 
 <div class="containerUsu">
     <div class="titulo">
-        <h1>Actualizar Usuario</h1>
+        <h1>Usuarios</h1>
     </div>
     
     <hr class="divider">
@@ -34,7 +34,10 @@ if (Yii::$app->session->hasFlash('success')): ?>
 
     <div class="UsuariosForm">
     <?php $form = ActiveForm::begin(); ?>
-
+    <div class="titulo2">
+                <h2>Actualizar Usuario</h2>
+            </div>
+            <hr class="divider2">
     <div class="form-grid">
         <?= $form->field($model, 'identificacion')->textInput(['maxlength' => true, 'placeholder' => 'Identificación']) ?>
 
