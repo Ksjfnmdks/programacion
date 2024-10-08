@@ -16,14 +16,14 @@ use Yii;
  * @property TblCompetenciasProgramas[] $tblCompetenciasProgramas
  * @property TblFichas[] $tblFichas
  */
-class TblProgramas extends \yii\db\ActiveRecord
+class Programas extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'tbl_programas';
+        return 'programas';
     }
 
     /**
@@ -60,7 +60,7 @@ class TblProgramas extends \yii\db\ActiveRecord
      */
     public function getRedIdFK()
     {
-        return $this->hasOne(TblRedes::class, ['red_id' => 'red_id_FK']);
+        return $this->hasOne(Redes::class, ['red_id' => 'red_id_FK']);
     }
 
     /**
@@ -70,7 +70,7 @@ class TblProgramas extends \yii\db\ActiveRecord
      */
     public function getTblCompetenciasProgramas()
     {
-        return $this->hasMany(TblCompetenciasProgramas::class, ['id_pro_fk' => 'pro_id']);
+        return $this->hasMany(CompetenciasProgramas::class, ['id_pro_fk' => 'pro_id']);
     }
 
     /**
@@ -80,6 +80,6 @@ class TblProgramas extends \yii\db\ActiveRecord
      */
     public function getTblFichas()
     {
-        return $this->hasMany(TblFichas::class, ['pro_id_FK' => 'pro_id']);
+        return $this->hasMany(Fichas::class, ['pro_id_FK' => 'pro_id']);
     }
 }

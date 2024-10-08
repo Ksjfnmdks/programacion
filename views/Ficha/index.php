@@ -1,6 +1,6 @@
 <?php
 
-use app\models\TblFichas;
+use app\models\Fichas;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;

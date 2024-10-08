@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TblFichas;
+use app\models\Fichas;
 
 /**
  * FichaSearch represents the model behind the search form of `app\models\TblFichas`.
  */
-class FichaSearch extends TblFichas
+class FichaSearch extends Fichas
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class FichaSearch extends TblFichas
      */
     public function search($params)
     {
-        $query = TblFichas::find();
+        $query = Fichas::find();
 
         // add conditions that should always apply here
 

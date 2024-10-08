@@ -20,14 +20,14 @@ use Yii;
  * @property TblProgramas $proIdFK
  * @property TblHorarios[] $tblHorarios
  */
-class TblFichas extends \yii\db\ActiveRecord
+class Fichas extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'tbl_fichas';
+        return 'fichas';
     }
 
     /**
@@ -41,8 +41,8 @@ class TblFichas extends \yii\db\ActiveRecord
             [['pro_id_FK', 'jor_id_FK'], 'integer'],
             [['codigo'], 'string', 'max' => 10],
             [['instructor_lider'], 'string', 'max' => 100],
-            [['pro_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblProgramas::class, 'targetAttribute' => ['pro_id_FK' => 'pro_id']],
-            [['jor_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblJornadas::class, 'targetAttribute' => ['jor_id_FK' => 'jor_id']],
+            [['pro_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Programas::class, 'targetAttribute' => ['pro_id_FK' => 'pro_id']],
+            [['jor_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Jornadas::class, 'targetAttribute' => ['jor_id_FK' => 'jor_id']],
         ];
     }
 
@@ -70,7 +70,7 @@ class TblFichas extends \yii\db\ActiveRecord
      */
     public function getJorIdFK()
     {
-        return $this->hasOne(TblJornadas::class, ['jor_id' => 'jor_id_FK']);
+        return $this->hasOne(Jornadas::class, ['jor_id' => 'jor_id_FK']);
     }
 
     /**
@@ -80,7 +80,7 @@ class TblFichas extends \yii\db\ActiveRecord
      */
     public function getProIdFK()
     {
-        return $this->hasOne(TblProgramas::class, ['pro_id' => 'pro_id_FK']);
+        return $this->hasOne(Programas::class, ['pro_id' => 'pro_id_FK']);
     }
 
     /**
@@ -90,6 +90,6 @@ class TblFichas extends \yii\db\ActiveRecord
      */
     public function getTblHorarios()
     {
-        return $this->hasMany(TblHorarios::class, ['fic_id_FK' => 'fic_id']);
+        return $this->hasMany(Horarios::class, ['fic_id_FK' => 'fic_id']);
     }
 }

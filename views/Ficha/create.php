@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\TblJornadas;
-use app\models\TblProgramas;
-use app\models\TblUsuarios;
+use app\models\Jornadas;
+use app\models\Programas;
+use app\models\Usuarios;
 
 /** @var yii\web\View $this */
 /** @var app\models\TblFichas $model */
@@ -44,14 +44,14 @@ $this->registerCssFile("@web/css/ficha.css", ['depends' => [yii\web\YiiAsset::cl
             <?= $form->field($model, 'fecha_final')->textInput(['type' => 'date']) ?>
 
             <?= $form->field($model, 'pro_id_FK')->dropDownList(
-                ArrayHelper::map(TblProgramas::find()->all(), 'pro_id', 'nombre_programa'), 
+                ArrayHelper::map(Programas::find()->all(), 'pro_id', 'nombre_programa'), 
                 ['prompt' => 'Seleccione un programa']
             ) ?>
 
         <?= $form->field($model, 'instructor_lider')->textInput(['maxlength' => true, 'placeholder' => 'codigo']) ?>
 
             <?= $form->field($model, 'jor_id_FK')->dropDownList(
-                ArrayHelper::map(TblJornadas::find()->all(), 'jor_id', 'descripcion'), 
+                ArrayHelper::map(Jornadas::find()->all(), 'jor_id', 'descripcion'), 
                 ['prompt' => 'Seleccione una jornada']
             ) ?>
         </div>

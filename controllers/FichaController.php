@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\TblFichas;
+use app\models\Fichas;
 use app\models\FichaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,7 +68,7 @@ class FichaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new TblFichas();
+        $model = new Fichas();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -126,7 +126,7 @@ class FichaController extends Controller
      */
     protected function findModel($fic_id)
     {
-        if (($model = TblFichas::findOne(['fic_id' => $fic_id])) !== null) {
+        if (($model = Fichas::findOne(['fic_id' => $fic_id])) !== null) {
             return $model;
         }
 
