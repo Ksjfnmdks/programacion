@@ -1,0 +1,15 @@
+
+/* Estilo para el botón de cerrar sesión */
+.btn-confirmar {
+    background-color: #38A800; /* Color de fondo personalizado */
+    color: white; /* Color del texto */
+}
+
+/* Estilo para el botón de cancelar */
+.btn-secondary {
+    background-color: #6c757d; /* Color de fondo del botón secundario (puedes personalizarlo también) */
+    color: white; /* Color del texto */
+}
+
+
+
