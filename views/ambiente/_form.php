@@ -23,8 +23,8 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'estado')->dropDownList(
         [
-            'Habilitado' => 'habilidato',
-            'inactivo' => 'Desabilitado',
+            'activo' => 'Activo',
+            'inactivo' => 'Inactivo',
             'pendiente' => 'mantenimiento'
         ], 
     ['prompt' => 'Selecciona un estado']
@@ -36,8 +36,6 @@ use yii\helpers\ArrayHelper;
                 ArrayHelper::map(Redes::find()->all(), 'red_id', 'nombre_red'), 
                 ['prompt' => 'Seleccione una red']
             ) ?>
-
-
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

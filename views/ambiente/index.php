@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Ambientes;
+use app\models\Ambiente;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -128,12 +128,22 @@ $this->registerCss("
                 'nombre_ambiente',
                 'capacidad',
                 'estado',
+                
                 'recursos:ntext',
-                'nombre_red',
+                
+                [
+                    'attribute' => 'nombre_red',  // El atributo en el modelo
+                    'label' => 'Nombre de Red',  // Nombre que aparecerá en la cabecera de la tabla
+                    'value' => function ($model) {
+                        // Si el ambiente tiene red, muestra el nombre de la red; si no, muestra 'Sin red'
+                        return $model->redes ? $model->redes->nombre_red : 'Sin red';
+                    },
+                ],
+                
                 'fecha_creacion',
                 [
                     'class' => ActionColumn::className(),
-                    'urlCreator' => function ($action, Ambientes $model, $key, $index, $column) {
+                    'urlCreator' => function ($action, Ambiente $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'amb_id' => $model->amb_id]);
                     },
                 ],

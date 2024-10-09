@@ -3,11 +3,7 @@
 namespace app\models;
 
 use Yii;
-use yii\db\Expression;
-
-use yii\behaviors\TimestampBehavior;
-
-
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "ambientes".
@@ -23,7 +19,7 @@ use yii\behaviors\TimestampBehavior;
  * @property Horarios[] $horarios
  * @property Redes $nombreRed
  */
-class Ambientes extends \yii\db\ActiveRecord
+class Ambiente extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -36,21 +32,6 @@ class Ambientes extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-
-    public function behaviors(){
-
-        return [
-            [
-                'class' => TimestampBehavior::class,
-                'attributes' => [
-                    \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['fecha_creacion'],
-                ],
-                'value' => new Expression('NOW()'),
-            ],
-        ];
-    }
-
-
     public function rules()
     {
         return [
@@ -95,9 +76,29 @@ class Ambientes extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getRedes(){
-
-        return $this->hasOne(Redes::className(), ['nombre_red' => 'nombre_red']);
+    public function getRedes()
+    {
+        return $this->hasOne(Redes::className(), ['red_id' => 'nombre_red']); // Relación corregida
     }
 
+    /**
+     * Este método se ejecuta antes de guardar el modelo en la base de datos.
+     *
+     * @param boolean $insert Indica si es una inserción o una actualización
+    * @return boolean Devuelve true para continuar con la operación de guardado
+    */
+    public function beforeSave($insert)
+{
+    if ($insert) { // Solo para nuevos registros
+        $this->fecha_creacion = date('Y-m-d H:i:s'); // Establece la fecha y hora solo si es un nuevo registro
+    } elseif ($this->isAttributeChanged('fecha_creacion')) {
+        // Si se está actualizando el modelo y la fecha_creacion ha sido cambiada, revertir el cambio
+        $this->fecha_creacion = $this->getOldAttribute('fecha_creacion'); // Mantener la fecha original
+    }
+
+    return parent::beforeSave($insert);
+}
+
+
+    
 }

@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Ambientes;
+use app\models\Ambiente;
 use app\models\AmbienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,7 +67,7 @@ class AmbienteController extends Controller
      */
         public function actionCreate()
         {
-            $model = new Ambientes();
+            $model = new Ambiente();
 
             // Obtener las redes
             $redes = \app\models\Redes::find()->select(['red_id', 'nombre_red'])->asArray()->all();
@@ -99,7 +99,14 @@ class AmbienteController extends Controller
     {
         $model = $this->findModel($amb_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        // Solo durante la actualización, eliminar la fecha de creación de los datos
+        $postData = $this->request->post();
+        if (isset($postData['Ambiente']['fecha_creacion'])) {
+            unset($postData['Ambiente']['fecha_creacion']); // Eliminar la fecha de creación del arreglo
+        }
+
+        // Si el formulario es enviado y los datos son válidos, se guarda el modelo
+        if ($this->request->isPost && $model->load($postData) && $model->save()) {
             return $this->redirect(['view', 'amb_id' => $model->amb_id]);
         }
 
@@ -107,6 +114,7 @@ class AmbienteController extends Controller
             'model' => $model,
         ]);
     }
+
 
     /**
      * Deletes an existing Ambiente model.
@@ -131,7 +139,7 @@ class AmbienteController extends Controller
      */
     protected function findModel($amb_id)
     {
-        if (($model = Ambientes::findOne(['amb_id' => $amb_id])) !== null) {
+        if (($model = Ambiente::findOne(['amb_id' => $amb_id])) !== null) {
             return $model;
         }
 
