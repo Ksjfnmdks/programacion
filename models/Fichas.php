@@ -39,7 +39,7 @@ class Fichas extends \yii\db\ActiveRecord
             [['codigo', 'fecha_incio', 'fecha_final', 'pro_id_FK', 'instructor_lider', 'jor_id_FK'], 'required'],
             [['fecha_incio', 'fecha_final', 'fecha_creacion'], 'safe'],
             [['pro_id_FK', 'jor_id_FK'], 'integer'],
-            [['codigo'], 'string', 'max' => 10],
+            [['codigo'], 'unique', 'message' => 'Este código ya está en uso.'], // El campo debe ser único
             [['instructor_lider'], 'string', 'max' => 100],
             [['pro_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Programas::class, 'targetAttribute' => ['pro_id_FK' => 'pro_id']],
             [['jor_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Jornadas::class, 'targetAttribute' => ['jor_id_FK' => 'jor_id']],

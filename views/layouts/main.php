@@ -54,11 +54,15 @@ $this->title = 'Sistema de Asignación';
 
                             ['label' => '<h5 class="bi bi-house list-group-item" 
                                         style="color: white;">  Home</h5>',
-                                        'url' => ['/site/index'], 'encode' => false],   
+                                        'url' => ['/site/index'], 'encode' => false],  
 
                             ['label' => '<h5 class="bi bi-people list-group-item" 
-                                        style="color: white;">  Usuario</h5>',
+                                        style="color: white;">  Usuarios</h5>',
                                         'url' => ['/usuario/index'], 'encode' => false],   
+
+                            ['label' => '<h5 class="bi bi-house list-group-item" 
+                                        style="color: white;">  Fichas</h5>',
+                                        'url' => ['/ficha/index'], 'encode' => false], 
 
                             ['label' => '<h5 class="bi bi-people list-group-item" 
                                         style="color: white;">  Redes</h5>', 

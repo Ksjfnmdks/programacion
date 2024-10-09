@@ -46,6 +46,10 @@ class FichaSearch extends Fichas
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 4, 
+            ],
+            
         ]);
 
         $this->load($params);
