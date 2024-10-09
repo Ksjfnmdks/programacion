@@ -13,9 +13,15 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Lista de fichas';
-
+$this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
+$this->registerCssFile("@web/css/ficha.css", ['depends' => [yii\web\YiiAsset::className()]]);
 $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
-
+// Añadimos el CSS personalizado para aumentar el tamaño de la fuente de la tabla
+$this->registerCss("
+    .table td, .table th {
+        font-size: 19px; /* Aumenta el tamaño de la fuente a 20px */
+    }
+");
 ?>
 <div class="Contabla">
     <div class="lista">
@@ -47,18 +53,23 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'table'], 
+            'options' => ['class' => 'table table-striped'],
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 'codigo',
                 'fecha_incio',
-                'fecha_final',
                 [
-                    'attribute' => 'pro_id_FK',
+                    'attribute' => 'programa',
                     'value' => 'proIdFK.nombre_programa',
                 ],
+                [
+                    'attribute' => 'duracion meses',
+                    'value' => 'proIdFK.tiempo_formacion',
+                ],
+                'fecha_final',
                 'instructor_lider',
                 [
-                    'attribute' => 'jor_id_FK',
+                    'attribute' => 'jornada',
                     'value' => 'jorIdFK.descripcion',
                 ],
                 'fecha_creacion',

@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
     ['prompt' => 'Selecciona un estado']
     ) ?>
 
-    <?= $form->field($model, 'recursos')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'recursos')->textarea(['rows' => 2]) ?>
     
     <?= $form->field($model, 'nombre_red')->dropDownList(
                 ArrayHelper::map(Redes::find()->all(), 'red_id', 'nombre_red'), 
@@ -56,7 +56,7 @@ use yii\helpers\ArrayHelper;
     display: inline-block;
     width: 450px; 
     margin: 0 auto; 
-    height:700px;
+    height: 100%;
 }
 
 .linea2 {

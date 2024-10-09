@@ -72,7 +72,8 @@ class FichaController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'fic_id' => $model->fic_id]);
+                // Redirigir al index después de guardar
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -95,7 +96,8 @@ class FichaController extends Controller
         $model = $this->findModel($fic_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'fic_id' => $model->fic_id]);
+            // Redirigir al index después de actualizar
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
