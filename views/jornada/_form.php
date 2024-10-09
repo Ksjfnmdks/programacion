@@ -15,9 +15,9 @@ use yii\widgets\ActiveForm;
     <div class="form-group">
         <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'hora_inicio')->textInput(['type' => 'time']) ?>
-
-        <?= $form->field($model, 'hora_fin')->textInput(['type' => 'time']) ?>
+        <?= $form->field($model, 'hora_inicio')->input('time') ?>
+        
+        <?= $form->field($model, 'hora_fin')->input('time') ?>
 
         
     </div>
@@ -29,6 +29,7 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
 <style>
 /* Contenedor principal centrado */
 .create-ambientes-container {
