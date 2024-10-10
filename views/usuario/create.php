@@ -9,7 +9,6 @@ use app\models\Estados;
 /* @var $model app\models\Usuarios */
 /* @var $form yii\widgets\ActiveForm */
 
-
 $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
 ?>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -22,7 +21,7 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
     <?php endif; ?>
 
     <div class="titulo">
-        <h1>Usuarios</h1>
+        <h1>Crear Usuarios</h1>
     </div>
     <hr class="divider">
     <div class="lista">
@@ -38,12 +37,8 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
         ) ?>
     </div>
 
-    <div class="UsuariosForm">
+        <div class="UsuariosForm">
         <?php $form = ActiveForm::begin(); ?>
-            <div class="titulo2">
-                <h2>Crear Usuario</h2>
-            </div>
-            <hr class="divider2">
         <div class="form-grid">
             
             <?= $form->field($model, 'identificacion')->textInput(['maxlength' => true, 'placeholder' => 'Identificación']) ?>
@@ -69,13 +64,10 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
                 ArrayHelper::map(Estados::find()->all(), 'est_id', 'descripcion'), 
                 ['prompt' => 'Seleccione un Estado']
             ) ?>
-
         </div>
+            <div class="boton">
+                <?= Html::submitButton('Registrar', ['class' => 'btn-registrar']) ?>
+            </div>
+            <?php ActiveForm::end(); ?>
     </div>
-    
-        <div class="boton">
-            <?= Html::submitButton('Registrar', ['class' => 'btn-registrar']) ?>
-        </div>
-
-        <?php ActiveForm::end(); ?>
 </div>

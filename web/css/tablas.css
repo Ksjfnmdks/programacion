@@ -96,11 +96,22 @@ table th {
     }
 }
 
-.BuscarUsu{
-    width: auto;
+.BuscarUsu {
     display: flex;
-    justify-content: end;
-    align-items: end;
+    flex-wrap: nowrap; 
+    justify-content: flex-end;
+    gap: 10px; 
+}
+
+.BuscarUsu .form-group {
+    margin-bottom: 0;
+    display: inline-flex; 
+    align-items: end; 
+}
+
+.BuscarUsu input {
+    width: auto; 
+    max-width: 200px;
 }
 .Texto-verde{
     color: #007832;
@@ -149,3 +160,12 @@ table th {
     font-weight: 700; 
     text-decoration: none; 
 }
+.titulo {
+    font-family: 'Work Sans', sans-serif;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #000000;
+}
+
+

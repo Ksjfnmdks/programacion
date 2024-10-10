@@ -84,6 +84,7 @@ body {
     display: flex;
     width: 75%;
     margin: 10px auto;
+    padding-bottom: 15px;
     border: none;
     border-top: 2px solid #000000;
 }
@@ -109,7 +110,7 @@ h1 {
     display: flex;
     justify-content: center;
     padding: 10px;
-    width: 60%;
+    width: 100%;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
@@ -118,10 +119,17 @@ h1 {
 
 .form-grid {
     display: grid;
+    padding-top: 30px;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 20px; 
     row-gap: 15px;
+    width: 100%; /* Esto hará que el grid ocupe todo el ancho del contenedor */
 }
+.UsuariosForm form {
+    width: 75%; /* Asegúrate de que el formulario de usuarios ocupe todo el ancho del contenedor */
+    max-width: none; /* Eliminar cualquier restricción de ancho */
+}
+
 
 .form-group1 {
     margin: 5px;
@@ -155,9 +163,22 @@ input, select {
     border: none;
     border-radius: 4px;
     font-size: 16px;
-    cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
 }
+.btn-actualizar {
+    text-align: center;
+    width: 10%;
+    background-color: #38A800;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
 
 .btn-registrar:hover {
     background-color: #45a049;
@@ -174,6 +195,9 @@ input, select {
 
     .btn-registrar {
         width: 100%;
+    }
+    input, select {
+        width: 100%; 
     }
 }
 

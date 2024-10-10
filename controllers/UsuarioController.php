@@ -39,13 +39,14 @@ class UsuarioController extends Controller
     public function actionIndex()
     {
         $searchModel = new UsuarioSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
 
     /**
      * Displays a single TblUsuarios model.
@@ -54,12 +55,12 @@ class UsuarioController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($usu_id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($usu_id),
-        ]);
-    }
-
+{
+    $model = $this->findModel($usu_id);
+    return $this->render('view', [
+        'model' => $model,
+    ]);
+}
     /**
      * Creates a new TblUsuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -94,13 +95,13 @@ class UsuarioController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($usu_id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($usu_id);
     
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'Usuario actualizado correctamente.');
-            return $this->redirect(['update', 'id' => $model->usu_id]); // Mantén al usuario en la misma vista
+            return $this->redirect(['update', 'usu_id' => $model->usu_id]); // Mantén al usuario en la misma vista
         }
     
         return $this->render('update', [
@@ -123,14 +124,12 @@ class UsuarioController extends Controller
  * @throws NotFoundHttpException if the model cannot be found
  */
 
- public function actionDelete($id)
+ public function actionDelete($usu_id)
  {
-     $model = $this->findModel($id);
+     $model = $this->findModel($usu_id);
      $model->est_id_FK  = 2;  // Cambiar estado a inactivo (2)
      if ($model->save(false)) {  // Guardar sin validar
-         Yii::$app->session->setFlash('success', 'El usuario ha sido desactivado.');
-     } else {
-         Yii::$app->session->setFlash('error', 'No se pudo desactivar el usuario.');
+        
      }
  
      return $this->redirect(['index']);  // Redirigir a la lista de usuarios
