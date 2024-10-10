@@ -115,12 +115,26 @@ class UsuarioController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($usu_id)
-    {
-        $this->findModel($usu_id)->delete();
+    /**
+ * Deletes an existing TblUsuarios model.
+ * If deletion is successful, the browser will be redirected to the 'index' page.
+ * @param int $usu_id Usu ID
+ * @return \yii\web\Response
+ * @throws NotFoundHttpException if the model cannot be found
+ */
 
-        return $this->redirect(['index']);
-    }
+ public function actionDelete($id)
+ {
+     $model = $this->findModel($id);
+     $model->est_id_FK  = 2;  // Cambiar estado a inactivo (2)
+     if ($model->save(false)) {  // Guardar sin validar
+         Yii::$app->session->setFlash('success', 'El usuario ha sido desactivado.');
+     } else {
+         Yii::$app->session->setFlash('error', 'No se pudo desactivar el usuario.');
+     }
+ 
+     return $this->redirect(['index']);  // Redirigir a la lista de usuarios
+ } 
 
     /**
      * Finds the TblUsuarios model based on its primary key value.
