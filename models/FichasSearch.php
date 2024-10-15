@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 use app\models\Fichas;
 
 /**
- * FichaSearch represents the model behind the search form of `app\models\TblFichas`.
+ * FichasSearch represents the model behind the search form of `app\models\Fichas`.
  */
-class FichaSearch extends Fichas
+class FichasSearch extends Fichas
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class FichaSearch extends Fichas
     public function rules()
     {
         return [
-            [['fic_id', 'pro_id_FK', 'jor_id_FK'], 'integer'],
-            [['codigo', 'fecha_incio', 'fecha_final', 'instructor_lider', 'fecha_creacion'], 'safe'],
+            [['fic_id', 'pro_id_FK', 'jor_id_FK', 'usu_id'], 'integer'],
+            [['codigo', 'fecha_incio', 'fecha_final', 'fecha_creacion'], 'safe'],
         ];
     }
 
@@ -49,7 +49,6 @@ class FichaSearch extends Fichas
             'pagination' => [
                 'pageSize' => 4, 
             ],
-            
         ]);
 
         $this->load($params);
@@ -68,10 +67,10 @@ class FichaSearch extends Fichas
             'pro_id_FK' => $this->pro_id_FK,
             'jor_id_FK' => $this->jor_id_FK,
             'fecha_creacion' => $this->fecha_creacion,
+            'usu_id' => $this->usu_id,
         ]);
 
-        $query->andFilterWhere(['like', 'codigo', $this->codigo])
-            ->andFilterWhere(['like', 'instructor_lider', $this->instructor_lider]);
+        $query->andFilterWhere(['like', 'codigo', $this->codigo]);
 
         return $dataProvider;
     }

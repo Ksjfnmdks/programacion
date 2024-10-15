@@ -57,7 +57,8 @@ $this->title = 'Sistema de Asignación';
                         'options' => ['class' => 'list-group-item', 'style' => ''],
                         'items' => [
                             ['label' => '<h5 class="bi bi-house list-group-item" style="color: white;">  Home</h5>', 'url' => ['/site/index'], 'encode' => false],   
-                            ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  Usuario</h5>', 'url' => ['/usuario/index'], 'encode' => false],   
+                            ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  Usuario</h5>', 'url' => ['/usuario/index'], 'encode' => false], 
+                            ['label' => '<h5 class="bi bi-journals list-group-item" style="color: white;"> fichas</h5>', 'url' => ['/fichas/index'], 'encode' => false],  
                             ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  Redes</h5>', 'url' => ['/red/index'], 'encode' => false],
                             ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  Competencias</h5>', 'url' => ['/competencias/index'], 'encode' => false],
                             ['label' => '<h5 class="bi bi-journals list-group-item" style="color: white;">  Programas</h5>', 'url' => ['/programa/index'], 'encode' => false],

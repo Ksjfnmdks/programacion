@@ -37,7 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'pro_id_FK',
                 'value' => $model->proIdFK->nombre_programa, // Mostrar nombre del rol
             ],
-            'instructor_lider',
+            [
+                'attribute' => 'usu_id',
+                'value' => $model->usu->nombre, // Mostrar descripción del estado
+            ],
             [
                 'attribute' => 'jor_id_FK',
                 'value' => $model->jorIdFK->descripcion, // Mostrar descripción del estado

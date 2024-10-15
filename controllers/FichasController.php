@@ -3,16 +3,15 @@
 namespace app\controllers;
 
 use app\models\Fichas;
-use app\models\FichaSearch;
+use app\models\FichasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
- * FichaController implements the CRUD actions for TblFichas model.
+ * FichasController implements the CRUD actions for Fichas model.
  */
-class FichaController extends Controller
+class FichasController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,13 +32,13 @@ class FichaController extends Controller
     }
 
     /**
-     * Lists all TblFichas models.
+     * Lists all Fichas models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new FichaSearch();
+        $searchModel = new FichasSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +48,7 @@ class FichaController extends Controller
     }
 
     /**
-     * Displays a single TblFichas model.
+     * Displays a single Fichas model.
      * @param int $fic_id Fic ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,8 +61,8 @@ class FichaController extends Controller
     }
 
     /**
-     * Creates a new TblFichas model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Creates a new Fichas model.
+     * If creation is successful, the browser will be redirected to the 'create' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
@@ -72,11 +71,12 @@ class FichaController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                // Redirigir al index después de guardar
-                return $this->redirect(['index']);
+                // Establecer el mensaje flash de éxito
+                \Yii::$app->session->setFlash('success', '¡Ficha guardada correctamente!');
+
+                // Redirigir a la página de creación para limpiar los campos
+                return $this->redirect(['create']);
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -85,8 +85,8 @@ class FichaController extends Controller
     }
 
     /**
-     * Updates an existing TblFichas model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Updates an existing Fichas model.
+     * If update is successful, the browser will be redirected to the 'index' page.
      * @param int $fic_id Fic ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
@@ -96,7 +96,7 @@ class FichaController extends Controller
         $model = $this->findModel($fic_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            // Redirigir al index después de actualizar
+            // Redirigir a la lista de fichas
             return $this->redirect(['index']);
         }
 
@@ -106,7 +106,7 @@ class FichaController extends Controller
     }
 
     /**
-     * Deletes an existing TblFichas model.
+     * Deletes an existing Fichas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $fic_id Fic ID
      * @return \yii\web\Response
@@ -120,10 +120,10 @@ class FichaController extends Controller
     }
 
     /**
-     * Finds the TblFichas model based on its primary key value.
+     * Finds the Fichas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $fic_id Fic ID
-     * @return TblFichas the loaded model
+     * @return Fichas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($fic_id)

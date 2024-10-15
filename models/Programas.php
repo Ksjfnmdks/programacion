@@ -5,16 +5,19 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_programas".
+ * This is the model class for table "programas".
  *
  * @property int $pro_id
+ * @property string $codigo_programa
  * @property string $nombre_programa
+ * @property string $nivel_formacion
+ * @property string $version
+ * @property int $horas
+ * @property int $meses
  * @property int $red_id_FK
  * @property string $fecha_creacion
  *
- * @property TblRedes $redIdFK
- * @property TblCompetenciasProgramas[] $tblCompetenciasProgramas
- * @property TblFichas[] $tblFichas
+ * @property Redes $redIdFK
  */
 class Programas extends \yii\db\ActiveRecord
 {
@@ -32,11 +35,14 @@ class Programas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre_programa', 'red_id_FK'], 'required'],
-            [['red_id_FK'], 'integer'],
+            [['codigo_programa', 'nombre_programa', 'nivel_formacion', 'version', 'horas', 'meses', 'red_id_FK'], 'required'],
+            [['horas', 'meses', 'red_id_FK'], 'integer'],
             [['fecha_creacion'], 'safe'],
+            [['codigo_programa'], 'string', 'max' => 8],
             [['nombre_programa'], 'string', 'max' => 100],
-            [['red_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => TblRedes::class, 'targetAttribute' => ['red_id_FK' => 'red_id']],
+            [['nivel_formacion'], 'string', 'max' => 50],
+            [['version'], 'string', 'max' => 2],
+            [['red_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Redes::class, 'targetAttribute' => ['red_id_FK' => 'red_id']],
         ];
     }
 
@@ -47,7 +53,12 @@ class Programas extends \yii\db\ActiveRecord
     {
         return [
             'pro_id' => 'Pro ID',
+            'codigo_programa' => 'Codigo Programa',
             'nombre_programa' => 'Nombre Programa',
+            'nivel_formacion' => 'Nivel Formacion',
+            'version' => 'Version',
+            'horas' => 'Horas',
+            'meses' => 'Meses',
             'red_id_FK' => 'Red Id Fk',
             'fecha_creacion' => 'Fecha Creacion',
         ];
@@ -61,25 +72,5 @@ class Programas extends \yii\db\ActiveRecord
     public function getRedIdFK()
     {
         return $this->hasOne(Redes::class, ['red_id' => 'red_id_FK']);
-    }
-
-    /**
-     * Gets query for [[TblCompetenciasProgramas]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTblCompetenciasProgramas()
-    {
-        return $this->hasMany(CompetenciasProgramas::class, ['id_pro_fk' => 'pro_id']);
-    }
-
-    /**
-     * Gets query for [[TblFichas]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTblFichas()
-    {
-        return $this->hasMany(Fichas::class, ['pro_id_FK' => 'pro_id']);
     }
 }

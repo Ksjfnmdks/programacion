@@ -5,20 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_fichas".
+ * This is the model class for table "fichas".
  *
  * @property int $fic_id
  * @property string $codigo
  * @property string $fecha_incio
  * @property string $fecha_final
  * @property int $pro_id_FK
- * @property string $instructor_lider
  * @property int $jor_id_FK
  * @property string $fecha_creacion
+ * @property int $usu_id
  *
- * @property TblJornadas $jorIdFK
- * @property TblProgramas $proIdFK
- * @property TblHorarios[] $tblHorarios
+ * @property Horarios[] $horarios
+ * @property Jornadas $jorIdFK
+ * @property Programas $proIdFK
+ * @property Usuarios $usu
  */
 class Fichas extends \yii\db\ActiveRecord
 {
@@ -36,13 +37,15 @@ class Fichas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'fecha_incio', 'fecha_final', 'pro_id_FK', 'instructor_lider', 'jor_id_FK'], 'required'],
+            [['codigo', 'fecha_incio', 'fecha_final', 'pro_id_FK', 'jor_id_FK', 'usu_id'], 'required'],
             [['fecha_incio', 'fecha_final', 'fecha_creacion'], 'safe'],
-            [['pro_id_FK', 'jor_id_FK'], 'integer'],
-            [['codigo'], 'unique', 'message' => 'Este código ya está en uso.'], // El campo debe ser único
-            [['instructor_lider'], 'string', 'max' => 100],
+            [['pro_id_FK', 'jor_id_FK', 'usu_id'], 'integer'],
+            [['codigo'], 'required'], // Campo requerido
+            [['codigo'], 'integer'], // Solo números
+            [['codigo'], 'unique', 'message' => 'Este código ya ha sido registrado.'], // Validación de unicidad
             [['pro_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Programas::class, 'targetAttribute' => ['pro_id_FK' => 'pro_id']],
             [['jor_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Jornadas::class, 'targetAttribute' => ['jor_id_FK' => 'jor_id']],
+            [['usu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usu_id' => 'usu_id']],
         ];
     }
 
@@ -57,10 +60,20 @@ class Fichas extends \yii\db\ActiveRecord
             'fecha_incio' => 'Fecha Incio',
             'fecha_final' => 'Fecha Final',
             'pro_id_FK' => 'Pro Id Fk',
-            'instructor_lider' => 'Instructor Lider',
             'jor_id_FK' => 'Jor Id Fk',
             'fecha_creacion' => 'Fecha Creacion',
+            'usu_id' => 'usuario',
         ];
+    }
+
+    /**
+     * Gets query for [[Horarios]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getHorarios()
+    {
+        return $this->hasMany(Horarios::class, ['fic_id_FK' => 'fic_id']);
     }
 
     /**
@@ -84,12 +97,12 @@ class Fichas extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[TblHorarios]].
+     * Gets query for [[Usu]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTblHorarios()
+    public function getUsu()
     {
-        return $this->hasMany(Horarios::class, ['fic_id_FK' => 'fic_id']);
+        return $this->hasOne(Usuarios::class, ['usu_id' => 'usu_id']);
     }
 }
