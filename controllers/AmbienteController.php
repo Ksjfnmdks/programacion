@@ -98,22 +98,16 @@ class AmbienteController extends Controller
     public function actionUpdate($amb_id)
     {
         $model = $this->findModel($amb_id);
-
-        // Solo durante la actualización, eliminar la fecha de creación de los datos
-        $postData = $this->request->post();
-        if (isset($postData['Ambiente']['fecha_creacion'])) {
-            unset($postData['Ambiente']['fecha_creacion']); // Eliminar la fecha de creación del arreglo
-        }
-
-        // Si el formulario es enviado y los datos son válidos, se guarda el modelo
-        if ($this->request->isPost && $model->load($postData) && $model->save()) {
+    
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'amb_id' => $model->amb_id]);
         }
-
+    
         return $this->render('update', [
             'model' => $model,
         ]);
     }
+    
 
 
     /**

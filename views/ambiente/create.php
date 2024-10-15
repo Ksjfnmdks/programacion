@@ -14,8 +14,8 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
 <br>
 <div class="div text-center">
     <h1>Crear Ambiente</h1>
-
 </div>
+
 <hr class="divider2">
 
 
@@ -28,7 +28,7 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
                 ['class' => 'listaususelected']
             ) ?>        
             <?= Html::a(
-                Html::img('@web/img/icons/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Asuarios', 
+                Html::img('@web/img/icons/icon-lista.png', ['class' => 'iconosa']) . ' Lista de Ambientes', 
                 ['ambiente/index'], 
                 ['class' => 'listausu']
             ) ?>
@@ -51,7 +51,7 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
     margin: 0 auto; /* Centrar el contenedor en la página */
     height: 830px;
     
-    padding: 20px;
+    padding: 0;
     
     text-align: center;
     font-family: Arial, sans-serif;
@@ -105,5 +105,8 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
 
 .form-wrapper {
     margin-top: 20px; /* Añadir margen superior al formulario */
+}
+.lista{
+
 }
 </style>

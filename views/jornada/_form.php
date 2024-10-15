@@ -10,16 +10,24 @@ use yii\widgets\ActiveForm;
 
 <div class="jornada-form-container">
 
+    <h2 class="form-title">Nueva Jornada</h2>
+
+    <div class="linea2"> </div>
+    <br>
+
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="form-group">
+
         <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'hora_inicio')->input('time') ?>
+        <div class="form-row">
+            <?= $form->field($model, 'hora_inicio')->input('time') ?>
+            
+            <?= $form->field($model, 'hora_fin')->input('time') ?>
+        </div>
         
-        <?= $form->field($model, 'hora_fin')->input('time') ?>
-
-        
+        <?= $form->field($model, 'fecha_creacion')->hiddenInput()->label(false) ?>
     </div>
 
     <div class="form-group submit-btn">
@@ -33,7 +41,7 @@ use yii\widgets\ActiveForm;
 <style>
 /* Contenedor principal centrado */
 .create-ambientes-container {
-    width: 90%; /* Ancho máximo para el contenedor */
+    width: 100%; /* Ancho máximo para el contenedor */
     max-width: 800px; /* Limita el tamaño máximo en pantallas grandes */
     margin: 0 auto; /* Centrar el contenedor en la página */
     height:520px;
@@ -49,6 +57,16 @@ use yii\widgets\ActiveForm;
     margin-top: 20px; /* Opcional: Añadir margen superior si lo necesitas */
 }
 
+.form-row {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los inputs */
+    gap: 20px; /* Ajusta el espacio entre los inputs */
+}
+
+.form-row .form-group {
+    flex: 1; /* Los inputs ocuparán el mismo espacio */
+}
+
 
 .jornada-form-container {
     background-color: white;
@@ -56,9 +74,9 @@ use yii\widgets\ActiveForm;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.240);
     display: inline-block;
-    width: 350px; 
+    width: 100%; 
     margin: 0 auto; 
-    height:350px;
+    height: 100%;
 }
 
 .jornada-form-container .form-group {
@@ -66,6 +84,11 @@ use yii\widgets\ActiveForm;
     text-align: left; /* Alinear a la izquierda */
 }
 
+.linea2 {
+    background-color: black;
+    width: 100%;
+    height: 2px;
+}  
 /* Estilos para el título */
 .tbl-jornadas-form-container {
     font-size: 24px;

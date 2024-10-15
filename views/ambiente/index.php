@@ -124,13 +124,10 @@ $this->registerCss("
             ],
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                'amb_id',
                 'nombre_ambiente',
                 'capacidad',
                 'estado',
-                
                 'recursos:ntext',
-                
                 [
                     'attribute' => 'nombre_red',  // El atributo en el modelo
                     'label' => 'Nombre de Red',  // Nombre que aparecerá en la cabecera de la tabla

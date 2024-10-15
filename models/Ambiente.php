@@ -89,15 +89,15 @@ class Ambiente extends ActiveRecord
     */
     public function beforeSave($insert)
 {
-    if ($insert) { // Solo para nuevos registros
-        $this->fecha_creacion = date('Y-m-d H:i:s'); // Establece la fecha y hora solo si es un nuevo registro
-    } elseif ($this->isAttributeChanged('fecha_creacion')) {
-        // Si se está actualizando el modelo y la fecha_creacion ha sido cambiada, revertir el cambio
-        $this->fecha_creacion = $this->getOldAttribute('fecha_creacion'); // Mantener la fecha original
+    if ($insert) { // Solo asignar la fecha de creación en inserciones
+        $this->fecha_creacion = date('Y-m-d H:i:s'); // Establece la fecha de creación solo una vez
     }
+    // No tocar la fecha de creación en actualizaciones
 
     return parent::beforeSave($insert);
 }
+
+
 
 
     

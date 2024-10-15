@@ -17,26 +17,30 @@ use yii\helpers\ArrayHelper;
     <br>
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre_ambiente')->textInput(['maxlength' => true]) ?>
+    <div class="form-row">
+        <?= $form->field($model, 'nombre_ambiente')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'capacidad')->textInput() ?>
+    </div>
 
-    <?= $form->field($model, 'capacidad')->textInput() ?>
+    <div class="form-row">
+        <?= $form->field($model, 'estado')->dropDownList(
+            [
+                'activo' => 'Activo',
+                'inactivo' => 'Inactivo',
+                'pendiente' => 'mantenimiento'
+            ], 
+        ['prompt' => 'Selecciona un estado']
+        ) ?>
 
-    <?= $form->field($model, 'estado')->dropDownList(
-        [
-            'activo' => 'Activo',
-            'inactivo' => 'Inactivo',
-            'pendiente' => 'mantenimiento'
-        ], 
-    ['prompt' => 'Selecciona un estado']
-    ) ?>
-
-    <?= $form->field($model, 'recursos')->textarea(['rows' => 2]) ?>
-    
-    <?= $form->field($model, 'nombre_red')->dropDownList(
+        <?= $form->field($model, 'nombre_red')->dropDownList(
                 ArrayHelper::map(Redes::find()->all(), 'red_id', 'nombre_red'), 
                 ['prompt' => 'Seleccione una red']
-            ) ?>
+        )?>
+    </div>  
+    <?= $form->field($model, 'recursos')->textarea(['rows' => 4]) ?>
 
+
+    
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
@@ -54,9 +58,19 @@ use yii\helpers\ArrayHelper;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.237);
     display: inline-block;
-    width: 450px; 
+    width: 100%; 
     margin: 0 auto; 
     height: 100%;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los inputs */
+    gap: 20px; /* Ajusta el espacio entre los inputs */
+}
+
+.form-row .form-group {
+    flex: 1; /* Los inputs ocuparán el mismo espacio */
 }
 
 .linea2 {

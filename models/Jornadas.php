@@ -118,5 +118,14 @@ class Jornadas extends \yii\db\ActiveRecord
         }
    }
     
+   public function beforeSave($insert)
+{
+    if ($this->isNewRecord) { // Solo si es un nuevo registro
+        $this->fecha_creacion = date('Y-m-d H:i:s'); // Fecha y hora actual
+    }
+
+    return parent::beforeSave($insert);
+}
+
 
 }
