@@ -93,7 +93,7 @@ class Fichas extends \yii\db\ActiveRecord
      */
     public function getProIdFK()
     {
-        return $this->hasOne(Programas::class, ['pro_id' => 'pro_id_FK']);
+        return $this->hasOne(Programa::class, ['pro_id' => 'pro_id_FK']);
     }
 
     /**

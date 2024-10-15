@@ -1,29 +1,57 @@
 <?php
 
-use app\models\Red;
+use app\assets\AppAsset;
+use app\models\Programa;
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\LinkPager;
-use yii\bootstrap5\ActiveForm;
-use app\assets\AppAsset;
 use yii\widgets\DetailView;
 
+
 /** @var yii\web\View $this */
-/** @var app\models\RedSearch $searchModel */
+/** @var app\models\ProgramaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 /** @var yii\data\Pagination $Pagination */
-/** @var app\models\Red $searchModel */
+/** @var app\models\Programa $searchModel */
 
+
+$this->title = 'Programas';
 ?>
 
 
-<div class="red-index">
-    <div class="d-flex col-sm-12 col-xs-12 col-xl-12 col-md-12 justify-content-center flex-column align-items-center text-center">
+<style>
+    .header1 {
+        height: 10vh;
+        text-decoration: none;
+        background: #39A900;
+        color: white;
+        pointer-events: none;
+        cursor: default;
+    }
 
+    .paginador {
+        color: white;
+        width: 60vw;
+        display: flex;
+        justify-self: center;
+        justify-content: center;
+    }
+
+    .paginador1 {
+
+        color: white;
+        width: 50px;
+    }
+</style>
+
+
+<div class="programa-index">
+    <div class="d-flex col-sm-12 col-xs-12 col-xl-12 col-md-12 justify-content-center flex-column align-items-center text-center" style="width: 80vw;">
         <br>
-        <h1 class="titulo-principal text-dark fw-bold">REDES</h1>
+        <h1 class="titulo-principal text-dark fw-bold">PROGRAMAS</h1>
         <div class="linea1 bg-black"></div>
         <br>
         <div class=" contenedor-menu d-flex flex-row justify-content-between">
@@ -33,7 +61,7 @@ use yii\widgets\DetailView;
                 </div>
                 <div class="w-40 h-30">
                     <h4 class="">
-                        <?= Html::a(' <p class="letra lista-redes">&nbsp;Crear &nbsp;Red</p>', ['create'], [
+                        <?= Html::a(' <p class="letra lista-redes">&nbsp;Crear &nbsp;Programa</p>', ['create'], [
                             'class' => ' fw-bolder icon-link icon-link-hover',
                             'style' => 'color: black; text-decoration: none; font-size: 1.5rem;',
                             'encode' => false
@@ -45,7 +73,7 @@ use yii\widgets\DetailView;
                 <div class="w-70 h-30">
                     <h4 class="">
                         <?= Html::a(
-                            ' <p class="letra "><img src="img/icons/controlar.png" alt="agregar">&nbsp;Lista de &nbsp;Redes</p>',
+                            ' <p class="letra "><img src="img/icons/controlar.png" alt="agregar">&nbsp;Lista de &nbsp;Programas</p>',
                             ['index'],
                             [
                                 'class' => 'fw-bolder icon-link icon-link-hover',
@@ -62,38 +90,51 @@ use yii\widgets\DetailView;
 
         <div class="d-flex flex-row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-end" style="width:80vw; color:white; padding-right:10px">
 
-            <div class="red-search col-4">
+            <div class="programa-search col-4">
 
                 <?php $form = ActiveForm::begin([
                     'action' => ['index'],
                     'method' => 'get',
                 ]); ?>
 
-                <?= $form->field($searchModel, 'nombre_red')->textInput([
-                    'placeholder' => 'Buscar red',
+                <?= $form->field($searchModel, 'nombre_programa')->textInput([
+                    'placeholder' => 'Buscar programa',
                     'style' => 'background:rgb(205, 205, 205); border-radius: 20px; height: 40px;
                                                                     font-weight: bold;'
                 ])
                     ->label(false) ?>
                 <?php ActiveForm::end(); ?>
             </div>
-
         </div>
 
 
         <br>
 
-        <div class=" table-responsive col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex flex-row justify-content-center"
+        <div class=" table-responsive col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 d-flex flex-row justify-content-center"
             style=" height:50vh">
 
             <?= GridView::widget([
+
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    // 'red_id',
-                    'nombre_red',
-
+                    //'pro_id',
+                    'codigo_programa',
+                    'nombre_programa',
+                    'nivel_formacion',
+                    'version',
+                    'horas',
+                    'meses',
+                    //'red_id_FK',
+                    'fecha_creacion',
+                    [
+                        'attribute' => 'red_id_FK',
+                        'label' => 'Red',
+                        'value' => function ($model) {
+                            return $model->red ? $model->red->nombre_red : 'N/A';
+                        },
+                    ],
                 ],
                 'pager' => [
                     'class' => LinkPager::class,
@@ -109,6 +150,7 @@ use yii\widgets\DetailView;
             ]);
             ?>
         </div>
+
     </div>
 </div>
 <style>

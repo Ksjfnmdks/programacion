@@ -1,5 +1,5 @@
 <?php
-use app\models\TblFicha;
+use app\models\Ficha;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;

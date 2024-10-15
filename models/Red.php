@@ -11,9 +11,9 @@ use Yii;
  * @property string $nombre_red
  *
  * @property Ambientes[] $ambientes
- * @property Programas[] $programas
+ * @property Programa[] $programa
  */
-class Redes extends \yii\db\ActiveRecord
+class Red extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -41,7 +41,7 @@ class Redes extends \yii\db\ActiveRecord
     {
         return [
             'red_id' => 'Red ID',
-            'nombre_red' => 'Nombre Red',
+            'nombre_red' => 'Red',
         ];
     }
 
@@ -62,6 +62,6 @@ class Redes extends \yii\db\ActiveRecord
      */
     public function getProgramas()
     {
-        return $this->hasMany(Programas::class, ['red_id_FK' => 'red_id']);
+        return $this->hasMany(Programa::class, ['red_id_FK' => 'red_id']);
     }
 }

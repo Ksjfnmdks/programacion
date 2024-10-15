@@ -61,8 +61,9 @@ $this->title = 'Sistema de Asignación';
                             ['label' => '<h5 class="bi bi-journals list-group-item" style="color: white;"> fichas</h5>', 'url' => ['/fichas/index'], 'encode' => false],  
                             ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  Redes</h5>', 'url' => ['/red/index'], 'encode' => false],
                             ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  Competencias</h5>', 'url' => ['/competencias/index'], 'encode' => false],
+                            ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  jornada</h5>', 'url' => ['/jornada/index'], 'encode' => false],
+                            ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  CompetenciasProgramas</h5>', 'url' => ['/competenciasxprogramas/index'], 'encode' => false],
                             ['label' => '<h5 class="bi bi-journals list-group-item" style="color: white;">  Programas</h5>', 'url' => ['/programa/index'], 'encode' => false],
-                            ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  Asignación</h5>', 'url' => ['/competenciaprograma/index'], 'encode' => false],
                             ['label' => '<h5 class="bi bi-people list-group-item" style="color: white;">  Ambiente</h5>', 'url' => ['/ambiente/index'], 'encode' => false],
                         ]
                     ]);
