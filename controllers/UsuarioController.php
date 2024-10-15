@@ -127,12 +127,15 @@ class UsuarioController extends Controller
  public function actionDelete($usu_id)
  {
      $model = $this->findModel($usu_id);
-     $model->est_id_FK  = 2;  // Cambiar estado a inactivo (2)
-     if ($model->save(false)) {  // Guardar sin validar
-        
+     $model->est_id_FK = 2;
+ 
+     if ($model->save(false)) {
+       
+     } else {
+         Yii::$app->session->setFlash('error', 'Error al eliminar el usuario.');
      }
  
-     return $this->redirect(['index']);  // Redirigir a la lista de usuarios
+     return $this->redirect(['index']);
  } 
 
     /**
