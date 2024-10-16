@@ -47,6 +47,34 @@ class UsuarioController extends Controller
         ]);
     }
 
+    public function actionInstructores()
+    {
+        $searchModel = new UsuarioSearch();
+        $query = Usuarios::find()->where(['in', 'rol_id_FK', [2, 3]]);  // Instructores y Privilegiados
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+    
+        return $this->render('instructores', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+
+    public function actionPerfil()
+    {
+        $id = Yii::$app->user->identity->id;
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Datos actualizados con éxito.');
+            return $this->redirect(['perfil']);
+        }
+
+        return $this->render('perfil', [
+            'model' => $model,
+        ]);
+    }
+
 
     /**
      * Displays a single TblUsuarios model.

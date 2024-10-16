@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Redes;
+use app\models\Red;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
@@ -33,7 +33,7 @@ use yii\helpers\ArrayHelper;
         ) ?>
 
         <?= $form->field($model, 'nombre_red')->dropDownList(
-                ArrayHelper::map(Redes::find()->all(), 'red_id', 'nombre_red'), 
+                ArrayHelper::map(Red::find()->all(), 'red_id', 'nombre_red'), 
                 ['prompt' => 'Seleccione una red']
         )?>
     </div>  

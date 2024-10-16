@@ -43,7 +43,7 @@ class Fichas extends \yii\db\ActiveRecord
             [['codigo'], 'required'], // Campo requerido
             [['codigo'], 'integer'], // Solo números
             [['codigo'], 'unique', 'message' => 'Este código ya ha sido registrado.'], // Validación de unicidad
-            [['pro_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Programas::class, 'targetAttribute' => ['pro_id_FK' => 'pro_id']],
+            [['pro_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Programa::class, 'targetAttribute' => ['pro_id_FK' => 'pro_id']],
             [['jor_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Jornadas::class, 'targetAttribute' => ['jor_id_FK' => 'jor_id']],
             [['usu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usu_id' => 'usu_id']],
         ];

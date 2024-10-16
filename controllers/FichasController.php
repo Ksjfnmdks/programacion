@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Fichas;
 use app\models\FichasSearch;
 use yii\web\Controller;
@@ -42,6 +43,18 @@ class FichasController extends Controller
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionFichas()
+    {
+        $searchModel = new FichasSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        // Renderizar la vista `ficha-instructores.php` desde `/views/fichas/`
+        return $this->render('fichas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

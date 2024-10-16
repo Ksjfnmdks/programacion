@@ -6,71 +6,50 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Fichas;
 
-/**
- * FichasSearch represents the model behind the search form of `app\models\Fichas`.
- */
 class FichasSearch extends Fichas
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $globalSearch;
+
     public function rules()
     {
         return [
             [['fic_id', 'pro_id_FK', 'jor_id_FK', 'usu_id'], 'integer'],
-            [['codigo', 'fecha_incio', 'fecha_final', 'fecha_creacion'], 'safe'],
+            [['codigo', 'fecha_incio', 'fecha_final', 'fecha_creacion', 'instructor_lider', 'globalSearch'], 'safe'],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
     public function search($params)
     {
-        $query = Fichas::find();
-
-        // add conditions that should always apply here
+        $query = Fichas::find()
+            ->joinWith(['proIdFK', 'jorIdFK', 'usu']);  // Join para acceder a campos relacionados
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 4, 
+                'pageSize' => 4, // Tamaño de página
             ],
         ]);
 
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'fic_id' => $this->fic_id,
-            'fecha_incio' => $this->fecha_incio,
-            'fecha_final' => $this->fecha_final,
-            'pro_id_FK' => $this->pro_id_FK,
-            'jor_id_FK' => $this->jor_id_FK,
-            'fecha_creacion' => $this->fecha_creacion,
-            'usu_id' => $this->usu_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'codigo', $this->codigo]);
+        // Búsqueda global: filtro en múltiples columnas usando `orFilterWhere`
+        $query->orFilterWhere(['like', 'fichas.codigo', $this->globalSearch])
+              ->orFilterWhere(['like', 'instructor_lider', $this->globalSearch])
+              ->orFilterWhere(['like', 'fecha_incio', $this->globalSearch])
+              ->orFilterWhere(['like', 'fecha_final', $this->globalSearch])
+              ->orFilterWhere(['like', 'fichas.fecha_creacion', $this->globalSearch])
+              ->orFilterWhere(['like', 'programas.nombre_programa', $this->globalSearch]) // Asumiendo que el programa tiene un campo `nombre`
+              ->orFilterWhere(['like', 'jornadas.descripcion', $this->globalSearch])  // Asumiendo que la jornada tiene un campo `nombre`
+              ->orFilterWhere(['like', 'usuarios.nombre', $this->globalSearch]); // Buscando por nombre del usuario líder
 
         return $dataProvider;
     }

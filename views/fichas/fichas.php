@@ -1,21 +1,22 @@
 <?php
-use app\models\Ficha;
+
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
+use yii\web\YiiAsset;
 
 /** @var yii\web\View $this */
 /** @var app\models\FichasSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Lista De Fichas';
-$this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
-$this->registerCssFile("@web/css/ficha.css", ['depends' => [yii\web\YiiAsset::className()]]);
-$this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
+$this->title = 'Listado de Fichas ';
+$this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [YiiAsset::class]]);
+$this->registerCssFile("@web/css/ficha.css", ['depends' => [YiiAsset::class]]);
+$this->registerCssFile('@web/css/tablas.css', ['depends' => [YiiAsset::class]]);
 
-// Añadimos el CSS personalizado para aumentar el tamaño de la fuente de la tabla y el color del texto
+// Personaliza el CSS para la tabla
 $this->registerCss("
     .table td, .table th {
         font-size: 19px; /* Aumenta el tamaño de la fuente a 19px */
@@ -31,32 +32,19 @@ $this->registerCss("
 ?>
 
 <div class="Contabla">
-    <div class="lista">
-        <?= Html::a(
-                Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear ficha', 
-                ['fichas/create'], 
-                ['class' => 'listausu']
-            ) ?>
-        <?= Html::a(
-            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de fichas', 
-            ['fichas/index'], 
-            ['class' => 'listaususelected']
-        ) ?>
-    </div>
-    <hr class="divider">
     <h2><?= Html::encode($this->title) ?></h2>
-    <div class="table-container">
 
+    <div class="table-container">
         <div class="BuscarUsu">
             <?php $form = ActiveForm::begin([
-                'action' => ['index'],
+                'action' => ['fichas'],
                 'method' => 'get',
             ]); ?>
             
-            <?= $form->field($searchModel, 'globalSearch')->textInput(['placeholder' => 'Buscar por código'])->label(false) ?>
+            <?= $form->field($searchModel, 'globalSearch')->textInput(['placeholder' => 'Buscar...'])->label(false) ?>
             <?php ActiveForm::end(); ?>
         </div>
-    
+
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'table'],
@@ -104,15 +92,6 @@ $this->registerCss("
                     'attribute' => 'fecha_creacion',
                     'enableSorting' => false,
                     'headerOptions' => ['style' => 'background-color: #38A800; color: #fff; font-weight: bold;'],
-                ],
-                [
-                    'class' => ActionColumn::class,
-                    'header' => 'Acciones',
-                    'headerOptions' => ['style' => 'background-color: #38A800; color: #fff; font-weight: bold;'],
-                    'urlCreator' => function ($action, $model, $key, $index) {
-                        return Url::to([$action, 'fic_id' => $model->fic_id]);
-                    },
-                    'template' => '{update} {delete}', 
                 ],
             ],
         ]); ?>

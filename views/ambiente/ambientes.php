@@ -80,33 +80,20 @@ $this->registerCss("
 
     </div>
 
-   
 
     <hr class="divider">
 
-    <div class="lista">
-            <?= Html::a(
-                Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear Ambiente', 
-                ['ambiente/create'], 
-                ['class' => 'listausu']
-            ) ?>
-        <?= Html::a(
-            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Ambiente', 
-            ['ambiente/index'], 
-            ['class' => 'listaususelected']
-        ) ?>
-    </div>
 
     <div class="table-container">
 
         <div class="container2">
             <div class="BuscarAmb">
                 <?php $form = ActiveForm::begin([
-                    'action' => ['index'],
+                    'action' => ['ambientes'],
                     'method' => 'get',
                 ]); ?>
 
-                <?= $form->field($searchModel, 'globalSearch')->textInput(['placeholder' => 'Buscar por nombre de ambiente'])->label(false) ?>
+                <?= $form->field($searchModel, 'globalSearch')->textInput(['placeholder' => 'Buscar'])->label(false) ?>
 
                 <?php ActiveForm::end(); ?>
             </div>
@@ -129,21 +116,14 @@ $this->registerCss("
                 'estado',
                 'recursos:ntext',
                 [
-                    'attribute' => 'nombre_red',  // El atributo en el modelo
-                    'label' => 'Nombre de Red',  // Nombre que aparecerá en la cabecera de la tabla
+                    'attribute' => 'nombre_red',
+                    'label' => 'Nombre de Red',
                     'value' => function ($model) {
-                        // Si el ambiente tiene red, muestra el nombre de la red; si no, muestra 'Sin red'
                         return $model->redes ? $model->redes->nombre_red : 'Sin red';
                     },
                 ],
                 
                 'fecha_creacion',
-                [
-                    'class' => ActionColumn::className(),
-                    'urlCreator' => function ($action, Ambiente $model, $key, $index, $column) {
-                        return Url::toRoute([$action, 'amb_id' => $model->amb_id]);
-                    },
-                ],
             ],
             'headerRowOptions' => ['class' => 'header1'], 
         ]); ?>

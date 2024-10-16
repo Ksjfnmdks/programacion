@@ -6,67 +6,42 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Ambiente;
 
-/**
- * AmbienteSearch represents the model behind the search form of `app\models\Ambiente`.
- */
 class AmbienteSearch extends Ambiente
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $globalSearch;
+
     public function rules()
     {
         return [
-            [['amb_id', 'capacidad', 'nombre_red'], 'integer'],
-            [['nombre_ambiente', 'estado', 'recursos', 'fecha_creacion'], 'safe'],
+            [['amb_id', 'capacidad'], 'integer'],
+            [['nombre_ambiente', 'estado', 'recursos', 'nombre_red', 'fecha_creacion', 'globalSearch'], 'safe'],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
-
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
     public function search($params)
     {
-        $query = Ambiente::find();
-
-        // add conditions that should always apply here
+        $query = Ambiente::find()->joinWith('redes');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
         ]);
 
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'amb_id' => $this->amb_id,
-            'capacidad' => $this->capacidad,
-            'nombre_red' => $this->nombre_red,
-            'fecha_creacion' => $this->fecha_creacion,
-        ]);
-
-        $query->andFilterWhere(['like', 'nombre_ambiente', $this->nombre_ambiente])
-            ->andFilterWhere(['like', 'estado', $this->estado])
-            ->andFilterWhere(['like', 'recursos', $this->recursos]);
+        // Aplicar búsqueda global
+        $query->orFilterWhere(['like', 'nombre_ambiente', $this->globalSearch])
+              ->orFilterWhere(['like', 'capacidad', $this->globalSearch])
+              ->orFilterWhere(['like', 'estado', $this->globalSearch])
+              ->orFilterWhere(['like', 'recursos', $this->globalSearch])
+              ->orFilterWhere(['like', 'redes.nombre_red', $this->globalSearch])
+              ->orFilterWhere(['like', 'fecha_creacion', $this->globalSearch]);
 
         return $dataProvider;
     }

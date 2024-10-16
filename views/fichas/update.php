@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Jornadas;
-use app\models\Programas;
+use app\models\Programa;
 use app\models\Usuarios;
 
 /** @var yii\web\View $this */
@@ -95,11 +95,11 @@ $this->registerJs($script);
         ])->label('Fecha de Inicio') ?>
 
         <?= $form->field($model, 'pro_id_FK')->dropDownList(
-            ArrayHelper::map(Programas::find()->all(), 'pro_id', 'nombre_programa'), 
+            ArrayHelper::map(Programa::find()->all(), 'pro_id', 'nombre_programa'), 
             [
                 'prompt' => 'Seleccione un programa',
                 'id' => 'programa-id',
-                'options' => ArrayHelper::map(Programas::find()->all(), 'pro_id', function ($model) {
+                'options' => ArrayHelper::map(Programa::find()->all(), 'pro_id', function ($model) {
                     return ['data-duracion' => $model->meses];
                 }),
             ]

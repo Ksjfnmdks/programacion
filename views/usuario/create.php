@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\TblRoles;
-use app\models\TblEstados;
+use app\models\Roles;
+use app\models\Estados;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
@@ -61,12 +61,12 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
             <?= $form->field($model, 'password')->passwordInput(['maxlength' => 50, 'placeholder' => 'Contraseña']) ?>
 
             <?= $form->field($model, 'rol_id_FK')->dropDownList(
-                ArrayHelper::map(TblRoles::find()->all(), 'rol_id', 'nombre'), 
+                ArrayHelper::map(Roles::find()->all(), 'rol_id', 'nombre'), 
                 ['prompt' => 'Seleccione un Rol']
             ) ?>
 
             <?= $form->field($model, 'est_id_FK')->dropDownList(
-                ArrayHelper::map(TblEstados::find()->all(), 'est_id', 'descripcion'), 
+                ArrayHelper::map(Estados::find()->all(), 'est_id', 'descripcion'), 
                 ['prompt' => 'Seleccione un Estado']
             ) ?>
 

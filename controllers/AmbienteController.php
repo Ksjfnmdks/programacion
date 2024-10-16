@@ -47,6 +47,17 @@ class AmbienteController extends Controller
         ]);
     }
 
+    public function actionAmbientes()
+    {
+        $searchModel = new AmbienteSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('ambientes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Ambiente model.
      * @param int $amb_id Amb ID
@@ -70,7 +81,7 @@ class AmbienteController extends Controller
             $model = new Ambiente();
 
             // Obtener las redes
-            $redes = \app\models\Redes::find()->select(['red_id', 'nombre_red'])->asArray()->all();
+            $redes = \app\models\Red::find()->select(['red_id', 'nombre_red'])->asArray()->all();
             $redesOptions = \yii\helpers\ArrayHelper::map($redes, 'id', 'nombre');
 
             if ($this->request->isPost) {

@@ -41,7 +41,7 @@ class Ambiente extends ActiveRecord
             [['fecha_creacion'], 'safe'],
             [['nombre_ambiente'], 'string', 'max' => 30],
             [['estado'], 'string', 'max' => 10],
-            [['nombre_red'], 'exist', 'skipOnError' => true, 'targetClass' => Redes::class, 'targetAttribute' => ['nombre_red' => 'red_id']],
+            [['nombre_red'], 'exist', 'skipOnError' => true, 'targetClass' => Red::class, 'targetAttribute' => ['nombre_red' => 'red_id']],
         ];
     }
 
@@ -78,7 +78,7 @@ class Ambiente extends ActiveRecord
      */
     public function getRedes()
     {
-        return $this->hasOne(Redes::className(), ['red_id' => 'nombre_red']); // Relación corregida
+        return $this->hasOne(Red::className(), ['red_id' => 'nombre_red']); // Relación corregida
     }
 
     /**
