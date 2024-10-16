@@ -7,6 +7,7 @@ use app\models\AmbienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * AmbienteController implements the CRUD actions for Ambiente model.
@@ -76,27 +77,33 @@ class AmbienteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-        public function actionCreate()
-        {
-            $model = new Ambiente();
-
-            // Obtener las redes
-            $redes = \app\models\Red::find()->select(['red_id', 'nombre_red'])->asArray()->all();
-            $redesOptions = \yii\helpers\ArrayHelper::map($redes, 'id', 'nombre');
-
-            if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['view', 'amb_id' => $model->amb_id]);
-                }
-            } else {
-                $model->loadDefaultValues();
+    public function actionCreate()
+    {
+        $model = new Ambiente();
+    
+        // Obtener las redes
+        $redes = \app\models\Red::find()->select(['red_id', 'nombre_red'])->asArray()->all();
+        $redesOptions = \yii\helpers\ArrayHelper::map($redes, 'red_id', 'nombre_red');
+    
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                // Definir un mensaje flash para mostrarlo en la vista de 'index'
+                Yii::$app->session->setFlash('success', 'Ambiente creado correctamente.');
+    
+                // Redirigir a la acción 'index' después de guardar
+                return $this->redirect(['index']);
             }
-
-            return $this->render('create', [
-                'model' => $model,
-                'redesOptions' => $redesOptions, // Pasar las opciones de redes a la vista
-            ]);
+        } else {
+            $model->loadDefaultValues();
         }
+    
+        return $this->render('create', [
+            'model' => $model,
+            'redesOptions' => $redesOptions, // Pasar las opciones de redes a la vista
+        ]);
+    }
+    
+
 
 
     /**

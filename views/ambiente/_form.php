@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
 
     <div class="form-row">
         <?= $form->field($model, 'nombre_ambiente')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'capacidad')->textInput() ?>
+        <?= $form->field($model, 'capacidad')->textInput(['type' => 'number', 'min' => 1]) ?>
     </div>
 
     <div class="form-row">

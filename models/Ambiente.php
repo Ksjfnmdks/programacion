@@ -42,6 +42,9 @@ class Ambiente extends ActiveRecord
             [['nombre_ambiente'], 'string', 'max' => 30],
             [['estado'], 'string', 'max' => 10],
             [['nombre_red'], 'exist', 'skipOnError' => true, 'targetClass' => Red::class, 'targetAttribute' => ['nombre_red' => 'red_id']],
+            [['capacidad'], 'integer', 'message' => 'La capacidad debe ser un número entero.'],
+            ['nombre_ambiente', 'unique', 'message' => 'Este ambiente ya existe.'], // Validación de unicidad
+            [['capacidad'], 'required', 'message' => 'La capacidad no puede estar vacía.'],
         ];
     }
 
