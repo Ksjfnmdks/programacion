@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Resultado;
+use app\models\Resultados;
 use app\models\ResultadoSearch;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'class' => ActionColumn::class,
             'header' => 'Acciones',
-            'urlCreator' => function ($action, Resultado $model, $key, $index, $column) {
+            'urlCreator' => function ($action, Resultados $model, $key, $index, $column) {
                 return Url::toRoute([$action, 'id_res' => $model->id_res]);
             }
         ],
