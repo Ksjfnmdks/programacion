@@ -3,7 +3,7 @@ namespace app\models;
 
 use yii\data\ActiveDataProvider;
 
-class ResultadoSearch extends Resultados
+class ResultadoSearch extends Resultado
 {
     public $searchTerm; 
 
@@ -17,7 +17,7 @@ class ResultadoSearch extends Resultados
 
     public function search($params)
     {
-        $query = Resultados::find();
+        $query = Resultado::find();
     
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
