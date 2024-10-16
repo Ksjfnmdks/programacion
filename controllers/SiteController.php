@@ -15,12 +15,15 @@ use app\models\UsuarioSearch;
 class SiteController extends Controller
 {
 
+
     public function actionAdmin()
     {
         $searchModel = new UsuarioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'instructor');
-
-        return $this->render('admin', [
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    
+        $dataProvider->query->andWhere(['rol_id_FK' => [2, 3]]);
+    
+        return $this->render('Admin', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

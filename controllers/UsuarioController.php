@@ -50,8 +50,10 @@ class UsuarioController extends Controller
     public function actionInstructores()
     {
         $searchModel = new UsuarioSearch();
-        $query = Usuarios::find()->where(['in', 'rol_id_FK', [2, 3]]);  // Instructores y Privilegiados
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    
+        // Filtro adicional para asegurar que solo se muestren los roles de instructor
+        $dataProvider->query->andWhere(['rol_id_FK' => [2, 3]]);
     
         return $this->render('instructores', [
             'searchModel' => $searchModel,
