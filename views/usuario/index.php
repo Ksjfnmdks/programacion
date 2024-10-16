@@ -34,6 +34,7 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
     }
 </style>
 <link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 <div class="Contabla">
     <div class="titulo">
         <h1>Lista de Usuarios</h1>
@@ -113,23 +114,36 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
                     'template' => '{view} {update} {delete}',
                     'buttons' => [
                         'view' => function ($url, $model) {
-                            return Html::a('<i class="bi bi-eye"></i>',['usuario/view', 'usu_id' => $model->usu_id], ['class' => 'btn btn-info btn-sm']);
+                            return Html::a(
+                                '<i class="bi bi-eye-fill" style="color: #38A800; font-size: 1.2rem;"></i>',
+                                ['usuario/view', 'usu_id' => $model->usu_id], 
+                                ['class' => 'btn btn-sm']
+                            );
                         },
                         'update' => function ($url, $model) {
-                            return Html::a('<i class="bi bi-pencil-square"></i>', ['usuario/update', 'usu_id' => $model->usu_id], ['class' => 'btn btn-primary btn-sm']);
+                            return Html::a(
+                                '<i class="bi bi-pencil-fill" style="color: #38A800; font-size: 1.2rem;"></i>',
+                                ['usuario/update', 'usu_id' => $model->usu_id], 
+                                ['class' => 'btn btn-sm']
+                            );
                         },
                         'delete' => function ($url, $model, $key) {
                             if ($model->est_id_FK == 1) {
-                                return Html::a('<i class="bi bi-trash"></i>', '#', [
-                                    'class' => 'btn btn-danger btn-sm deleteButton',
-                                    'data-id' => $model->usu_id,
-                                    'data-bs-toggle' => 'modal',
-                                    'data-bs-target' => '#modalConfirmDelete'
-                                ]);
+                                return Html::a(
+                                    '<i class="bi bi-trash-fill" style="color: #38A800; font-size: 1.2rem;"></i>', 
+                                    '#', 
+                                    [
+                                        'class' => 'btn btn-sm deleteButton',
+                                        'data-id' => $model->usu_id,
+                                        'data-bs-toggle' => 'modal',
+                                        'data-bs-target' => '#modalConfirmDelete'
+                                    ]
+                                );
                             }
                             return ''; 
                         },
                     ],
+
                 ],
             ],
             'headerRowOptions' => ['class' => 'header1'], 

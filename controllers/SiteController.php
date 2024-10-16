@@ -78,7 +78,7 @@ class SiteController extends Controller
                    ],
                    [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['logout', 'userprivilegio'],
+                       'actions' => ['logout', 'userprivilegio','admin'],
                        //Esta propiedad establece que tiene permisos
                        'allow' => true,
                        //Usuarios autenticados, el signo ? es para invitados
