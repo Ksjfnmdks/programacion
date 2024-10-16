@@ -3,9 +3,11 @@
 namespace app\controllers;
 
 use yii;
-use app\models\Resultados;
+use app\models\Resultado;
 use app\models\ResultadoSearch;
-use app\models\Competencias;
+use app\models\CompetenciasModel;
+use yii\data\ActiveDataProvider;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -43,14 +45,16 @@ class ResultadoController extends Controller
         $searchModel = new ResultadoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
     
-        // Debug: Verifica los parámetros de búsqueda
-        \Yii::debug(Yii::$app->request->queryParams, 'searchParams');
+        $dataProvider = new ActiveDataProvider([
+            'query' => Resultado::find()->with('competencia'),
+        ]);
     
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+    
 
     /**
      * Displays a single Resultado model.
@@ -72,17 +76,22 @@ class ResultadoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Resultados();
-        $model->fecha_creacion = date('Y-m-d'); // Establece la fecha de hoy
-    
-        $competencias = Competencias::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
+        $model = new Resultado();
+        $competencias = CompetenciasModel::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
     
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_res' => $model->id_res]);
+            if ($model->load($this->request->post())) {
+                $competenciaSeleccionada = Yii::$app->request->post('Resultado')['id_com_fk'];
+                $model->id_com_fk = $competenciaSeleccionada;
+    
+                if (!CompetenciasModel::find()->where(['id_com' => $model->id_com_fk])->exists()) {
+                    $model->addError('id_com_fk', 'La competencia seleccionada no existe.');
+                }
+    
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id_res' => $model->id_res]);
+                }
             }
-        } else {
-            $model->loadDefaultValues();
         }
     
         return $this->render('create', [
@@ -90,7 +99,7 @@ class ResultadoController extends Controller
             'competencias' => $competencias,
         ]);
     }
-
+    
     /**
      * Updates an existing Resultado model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -102,7 +111,7 @@ class ResultadoController extends Controller
     {
         $model = $this->findModel($id_res); 
         
-        $competencias = Competencias::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
+        $competencias = CompetenciasModel::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
     
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id_res' => $model->id_res]);
@@ -144,7 +153,7 @@ class ResultadoController extends Controller
      */
     protected function findModel($id_res)
     {
-        if (($model = Resultados::findOne(['id_res' => $id_res])) !== null) {
+        if (($model = Resultado::findOne(['id_res' => $id_res])) !== null) {
             return $model;
         }
 
