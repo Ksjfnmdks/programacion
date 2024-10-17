@@ -7,7 +7,6 @@ use app\models\Jornadas;
 use app\models\Programa;
 use app\models\Usuarios;
 
-
 /** @var yii\web\View $this */
 /** @var app\models\Fichas $model */
 $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
@@ -59,12 +58,65 @@ JS;
 $this->registerJs($script);
 ?>
 
+<style>
+/* Estilos adicionales para hacer el formulario y los enlaces flexibles */
+
+/* Flexibilidad para el contenedor de los enlaces */
+.lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Asegura que los enlaces se separen completamente */
+    gap: 30px; /* Espacio entre los elementos */
+    margin-bottom: 20px; /* Añadir espacio inferior */
+}
+
+/* Flexibilidad para el contenedor de los campos del formulario */
+.ficha, .boton {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Flexibilidad en anchos de pantalla medianos y grandes */
+@media (min-width: 768px) {
+    .ficha {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .ficha > div {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    /* Centramos el botón en la pantalla */
+    .boton {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 767px) {
+    .ficha > div {
+        width: 100%;
+    }
+    
+    .boton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+</style>
+
 <div class="containerUsu">
     <?php if (Yii::$app->session->hasFlash('success')): ?>
         <div class="alert alert-success">
             <?= Yii::$app->session->getFlash('success') ?>
         </div>
     <?php endif; ?>
+    
     <div class="lista">
         <?= Html::a(
             Html::img('@web/img/icons/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear ficha ', 
@@ -78,23 +130,26 @@ $this->registerJs($script);
             ['class' => 'listausu']
         ) ?>
     </div>
+
     <hr class="divider">
+
     <div class="titulo">
         <h1>CREAR FICHA</h1>
     </div>
+
     <div class="UsuariosForm">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="ficha">
         <?= $form->field($model, 'codigo')->textInput([
-            'type' => 'text', // Cambiado de 'number' a 'text' para usar minlength y maxlength
-            'maxlength' => 10, // Longitud máxima
-            'minlength' => 7,  // Longitud mínima
+            'type' => 'text', 
+            'maxlength' => 10, 
+            'minlength' => 7,  
             'placeholder' => 'Código de 7 a 10 dígitos',
             'id' => 'codigo-id',
-            'pattern' => '\d{7,10}', // Asegura que solo se ingresen entre 7 y 10 dígitos
-            'onkeypress' => 'return event.charCode >= 48 && event.charCode <= 57' // Solo permite números
+            'pattern' => '\d{7,10}', 
+            'onkeypress' => 'return event.charCode >= 48 && event.charCode <= 57' 
         ])->label('Código') ?>
 
         <?= $form->field($model, 'fecha_incio')->textInput([

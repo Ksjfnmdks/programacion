@@ -12,7 +12,7 @@ use app\models\Usuarios;
 $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
 $this->registerCssFile("@web/css/ficha.css", ['depends' => [yii\web\YiiAsset::className()]]);
 
-// Script para calcular la fecha final automáticamente y redirigir al index después de 10 segundos
+// Script para calcular la fecha final automáticamente y mensaje de confirmación al guardar
 $script = <<< JS
 // Función para calcular la fecha final
 function calcularFechaFinal() {
@@ -39,12 +39,18 @@ function calcularFechaFinal() {
 document.getElementById('fecha-inicio-id').addEventListener('input', calcularFechaFinal);
 document.getElementById('programa-id').addEventListener('change', calcularFechaFinal);
 
-// Ocultar el mensaje de éxito después de 10 segundos y redirigir al índice
+// Mensaje de confirmación al enviar el formulario
+document.querySelector('form').addEventListener('beforeSubmit', function(e) {
+    if (!confirm('¿Estás seguro de que deseas guardar la ficha?')) {
+        e.preventDefault(); // Evitar que el formulario se envíe si el usuario cancela
+    }
+});
+
+// Ocultar el mensaje de éxito después de 10 segundos
 setTimeout(function() {
     var successMessage = document.querySelector('.alert-success');
     if (successMessage) {
         successMessage.style.display = 'none';
-        window.location.href = "index"; // Redirigir a la lista de fichas (index)
     }
 }, 10000);
 
@@ -52,12 +58,65 @@ JS;
 $this->registerJs($script);
 ?>
 
+<style>
+/* Estilos adicionales para hacer el formulario y los enlaces flexibles */
+
+/* Flexibilidad para el contenedor de los enlaces */
+.lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Asegura que los enlaces se separen completamente */
+    gap: 30px; /* Espacio entre los elementos */
+    margin-bottom: 20px; /* Añadir espacio inferior */
+}
+
+/* Flexibilidad para el contenedor de los campos del formulario */
+.ficha, .boton {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Flexibilidad en anchos de pantalla medianos y grandes */
+@media (min-width: 768px) {
+    .ficha {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .ficha > div {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    /* Centramos el botón en la pantalla */
+    .boton {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 767px) {
+    .ficha > div {
+        width: 100%;
+    }
+    
+    .boton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+</style>
+
 <div class="containerUsu">
     <?php if (Yii::$app->session->hasFlash('success')): ?>
         <div class="alert alert-success">
             <?= Yii::$app->session->getFlash('success') ?>
         </div>
     <?php endif; ?>
+    
     <div class="lista">
         <?= Html::a(
             Html::img('@web/img/icons/icon-crear-selecionado.png', ['class' => 'iconosa']) . ' Crear ficha ', 
@@ -71,22 +130,26 @@ $this->registerJs($script);
             ['class' => 'listausu']
         ) ?>
     </div>
+
     <hr class="divider">
+
     <div class="titulo">
         <h1>ACTUALIZAR FICHA</h1>
     </div>
+
     <div class="UsuariosForm">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="ficha">
         <?= $form->field($model, 'codigo')->textInput([
-            'type' => 'text', // Cambiado de 'number' a 'text' para usar readonly
-            'maxlength' => 10, // Longitud máxima
-            'placeholder' => 'código',
+            'type' => 'text', 
+            'maxlength' => 10, 
+            'minlength' => 7,  
+            'placeholder' => 'Código de 7 a 10 dígitos',
             'id' => 'codigo-id',
-            'readonly' => true, // Campo solo lectura
-            'onkeypress' => 'return event.charCode >= 48 && event.charCode <= 57' // Solo números
+            'pattern' => '\d{7,10}', 
+            'onkeypress' => 'return event.charCode >= 48 && event.charCode <= 57' 
         ])->label('Código') ?>
 
         <?= $form->field($model, 'fecha_incio')->textInput([
@@ -107,7 +170,7 @@ $this->registerJs($script);
 
         <?= $form->field($model, 'fecha_final')->textInput([
             'type' => 'date', 
-            'id' => 'fecha-final-id' // Se ha eliminado el atributo 'readonly'
+            'id' => 'fecha-final-id', 
         ])->label('Fecha Final') ?>
 
         <?= $form->field($model, 'usu_id')->dropDownList(

@@ -23,6 +23,13 @@
     text-align: center;
     overflow-x: auto; 
 }
+.container2{
+    width:auto;
+    display: flex;
+    justify-content: end;
+}
+
+
 
 h2 {
     margin-bottom: 20px;

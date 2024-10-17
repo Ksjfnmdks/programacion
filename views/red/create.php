@@ -84,12 +84,17 @@ use yii\helpers\Html;
                 </div>
             </div>
             <div class="d-flex flex-row w-40 h-30">
-                <div class="w-30 h-30">
-                    <img src="img/icons/controlar.png" alt="lista">
-                </div>
                 <div class="w-40 h-30">
-                    <h4>
-                        <a href="#" class="lista-redes fw-bold" style="text-decoration: none; color: black;">Lista de redes</a>
+                <h4 class="">
+                        <?= Html::a(
+                            ' <p class="letra lista-redes"><img src="img/icons/controlar.png" alt="agregar">&nbsp;Lista de &nbsp;Redes</p>',
+                            ['index'],
+                            [
+                                'class' => 'fw-bolder icon-link icon-link-hover',
+                                'style' => 'color: black; text-decoration: none; font-size: 1.5rem;',
+                                'encode' => false
+                            ]
+                        ) ?>
                     </h4>
                 </div>
             </div>

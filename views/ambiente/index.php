@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
-use yii\bootstrap5\Modal;
+use yii\widgets\LinkPager;
 
 /** @var yii\web\View $this */
 /** @var app\models\AmbienteSearch $searchModel */
@@ -14,8 +14,9 @@ use yii\bootstrap5\Modal;
 
 $this->title = 'Lista de Ambientes';
 $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
+?>
 
-$this->registerCss("
+<style>
     .header1 {
         height: 6vh;
         text-decoration: none;
@@ -24,67 +25,25 @@ $this->registerCss("
         pointer-events: none;
         cursor: default;
     }
+
     .paginador {
         color: white;
         width: 60vw;
         display: flex;
+        justify-self: center;
         justify-content: center;
     }
+
     .paginador1 {
         color: white;
         width: 50px;
     }
-    .table-container {
-        margin-top: 30px;
-    }
+</style>
 
-    .BuscarAmb {
-        margin-bottom: 20px;
-        width: 200px;
-    }
-
-    .iconosa {
-        width: 30px;
-        margin-right: 10px;
-    }
-    h1 {
-        color: #39A900;
-    }
-    .table {
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .container2{
-        margin-top: 30px;
-        display: flex;
-        justify-content: flex-end; 
-        align-items: center; 
-    }
-    .btn-custom {
-        background-color: #38A800; 
-        color: white; 
-        border: none;
-    }
-    .btn-custom:hover {
-        background-color: #2E8700; 
-    }
-");
-
-?>
-
-<div class="ambiente-index"> 
-
-    <!-- Mover la alerta aquí -->
-    <?php if (Yii::$app->session->hasFlash('success')): ?>
-        <div class="alert alert-success">
-            <?= Yii::$app->session->getFlash('success') ?>
-        </div>
-    <?php endif; ?>
-
+<div class="ambiente-index">
     <br>
 
-    <div class="div text-center">
+    <div class="text-center">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
 
@@ -92,13 +51,13 @@ $this->registerCss("
 
     <div class="lista">
         <?= Html::a(
-            Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear Ambiente', 
-            ['ambiente/create'], 
+            Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear Ambiente',
+            ['ambiente/create'],
             ['class' => 'listausu']
         ) ?>
         <?= Html::a(
-            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Ambiente', 
-            ['ambiente/index'], 
+            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Ambientes',
+            ['ambiente/index'],
             ['class' => 'listaususelected']
         ) ?>
     </div>
@@ -110,9 +69,12 @@ $this->registerCss("
                     'action' => ['index'],
                     'method' => 'get',
                 ]); ?>
-
-                <?= $form->field($searchModel, 'globalSearch')->textInput(['placeholder' => 'Buscar por nombre de ambiente'])->label(false) ?>
-
+                <?= $form->field($searchModel, 'globalSearch')
+                    ->textInput(['placeholder' => 'Buscar',
+                   'style' => 'background:rgb(205, 205, 205); border-radius: 20px; height: 40px;
+                    font-weight: bold;'
+                    ])
+                    ->label(false) ?>
                 <?php ActiveForm::end(); ?>
             </div>
         </div>
@@ -122,72 +84,74 @@ $this->registerCss("
             'options' => ['class' => 'table table-striped'],
             'summary' => 'Mostrando {begin} - {end} de {totalCount} Ambientes.',
             'pager' => [
-                'options' => ['class' => 'pagination justify-content-center'],
-                'linkOptions' => ['class' => 'page-link'],
-                'pageCssClass' => 'page-item',
+                'class' => LinkPager::class,
+                'options' => ['class' => 'pagination paginador justify-content-center'], // Cambia las clases CSS
+                'linkOptions' => ['class' => ' paginador1 ', 'style' => 'background: #39A900; margin: 2px; color:white'], // Cambia las clases de los enlaces
+                'prevPageLabel' => '<<', // Etiqueta del botón "Anterior"
+                'nextPageLabel' => '>>',    // Etiqueta del botón "Último"
+                'maxButtonCount' => 5, // Número máximo de botones
             ],
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                'nombre_ambiente',
-                'capacidad',
-                'estado',
-                'recursos:ntext',
+                [
+                    'attribute' => 'nombre_ambiente',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'capacidad',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'estado',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'recursos',
+                    'format' => 'ntext',
+                    'enableSorting' => false,
+                ],
                 [
                     'attribute' => 'nombre_red',
                     'label' => 'Nombre de Red',
+                    'enableSorting' => false,
                     'value' => function ($model) {
                         return $model->redes ? $model->redes->nombre_red : 'Sin red';
                     },
                 ],
-                'fecha_creacion',
                 [
-                    'class' => ActionColumn::className(),
-                    'template' => '{view} {update} {delete}',
+                    'attribute' => 'fecha_creacion',
+                    'enableSorting' => false,
+                ],
+                [
+                    'class' => ActionColumn::class,
+                    'header' => 'Acciones',
+                    'template' => '{update} {delete}',
                     'buttons' => [
-                        'update' => function ($url, $model, $key) {
-                            return Html::a('<i class="bi bi-pencil-fill" style="color: #38A800; font-size: 1.2rem;"></i>', $url, [
-                                'class' => 'btn btn-sm',
-                                'title' => 'Actualizar',
-                            ]);
+                        'update' => function ($url, $model) {
+                            return Html::a(
+                                '<i class="bi bi-pencil-fill" style="color: #38A800; font-size: 1.2rem;"></i>',
+                                $url,
+                                ['title' => 'Actualizar']
+                            );
                         },
-                        'delete' => function ($url, $model, $key) {
-                            return Html::button('<i class="bi bi-trash-fill" style="color: #38A800; font-size: 1.2rem;"></i>', [
-                                'class' => 'btn btn-sm deleteButton',
-                                'data-bs-toggle' => 'modal',
-                                'data-bs-target' => '#deleteModal-' . $model->amb_id,
-                            ]);
+                        'delete' => function ($url, $model) {
+                            return Html::a(
+                                '<i class="bi bi-trash-fill" style="color: #38A800; font-size: 1.2rem;"></i>',
+                                $url,
+                                [
+                                    'title' => 'Eliminar',
+                                    'data-confirm' => '¿Está seguro de que desea eliminar este ambiente?',
+                                    'data-method' => 'post',
+                                ]
+                            );
                         },
                     ],
                     'urlCreator' => function ($action, Ambiente $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'amb_id' => $model->amb_id]);
-                    }
+                    },
                 ],
             ],
             'headerRowOptions' => ['class' => 'header1'],
         ]); ?>
-
     </div>
 </div>
-
-<?php
-// Modal de confirmación para eliminar un registro
-foreach ($dataProvider->getModels() as $model) {
-    Modal::begin([
-        'id' => 'deleteModal-' . $model->amb_id,
-        'title' => 'Confirmar Eliminación',
-        'footer' => Html::a('Eliminar', ['ambiente/delete', 'amb_id' => $model->amb_id], [
-            'class' => 'btn',
-            'style' => 'background-color: #38A800; color: white;',
-            'data-method' => 'post',
-        ]) . Html::button('Cancelar', [
-            'class' => 'btn',
-            'style' => 'background-color: #38A800; color: white;',
-            'data-bs-dismiss' => 'modal',
-        ]),
-    ]);
-
-    echo "<p>¿Estás seguro de que deseas eliminar el ambiente \"{$model->nombre_ambiente}\"?</p>";
-
-    Modal::end();
-}
-?>

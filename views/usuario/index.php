@@ -4,6 +4,7 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\web\View;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 
 $this->title = 'Lista de Usuarios';
@@ -22,7 +23,7 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
     }
     .paginador{
         color: white;
-        width: 60vw;
+        width: 100%;
         display: flex;
         justify-self: center;
         justify-content: center;
@@ -31,7 +32,9 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
         
         color: white;
         width: 50px;
+        
     }
+    
 </style>
 <link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -62,7 +65,10 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
         ]); ?>
 
         <?= $form->field($searchModel, 'globalSearch')
-            ->textInput(['placeholder' => 'Buscar'])->label(false) ?>
+            ->textInput(['placeholder' => 'Buscar',
+            'style' => 'background:rgb(205, 205, 205); border-radius: 20px; height: 40px;
+            font-weight: bold;'
+            ])->label(false) ?>
 
         <?php ActiveForm::end(); ?>
     </div>
@@ -71,11 +77,14 @@ $this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::c
             'dataProvider' => $dataProvider,
             'options' => ['class' => 'table table-striped'],
             'summary' => 'Mostrando  {begin}  - {end}  de {totalCount} Usuarios.',      
-            'pager' => [
-                'options' => ['class' => 'pagination justify-content-center'],
-                'linkOptions' => ['class' => 'page-link'],
-                'pageCssClass' => 'page-item',
-            ],
+                'pager' => [
+                    'class' => LinkPager::class,
+                    'options' => ['class' => 'pagination paginador justify-content-center'], // Cambia las clases CSS
+                    'linkOptions' => ['class' => ' paginador1 ', 'style' => 'background: #39A900; margin: 2px; color:white'], // Cambia las clases de los enlaces
+                    'prevPageLabel' => '<<', // Etiqueta del botón "Anterior"
+                    'nextPageLabel' => '>>',    // Etiqueta del botón "Último"
+                    'maxButtonCount' => 5, // Número máximo de botones
+                ],
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 [

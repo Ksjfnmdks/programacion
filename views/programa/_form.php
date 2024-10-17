@@ -9,26 +9,25 @@ use yii\widgets\ActiveForm;
 ?>
 <style>
 .custom-error {
-    color: #39A900;
+    color: red;
     padding: 5px;
     border-radius: 5px;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 15px;
 }
 .custom-error-version{
-    color: #39A900;
+    color: red;
     padding: 5px;
     border-radius: 5px;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 15px;
+
     margin-left: 5vw;
 }
 .custom-error-meses{
-    color: #39A900;
+    color: red;
     padding: 5px;
     border-radius: 5px;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 15px;
+
     margin-left: 10vw;
 }
 </style>
@@ -105,6 +104,7 @@ use yii\widgets\ActiveForm;
                             'labelOptions'=>['class'=>'estilo-horas-meses input-group'],
                             'errorOptions'=>['class'=>'custom-error-meses']
                         ])->textInput([
+                            'id'=>'meses',
                             'maxlegth'=>true,
                             'placeholder'=>'Meses',
                             'style'=>'width: 20vw; height: 5vh; font-size: 14px; font-family: Work-sans, sans-serif; margin-left: 10vw;',
@@ -129,5 +129,22 @@ use yii\widgets\ActiveForm;
     <div class="form-group d-flex flex-row justify-content-end" style="height: 5vh; margin-left: 15vw;">
         <?= Html::submitButton('Crear', ['class'=> 'btn-crear-red col-12 col-sm-12','style' => 'background: #39A900; width: 6vw; height: 5vh; font-size: 20px;  margin-top: 3vh;']) ?>
     </div>
+
     <?php ActiveForm::end(); ?>
+
+    <script>
+    document.getElementById('nivel_formacion').addEventListener('input', function() {
+        var nivelFormacion = this.value.toLowerCase().trim();
+        var mesesInput = document.getElementById('meses');
+
+        // Condiciones para los diferentes niveles de formación
+        if (nivelFormacion === 'tecnica' || nivelFormacion === 'técnica') {
+            mesesInput.value = 24; // Ejemplo: 24 meses para nivel técnico
+        } else if (nivelFormacion === 'tecnologia' || nivelFormacion === 'tecnología') {
+            mesesInput.value = 36; // Ejemplo: 36 meses para nivel tecnológico
+        } else {
+            mesesInput.value = ''; // Dejar vacío si no hay coincidencia
+        }
+    });
+</script>
 </div>

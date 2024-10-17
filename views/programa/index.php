@@ -1,30 +1,24 @@
 <?php
 
-use app\assets\AppAsset;
 use app\models\Programa;
-use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
-use yii\widgets\DetailView;
-
 
 /** @var yii\web\View $this */
 /** @var app\models\ProgramaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-/** @var yii\data\Pagination $Pagination */
-/** @var app\models\Programa $searchModel */
 
-
-$this->title = 'Programas';
+$this->title = 'Lista de Programas';
+$this->registerCssFile('@web/css/tablas.css', ['depends' => [yii\web\YiiAsset::class]]);
 ?>
-
 
 <style>
     .header1 {
-        height: 10vh;
+        height: 6vh;
         text-decoration: none;
         background: #39A900;
         color: white;
@@ -32,199 +26,141 @@ $this->title = 'Programas';
         cursor: default;
     }
 
-    .paginador {
+    .paginador{
         color: white;
-        width: 60vw;
+        width: 100%;
         display: flex;
         justify-self: center;
         justify-content: center;
     }
-
-    .paginador1 {
-
+    .paginador1{
+        
         color: white;
         width: 50px;
     }
+
+    .iconosa {
+        width: 30px;
+        margin-right: 5px;
+    }
+
+    .buscar{
+    width: 20%;
+    }
 </style>
 
-
 <div class="programa-index">
-    <div class="d-flex col-sm-12 col-xs-12 col-xl-12 col-md-12 justify-content-center flex-column align-items-center text-center" style="width: 80vw;">
-        <br>
-        <h1 class="titulo-principal text-dark fw-bold">PROGRAMAS</h1>
-        <div class="linea1 bg-black"></div>
-        <br>
-        <div class=" contenedor-menu d-flex flex-row justify-content-between">
-            <div class="d-flex flex-row w-40 h-30">
-                <div class="w-30 h-30">
-                    <img src="img/icons/boton-agregar.png" alt="agregar">
-                </div>
-                <div class="w-40 h-30">
-                    <h4 class="">
-                        <?= Html::a(' <p class="letra lista-redes">&nbsp;Crear &nbsp;Programa</p>', ['create'], [
-                            'class' => ' fw-bolder icon-link icon-link-hover',
-                            'style' => 'color: black; text-decoration: none; font-size: 1.5rem;',
-                            'encode' => false
-                        ]) ?>
-                    </h4>
-                </div>
-            </div>
-            <div class="d-flex flex-row w-40 h-30">
-                <div class="w-70 h-30">
-                    <h4 class="">
-                        <?= Html::a(
-                            ' <p class="letra "><img src="img/icons/controlar.png" alt="agregar">&nbsp;Lista de &nbsp;Programas</p>',
-                            ['index'],
-                            [
-                                'class' => 'fw-bolder icon-link icon-link-hover',
-                                'style' => 'color: gray; text-decoration: none; font-size: 1.5rem; pointer-events: none; cursor: default;',
-                                'encode' => false
-                            ]
-                        ) ?>
-                    </h4>
-                </div>
-            </div>
-        </div>
-        <br>
+    <br>
 
+    <div class="text-center">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
 
-        <div class="d-flex flex-row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-end" style="width:80vw; color:white; padding-right:10px">
+    <hr class="divider">
 
-            <div class="programa-search col-4">
+    <div class="lista">
+        <?= Html::a(
+            Html::img('@web/img/icons/icon-crear.png', ['class' => 'iconosa']) . ' Crear Programa',
+            ['programa/create'],
+            ['class' => 'listausu']
+        ) ?>
+        <?= Html::a(
+            Html::img('@web/img/icons/icon-lista-selecionada.png', ['class' => 'iconosa']) . ' Lista de Programas',
+            ['programa/index'],
+            ['class' => 'listaususelected']
+        ) ?>
+    </div>
 
+    <div class="table-container">
+        <div class="container2">
+            <div class="buscar">
                 <?php $form = ActiveForm::begin([
                     'action' => ['index'],
                     'method' => 'get',
                 ]); ?>
-
-                <?= $form->field($searchModel, 'nombre_programa')->textInput([
-                    'placeholder' => 'Buscar programa',
+                <?= $form->field($searchModel, 'nombre_programa')
+                    ->textInput(['placeholder' => 'Buscar por programa',
                     'style' => 'background:rgb(205, 205, 205); border-radius: 20px; height: 40px;
-                                                                    font-weight: bold;'
-                ])
+                    font-weight: bold;'
+                    ])
                     ->label(false) ?>
                 <?php ActiveForm::end(); ?>
             </div>
         </div>
 
-
-        <br>
-
-        <div class=" table-responsive col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 d-flex flex-row justify-content-center"
-            style=" height:50vh">
-
-            <?= GridView::widget([
-
-                'dataProvider' => $dataProvider,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-
-                    //'pro_id',
-                    'codigo_programa',
-                    'nombre_programa',
-                    'nivel_formacion',
-                    'version',
-                    'horas',
-                    'meses',
-                    //'red_id_FK',
-                    'fecha_creacion',
-                    [
-                        'attribute' => 'red_id_FK',
-                        'label' => 'Red',
-                        'value' => function ($model) {
-                            return $model->red ? $model->red->nombre_red : 'N/A';
-                        },
-                    ],
-                ],
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'options' => ['class' => 'table table-striped'],
+            'summary' => 'Mostrando {begin} - {end} de {totalCount} Programas.',
                 'pager' => [
                     'class' => LinkPager::class,
                     'options' => ['class' => 'pagination paginador text-light'], // Cambia las clases CSS
-                    'linkOptions' => ['class' => 'page-link paginador1 ', 'style' => 'background: #39A900; border: 0px 0px 5px  0px; color:white'], // Cambia las clases de los enlaces
+                    'linkOptions' => ['class' => ' paginador1 ', 'style' => 'background: #39A900; border: 0px 0px 5px  0px; color:white'], // Cambia las clases de los enlaces
                     'prevPageLabel' => '<<', // Etiqueta del botón "Anterior"
                     'nextPageLabel' => '>>',    // Etiqueta del botón "Último"
                     'maxButtonCount' => 5, // Número máximo de botones
                 ],
-                'summary' => false,
-                'headerRowOptions' => ['class' => 'header1'],
-
-            ]);
-            ?>
-        </div>
-
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'attribute' => 'codigo_programa',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'nombre_programa',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'nivel_formacion',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'version',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'horas',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'meses',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'fecha_creacion',
+                    'enableSorting' => false,
+                ],
+                [
+                    'attribute' => 'red_id_FK',
+                    'label' => 'Red',
+                    'enableSorting' => false,
+                    'value' => function ($model) {
+                        return $model->red ? $model->red->nombre_red : 'N/A';
+                    },
+                ],
+                [
+                    'class' => ActionColumn::class,
+                    'header' => 'Acciones',
+                    'template' => '{delete}',
+                    'buttons' => [
+                        'delete' => function ($url, $model) {
+                            return Html::a(
+                                '<i class="bi bi-trash-fill" style="color: #38A800; font-size: 1.2rem;"></i>',
+                                $url,
+                                [
+                                    'title' => 'Eliminar',
+                                    'data-confirm' => '¿Está seguro de que desea eliminar este programa?',
+                                    'data-method' => 'post',
+                                ]
+                            );
+                        },
+                    ],
+                    'urlCreator' => function ($action, Programa $model, $key, $index, $column) {
+                        return Url::toRoute([$action, 'pro_id' => $model->pro_id]);
+                    },
+                ],
+            ],
+            'headerRowOptions' => ['class' => 'header1'],
+        ]); ?>
     </div>
 </div>
-<style>
-    .linea1 {
-        width: 90%;
-        height: 1px;
-        background: black;
-    }
-
-    .linea-form {
-        background: #000;
-        width: 32vw;
-        height: 1px;
-    }
-
-    .titulo-principal {
-        font-family: 'Work sans', sans-serif;
-    }
-
-    .contenedor-menu {
-        width: 70%;
-        height: 30%;
-    }
-
-    .crear-red {
-        font-family: 'Work sans', sans-serif;
-        text-decoration: none;
-        color: gray;
-    }
-
-    .lista-redes {
-        font-family: 'Work sans', sans-serif;
-        text-decoration: none;
-        color: black;
-    }
-
-    .lista-redes:hover {
-        font-family: 'Work sans', sans-serif;
-        text-decoration: none;
-        color: #39A900;
-    }
-
-    .titulo-crear {
-        font-family: 'Work sans', sans-serif;
-        font-size: 32px;
-    }
-
-    .formulario-crear-red {
-        width: 521px;
-        height: 301px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.237);
-        border-radius: 15px;
-    }
-
-    .header1 {
-        height: 10vh;
-        text-decoration: none;
-        background: #39A900;
-        color: white;
-        pointer-events: none;
-        cursor: default;
-    }
-
-    .paginador {
-        color: white;
-        width: 60vw;
-        display: flex;
-        justify-self: center;
-        justify-content: center;
-    }
-
-    .paginador1 {
-
-        color: white;
-        width: 50px;
-    }
-</style>
