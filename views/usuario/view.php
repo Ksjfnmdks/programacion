@@ -86,7 +86,7 @@ $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAs
                     'telefono',
                     'correo',
                     'username',
-                    'password',
+                    
                     [
                         'attribute' => 'rol_id_FK',
                         'value' => $model->rolIdFK->nombre, // Mostrar nombre del rol

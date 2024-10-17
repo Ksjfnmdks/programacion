@@ -43,22 +43,21 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['identificacion', 'nombre', 'apellido', 'correo', 'username', 'password', 'rol_id_FK', 'est_id_FK'], 'required'],
             [['fecha_creacion'], 'safe'],
             [['rol_id_FK', 'est_id_FK'], 'integer'],
-            [['identificacion', 'telefono'], 'string', 'max' => 10],
-            [['nombre', 'username', 'password'], 'string', 'max' => 50],
-            [['apellido', 'correo'], 'string', 'max' => 100],
+            [['identificacion', 'telefono'], 'string'],
+            [['nombre', 'username', 'password'], 'string'],
+            [['apellido', 'correo'], 'string'],
             
-            //Validacion de campos
-            [['identificacion'], 'required','message' => 'El campo identificacion no puede estar vacío.'],// No sirven estas validaciones
-            [['nombre'], 'required','message' => 'El campo nombre no puede estar vacío.'],
-            [['apellido'], 'required','message' => 'El campo apellido no puede estar vacío.'],
-            [['correo'], 'required','message' => 'El campo correo no puede estar vacío.'],
-            [['username'], 'required','message' => 'El campo username no puede estar vacío.'],
-            [['password'], 'required','message' => 'El campo password no puede estar vacío.'],
-            [['identificacion'], 'unique','message' => 'La identificacion ya ha sido registrada.'],//hasta aqui 
-            ['identificacion', 'match', 'pattern' => '/^\d+$/', 'message' => 'La identificación solo puede contener números.'],
-            ['telefono', 'match', 'pattern' => '/^\d+$/', 'message' => 'El teléfono solo puede contener números.'],
-            [['nombre', 'apellido'], 'match', 'pattern' => '/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/', 'message' => '{attribute} solo puede contener letras y espacios.'],
-            [['username', 'password'], 'unique', 'targetAttribute' => ['username', 'password']],
+          
+            [['identificacion'], 'required'],
+            [['nombre'], 'required'],
+            [['apellido'], 'required'],
+            [['correo'], 'required'],
+            [['username'], 'required'],
+            [['password'], 'required'],
+            [['identificacion'], 'unique','message' => 'La identificacion ya ha sido registrada.'],
+           
+            
+            [['username'], 'unique','message' => 'El nombre de usuario ya ha sido registrado'],
             [['rol_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::class, 'targetAttribute' => ['rol_id_FK' => 'rol_id']],
             [['est_id_FK'], 'exist', 'skipOnError' => true, 'targetClass' => Estados::class, 'targetAttribute' => ['est_id_FK' => 'est_id']],
         ];

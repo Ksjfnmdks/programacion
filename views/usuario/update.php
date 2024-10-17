@@ -11,8 +11,12 @@ use app\models\Estados;
 
 $this->registerCssFile("@web/css/UsuariosForm.css", ['depends' => [yii\web\YiiAsset::className()]]);
 
-// Mostrar mensaje flash si está configurado
-if (Yii::$app->session->hasFlash('success')): ?>
+?>
+
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="UsuariosForm.css">
+
+<?php if (Yii::$app->session->hasFlash('success')): ?>
     <div class="alert alert-success">
         <?= Yii::$app->session->getFlash('success') ?>
     </div>
@@ -33,36 +37,83 @@ if (Yii::$app->session->hasFlash('success')): ?>
     </div>
 
     <div class="UsuariosForm">
-    <?php $form = ActiveForm::begin(); ?>
-    <div class="form-grid">
-        <?= $form->field($model, 'identificacion')->textInput(['maxlength' => true, 'placeholder' => 'Identificación']) ?>
+        <?php $form = ActiveForm::begin(); ?>
+        
+        <div class="form-grid">
 
-        <?= $form->field($model, 'nombre')->textInput(['maxlength' => true, 'placeholder' => 'Nombres']) ?>
+            <?= $form->field($model, 'identificacion', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->textInput([
+                'maxlength' => 10, 
+                'placeholder' => 'Identificación',
+                'oninput' => "this.value = this.value.replace(/[^0-9]/g, '')"
+            ]) ?>
 
-        <?= $form->field($model, 'apellido')->textInput(['maxlength' => true, 'placeholder' => 'Apellidos']) ?>
+            <?= $form->field($model, 'nombre', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->textInput([
+                'maxlength' => 30, 
+                'placeholder' => 'Nombres',
+                'oninput' => "this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '')"
+            ]) ?>
 
-        <?= $form->field($model, 'telefono')->textInput(['maxlength' => true, 'placeholder' => 'Teléfono']) ?>
+            <?= $form->field($model, 'apellido', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->textInput([
+                'maxlength' => 30, 
+                'placeholder' => 'Apellidos',
+                'oninput' => "this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '')"
+            ]) ?>
 
-        <?= $form->field($model, 'correo')->input('email', ['placeholder' => 'Correo Electrónico']) ?>
+            <?= $form->field($model, 'telefono', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->textInput([
+                'maxlength' => 10, 
+                'placeholder' => 'Teléfono',
+                'oninput' => "this.value = this.value.replace(/[^0-9]/g, '')"
+            ]) ?>
 
-        <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => 'Usuario']) ?>
+            <?= $form->field($model, 'correo', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->input('email', [
+                'maxlength' => 100, 
+                'placeholder' => 'Correo Electrónico'
+            ]) ?>
 
-        <?= $form->field($model, 'password')->passwordInput(['maxlength' => true, 'placeholder' => 'Contraseña']) ?>
+            <?= $form->field($model, 'username', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->textInput([
+                'maxlength' => 30, 
+                'placeholder' => 'Usuario'
+            ]) ?>
 
-        <?= $form->field($model, 'rol_id_FK')->dropDownList(
-            ArrayHelper::map(Roles::find()->all(), 'rol_id', 'nombre'), 
-            ['prompt' => 'Seleccione un Rol']
-        ) ?>
+            <?= $form->field($model, 'password', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->passwordInput([
+                'maxlength' => 50, 
+                'placeholder' => 'Contraseña'
+            ]) ?>
 
-        <?= $form->field($model, 'est_id_FK')->dropDownList(
-            ArrayHelper::map(Estados::find()->all(), 'est_id', 'descripcion'), 
-            ['prompt' => 'Seleccione un Estado']
-        ) ?>
+            <?= $form->field($model, 'rol_id_FK', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->dropDownList(
+                ArrayHelper::map(Roles::find()->all(), 'rol_id', 'nombre'), 
+                ['prompt' => 'Seleccione un Rol']
+            ) ?>
+
+            <?= $form->field($model, 'est_id_FK', [
+                'errorOptions' => ['class' => 'custom-error']
+            ])->dropDownList(
+                ArrayHelper::map(Estados::find()->all(), 'est_id', 'descripcion'), 
+                ['prompt' => 'Seleccione un Estado']
+            ) ?>
+
+        </div>
+
+        <div class="boton">
+            <?= Html::submitButton('Actualizar', ['class' => 'btn-registrar']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
     </div>
-    <div class="boton">
-        <?= Html::submitButton('Actualizar', ['class' => 'btn-registrar']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-</div>
 </div>

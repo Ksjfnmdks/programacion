@@ -29,27 +29,76 @@ if (Yii::$app->session->hasFlash('success')): ?>
     <div class="UsuariosForm">
     <?php $form = ActiveForm::begin(); ?>
     <div class="form-grid">
-        <?= $form->field($model, 'identificacion')->textInput(['maxlength' => true, 'placeholder' => 'Identificación']) ?>
 
-        <?= $form->field($model, 'nombre')->textInput(['maxlength' => true, 'placeholder' => 'Nombres']) ?>
+        <?= $form->field($model, 'identificacion', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->textInput([
+            'maxlength' => 10, 
+            'placeholder' => 'Identificación',
+            'readonly' => true,
+            'oninput' => "this.value = this.value.replace(/[^0-9]/g, '')"
+        ]) ?>
 
-        <?= $form->field($model, 'apellido')->textInput(['maxlength' => true, 'placeholder' => 'Apellidos']) ?>
+        <?= $form->field($model, 'nombre', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->textInput([
+            'maxlength' => 30, 
+            'placeholder' => 'Nombres',
+            'readonly' => true, 
+            'oninput' => "this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '')"
+        ]) ?>
 
-        <?= $form->field($model, 'telefono')->textInput(['maxlength' => true, 'placeholder' => 'Teléfono']) ?>
+        <?= $form->field($model, 'apellido', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->textInput([
+            'maxlength' => 30, 
+            'placeholder' => 'Apellidos',
+            'readonly' => true, 
+            'oninput' => "this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '')"
+        ]) ?>
 
-        <?= $form->field($model, 'correo')->input('email', ['placeholder' => 'Correo Electrónico']) ?>
+        <?= $form->field($model, 'telefono', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->textInput([
+            'maxlength' => 10, 
+            'placeholder' => 'Teléfono',
+            'oninput' => "this.value = this.value.replace(/[^0-9]/g, '')"
+        ]) ?>
 
-        <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => 'Usuario']) ?>
+        <?= $form->field($model, 'correo', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->input('email', [
+            'maxlength' => 100, 
+            'placeholder' => 'Correo Electrónico'
+        ]) ?>
 
-        <?= $form->field($model, 'password')->passwordInput(['maxlength' => true, 'placeholder' => 'Contraseña']) ?>
+        <?= $form->field($model, 'username', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->textInput([
+            'maxlength' => 30, 
+            'placeholder' => 'Usuario',
+            'readonly' => true, 
+        ]) ?>
 
-        <?= $form->field($model, 'rol_id_FK')->dropDownList(
+        <?= $form->field($model, 'password', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->passwordInput([
+            'maxlength' => 50, 
+            'placeholder' => 'Contraseña'
+        ]) ?>
+
+        <?= $form->field($model, 'rol_id_FK', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->dropDownList(
             ArrayHelper::map(Roles::find()->all(), 'rol_id', 'nombre'), 
-            ['prompt' => 'Seleccione un Rol']
+            ['prompt' => 'Seleccione un Rol', 'disabled' => true]
         ) ?>
-        <?= $form->field($model, 'est_id_FK')->dropDownList(
+
+        <?= $form->field($model, 'est_id_FK', [
+            'errorOptions' => ['class' => 'custom-error']
+        ])->dropDownList(
             ArrayHelper::map(Estados::find()->all(), 'est_id', 'descripcion'), 
-            ['prompt' => 'Seleccione un Estado']
+            ['prompt' => 'Seleccione un Estado', 'disabled' => true] 
         ) ?>
     </div>
     <div class="boton">

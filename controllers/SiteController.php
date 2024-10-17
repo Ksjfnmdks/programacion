@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
 use app\models\UsuarioSearch;
+use app\models\Usuarios;
 
 class SiteController extends Controller
 {
@@ -130,32 +131,51 @@ class SiteController extends Controller
     }
 
     public function actionLogin()
-    {
-        $this->layout = 'login'; // Usar layout específico para login
+{
+    $this->layout = 'login';
 
-        if (!\Yii::$app->user->isGuest) {
-            if (User::isUserAdmin(Yii::$app->user->identity->id)) {
+    if (!\Yii::$app->user->isGuest) {
+        $userId = Yii::$app->user->identity->id;
+        $user = Usuarios::findOne($userId);
+
+        // Verificar si el usuario está activo
+        if ($user && $user->est_id_FK != 2) {
+            if (User::isUserAdmin($userId)) {
                 return $this->redirect(["site/admin"]);
             }
-            if (User::isUserPrivilegio(Yii::$app->user->identity->id)) {
+            if (User::isUserPrivilegio($userId)) {
                 return $this->redirect(["site/userprivilegio"]);
             }
             return $this->redirect(["site/user"]);
+        } else {
+            // Si el usuario está inactivo, lo redirigimos o mostramos un mensaje
+            Yii::$app->session->setFlash('error', 'Su cuenta está inactiva. Por favor, contacte al administrador.');
+            return $this->redirect(["site/login"]);
         }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if (User::isUserAdmin(Yii::$app->user->identity->id)) {
-                return $this->redirect(["site/admin"]);
-            }
-            if (User::isUserPrivilegio(Yii::$app->user->identity->id)) {
-                return $this->redirect(["site/userprivilegio"]);
-            }
-            return $this->redirect(["site/user"]);
-        }
-
-        return $this->render('login', ['model' => $model]);
     }
+
+    $model = new LoginForm();
+    if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $userId = Yii::$app->user->identity->id;
+        $user = Usuarios::findOne($userId);
+
+        // Verificar si el usuario está activo
+        if ($user && $user->est_id_FK != 2) {
+            if (User::isUserAdmin($userId)) {
+                return $this->redirect(["site/admin"]);
+            }
+            if (User::isUserPrivilegio($userId)) {
+                return $this->redirect(["site/userprivilegio"]);
+            }
+            return $this->redirect(["site/user"]);
+        } else {
+            Yii::$app->user->logout();
+            return $this->redirect(["site/login"]);
+        }
+    }
+
+    return $this->render('login', ['model' => $model]);
+}
 
 
     public function actionLogout()

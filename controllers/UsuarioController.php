@@ -157,15 +157,18 @@ class UsuarioController extends Controller
  public function actionDelete($usu_id)
  {
      $model = $this->findModel($usu_id);
-     $model->est_id_FK = 2;
+     $model->est_id_FK = 2; // Cambiar el estado en lugar de eliminar
  
      if ($model->save(false)) {
-       
+         Yii::$app->session->setFlash('success', 'Usuario eliminado con éxito.');
+         $response = ['success' => true, 'message' => 'Usuario eliminado con éxito.'];
      } else {
          Yii::$app->session->setFlash('error', 'Error al eliminar el usuario.');
+         $response = ['success' => false, 'message' => 'Error al eliminar el usuario.'];
      }
  
-     return $this->redirect(['index']);
+     Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+     return $response;
  } 
 
     /**

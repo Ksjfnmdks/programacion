@@ -207,3 +207,10 @@ input, select {
     font-weight: 700; 
     text-decoration: none; 
 }
+.custom-error {
+    color: red;
+    
+    font-size: 16px;
+    margin-top: 5px;
+    font-family: 'Work Sans', sans-serif;
+}
