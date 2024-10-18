@@ -23,8 +23,10 @@ class Competencias extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'competencias';
+        
     }
-
+    public $codigo_programa;
+    
     /**
      * {@inheritdoc}
      */
@@ -32,8 +34,9 @@ class Competencias extends \yii\db\ActiveRecord
     {
         return [
             [['codigo'], 'string', 'max' => 50],
+            [['codigo_programa'], 'exist', 'targetClass' => Programa::class, 'targetAttribute' => ['codigo_programa' => 'codigo_programa'], 'message' => 'El código de programa no existe.'],
             [['nombre'], 'string', 'max' => 100],
-            [['descripcion'], 'string', 'max' => 100],
+            [['descripcion'], 'string'],
             [['codigo', 'nombre', 'cant_horas', 'descripcion'], 'required'],
             [['cant_horas'], 'integer'],
             [['descripcion'], 'string'],
@@ -54,6 +57,19 @@ class Competencias extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert && !empty($this->codigo_programa)) {
+            $competenciaPrograma = new Competenciasxprogramas();
+            $competenciaPrograma->id_pro_fk = $this->codigo_programa;
+            $competenciaPrograma->id_com_fk = $this->id_com;
+            $competenciaPrograma->save();
+        }
+    }
+    
+
 
     /**
      * {@inheritdoc}
@@ -77,7 +93,7 @@ class Competencias extends \yii\db\ActiveRecord
      */
     public function getTblCompetenciasProgramas()
     {
-        return $this->hasMany(CompetenciasProgramas::class, ['id_com_fk' => 'id_com']);
+        return $this->hasMany(Competenciasxprogramas::class, ['id_com_fk' => 'id_com']);
     }
 
     /**
@@ -87,7 +103,7 @@ class Competencias extends \yii\db\ActiveRecord
      */
     public function getTblResultados()
     {
-        return $this->hasMany(Resultados::class, ['id_com_fk' => 'id_com']);
+        return $this->hasMany(Resultado::class, ['id_com_fk' => 'id_com']);
     }
 
     public static function getCompetenciasList()
