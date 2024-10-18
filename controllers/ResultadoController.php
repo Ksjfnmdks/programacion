@@ -5,7 +5,7 @@ namespace app\controllers;
 use yii;
 use app\models\Resultado;
 use app\models\ResultadoSearch;
-use app\models\CompetenciasModel;
+use app\models\Competencias;
 use yii\data\ActiveDataProvider;
 
 use yii\web\Controller;
@@ -20,6 +20,7 @@ class ResultadoController extends Controller
     /**
      * @inheritDoc
      */
+    
     public function behaviors()
     {
         return array_merge(
@@ -77,14 +78,14 @@ class ResultadoController extends Controller
     public function actionCreate()
     {
         $model = new Resultado();
-        $competencias = CompetenciasModel::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
+        $competencias = Competencias::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
     
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $competenciaSeleccionada = Yii::$app->request->post('Resultado')['id_com_fk'];
                 $model->id_com_fk = $competenciaSeleccionada;
     
-                if (!CompetenciasModel::find()->where(['id_com' => $model->id_com_fk])->exists()) {
+                if (!Competencias::find()->where(['id_com' => $model->id_com_fk])->exists()) {
                     $model->addError('id_com_fk', 'La competencia seleccionada no existe.');
                 }
     
@@ -111,7 +112,7 @@ class ResultadoController extends Controller
     {
         $model = $this->findModel($id_res); 
         
-        $competencias = CompetenciasModel::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
+        $competencias = Competencias::find()->select(['nombre', 'id_com'])->indexBy('id_com')->column();
     
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id_res' => $model->id_res]);
