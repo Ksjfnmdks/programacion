@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
-use app\models\CompetenciasModel;
+use app\models\Competencias;
 use app\models\CompetenciasSearch;
 use app\models\Programa;
-use app\models\Resultados;
+use app\models\Resultado;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use app\models\Competenciasxprogramas;
@@ -71,7 +71,7 @@ class CompetenciasController extends Controller
      */
     public function actionCreate()
     {
-        $model = new CompetenciasModel();
+        $model = new Competencias();
         
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -130,8 +130,8 @@ class CompetenciasController extends Controller
     public function actionDelete($id_com)
     {
       
-        Resultados::deleteAll(['id_com_fk' => $id_com]);
-    
+        Resultado::deleteAll(['id_com_fk' => $id_com]);
+        Competenciasxprogramas::deleteAll(['id_com_fk' => $id_com]);
        
         $competencia = $this->findModel($id_com);
         if ($competencia->delete()) {
@@ -151,7 +151,7 @@ class CompetenciasController extends Controller
      */
     protected function findModel($id_com)
     {
-        if (($model = CompetenciasModel::findOne(['id_com' => $id_com])) !== null) {
+        if (($model = Competencias::findOne(['id_com' => $id_com])) !== null) {
             return $model;
         }
 
