@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\models\CompetenciasModel;
+use app\models\Competencias;
 use yii\db\ActiveRecord;
 use Yii;
 
@@ -15,7 +15,7 @@ use Yii;
  * @property string $fecha_creacion
  * @property int $id_com_fk
  *
- * @property CompetenciasModel $comFk
+ * @property Competencias $comFk
  * @property TblHorarios[] $tblHorarios
  */
 class Resultado extends ActiveRecord
@@ -37,7 +37,7 @@ public function rules()
         [['nombre', 'horas', 'id_com_fk'], 'required'],
         [['horas'], 'integer', 'min' => 1],
         [['fecha_creacion'], 'safe'],
-        [['id_com_fk'], 'exist', 'skipOnError' => true, 'targetClass' => CompetenciasModel::class, 'targetAttribute' => ['id_com_fk' => 'id_com']],
+        [['id_com_fk'], 'exist', 'skipOnError' => true, 'targetClass' => Competencias::class, 'targetAttribute' => ['id_com_fk' => 'id_com']],
         ['nombre', 'unique', 'message' => 'Ya un resultado tiene este nombre.'],
         [['horas'], 'validateHoras'],
         [['horas'], 'validateHorasCompetencia'],
@@ -48,7 +48,7 @@ public function rules()
 
     public function validateHorasCompetencia($attribute, $params)
     {
-        $competencia = CompetenciasModel::findOne($this->id_com_fk);
+        $competencia = Competencias::findOne($this->id_com_fk);
 
         if ($competencia) {
 
@@ -72,7 +72,7 @@ public function rules()
     public function validateHoras($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $competencia = CompetenciasModel::findOne($this->id_com_fk);
+            $competencia = Competencias::findOne($this->id_com_fk);
             
             if ($competencia && $this->horas > $competencia->cant_horas) {
                 $this->addError($attribute, 'Las horas no pueden ser mayores a las horas de la competencia.');
@@ -112,7 +112,7 @@ public function rules()
      */
     public function getComFk()
     {
-        return $this->hasOne(CompetenciasModel::class, ['id_com' => 'id_com_fk']);
+        return $this->hasOne(Competencias::class, ['id_com' => 'id_com_fk']);
     }
 
     /**
@@ -127,7 +127,7 @@ public function rules()
 
     public function getCompetencia()
     {
-        return $this->hasOne(CompetenciasModel::class, ['id_com' => 'id_com_fk']);
+        return $this->hasOne(Competencias::class, ['id_com' => 'id_com_fk']);
     }
     
 }
